@@ -5,7 +5,7 @@
   <b-navbar toggleable="lg" type="dark" variant="dark">
     <!-- 왼쪽: 로고, 커뮤니티(공지사항,큐앤에이,자유게시판),매물,동네정보\-->
     <!-- 로고 -->
-    <b-navbar-brand href="#">
+    <b-navbar-brand href="/">
             <img src="../src/assets/logo.png" id="logo"/>
 
       <img src="../src/assets/happyhouse_logo.png" id="happy_logo"/>
@@ -23,7 +23,9 @@
 <!-- 있어보이는 단어로 바꿀 것.. -->
       <!-- 매물 -->
       <b-navbar-nav>
-        <b-nav-item href="#">매물정보</b-nav-item>
+              <!-- <router-link to="/about">About</router-link> -->
+        <!-- 이게 라우터라는걸몰라도 가능스 -->
+        <b-nav-item href="/houseinfo">매물정보</b-nav-item>
       </b-navbar-nav>
 
       <!-- 동네정보 -->
@@ -69,19 +71,19 @@
 
     </b-collapse>
   </b-navbar>
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-  <b-button>Button</b-button>
-  <b-button variant="danger">Button</b-button>
-  <b-button variant="success">Button</b-button>
-  <b-button variant="outline-primary">Button</b-button>
-    <b-card-title>뿡트스트랩</b-card-title> -->
     </div>
+
+    <!-- 라우터 뷰 -->
     <router-view />
+
+    <!-- header 코드가 길어서 footer는 따로 뺏는데  -->
+    <!-- 시간이 남으면 header 코드도 빼면 좋을듯함니다 ~~! -->
+    <app-footer></app-footer>
+
   </div>
 </template>
 
-<style>
+<style scoped>
 #logo{
   width:35px;
   margin-left: 50px;
@@ -92,24 +94,12 @@
   margin-left:7px;
 }
 
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-*
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>
+<script>
+import AppFooter from '@/components/layout/AppFooter.vue';
+export default{
+    components:{
+      AppFooter
+    }
+}
+</script>
