@@ -39,38 +39,66 @@
 </template>
 
 <script>
-import { SessionStorage } form "quasar";
+import { SessionStorage } from "vuex";
+import axios from "axios";
   export default {
-    data() {
+    name: "login",
+    data: function() {
       return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
+        user: {
+          userid:"",
+          userpwd:""
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
+        message:"",
+        msge:""
+      };
+    },
+    computed:{
+      nextRoute() {
+        return this.$route.params.nextRoute ? this.$route.params.nextRoute : "";
       }
     },
-    methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+  methods: {
+    login: function() {
+      axios
+        .post(
+          process.env.VUE_APP_SERVER_URL + "/member/confirm/login",
+          this.user
+        )
+        .then(response => {
+          if (response.data["status"] == "success") {
+            SessionStorage.set("accessToken", `${response.data["auth-token"]}`);
+            SessionStorage.set("userId", `${response.data["userid"]}`);
+            SessionStorage.set("userName", `${response.data["username"]}`);
+            if (SessionStorage.getItem("userId") == "admin") {
+              SessionStorage.set("admincheck", true);
+            } else {
+              SessionStorage.set("admincheck", false);
+            }
+            this.notify({
+              color: "green-4",
+              textColor: "white",
+              icon: "cloud_done",
+              message: "로그인 성공"
+            });
+            this.$router.push("/");
+          } else {
+            this.notify({
+              color: "red-5",
+              textColor: "white",
+              icon: "warning",
+              message: "로그인 실패"
+            });
+          }
+        });
+    },
+    onReset: function() {
+      this.user.userid = "";
+      this.user.userpwd = "";
+    },
+    main: function() {
+      this.$router.push("/");
     }
   }
+};
 </script>

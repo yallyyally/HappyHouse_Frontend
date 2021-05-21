@@ -37,36 +37,40 @@
       <!-- 오른쪽: 로그인/회원가입/로그아웃,마이페이지 -->
   
   <!-- 로그인 전 보이는 버전 -->
+  <div v-if="!loginok">
       <b-navbar-nav id="beforeLogin">
       <!-- 로그인 아이디, 비밀번호 입력 -->
         <b-form>
           <!-- 아이디 -->
           <!-- 비밀번호 -->
-          <input type="text" style="margin-top:7px;border:none;" size="sm" placeholder="ID"/>&nbsp;
-          <input style="margin-top:7px;border:none;" type="password" size="sm" placeholder="Password"/>&nbsp;
+          <!-- <input type="text" style="margin-top:7px;border:none;" size="sm" placeholder="ID"/>&nbsp;
+          <input style="margin-top:7px;border:none;" type="password" size="sm" placeholder="Password"/>&nbsp; -->
           <!-- 로그인 버튼 -->
           
-        <b-button size="sm" type="submit" style="margin-bottom:5px;">Login</b-button>
+        <!-- <b-button size="sm" type="submit" style="margin-bottom:5px;">Login</b-button> -->
+        <b-navbar-nav>
+        <b-nav-item @click="login">로그인</b-nav-item>
+      </b-navbar-nav>
         </b-form>
-
       <!-- 회원가입 -->
       <b-navbar-nav>
-        <b-nav-item href="#">회원가입</b-nav-item>
+        <b-nav-item @click="join">회원가입</b-nav-item>
       </b-navbar-nav>
-        
         </b-navbar-nav>
+  </div>
+  <div v-else>
     <!-- 로그인 후 보이는 버전 -->
           <b-navbar-nav id="afterLogin">
           <!-- 로그아웃 -->
                 <b-navbar-nav>
-        <b-nav-item href="#">로그아웃</b-nav-item>
+        <b-nav-item @click="logout">로그아웃</b-nav-item>
       </b-navbar-nav>
           <!-- 마이페이지 -->
       <b-navbar-nav>
-        <b-nav-item href="#">마이페이지</b-nav-item>
+        <b-nav-item @click="mypage">마이페이지</b-nav-item>
       </b-navbar-nav>
-        
         </b-navbar-nav>
+  </div>
 
 
     </b-collapse>
