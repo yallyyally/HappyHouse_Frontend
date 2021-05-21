@@ -37,7 +37,7 @@
       <!-- 오른쪽: 로그인/회원가입/로그아웃,마이페이지 -->
   
   <!-- 로그인 전 보이는 버전 -->
-  <div v-if="!loginok">
+  <div v-if="!getAccessToken">
       <b-navbar-nav id="beforeLogin">
       <!-- 로그인 아이디, 비밀번호 입력 -->
         <b-form>
@@ -63,7 +63,7 @@
           <b-navbar-nav id="afterLogin">
           <!-- 로그아웃 -->
                 <b-navbar-nav>
-        <b-nav-item @click="logout">로그아웃</b-nav-item>
+        <b-nav-item @click.prevent="onClickLogout">로그아웃</b-nav-item>
       </b-navbar-nav>
           <!-- 마이페이지 -->
       <b-navbar-nav>
