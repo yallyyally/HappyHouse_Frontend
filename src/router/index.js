@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from '../store';
+// import store from '../store';
 import Home from "../views/Home.vue";
 import HouseInfo from "../views/HouseInfo.vue";
 import join from "../views/member/join.vue";
@@ -9,15 +9,15 @@ import mypage from "../views/member/mypage.vue";
 
 Vue.use(VueRouter);
 
-const requireAuth = () => (to, from, next) => {
-  const nextRoute = to.path;
+// const requireAuth = () => (to, from, next) => {
+//   const nextRoute = to.path;
 
-  if (store.getters.getAccessToken) {
-    return next();
-  } else {
-    return next('/happyhouse/login' + nextRoute);
-  }
-};
+//   if (store.getters.getAccessToken) {
+//     return next();
+//   } else {
+//     return next('/login' + nextRoute);
+//   }
+// };
 
 const routes = [
   {
@@ -48,21 +48,21 @@ const routes = [
     name: "login",
     component: login,
   },
-  {
-    path: '/login/:firstKey/:secondKey',
-    name: 'LoginNextRoute',
-    component: Login,
-  },
-  {
-    path: '/login/:firstKey/:secondKey/:thirdKey',
-    name: 'LoginThirdRoute',
-    component: Login,
-  },
+  // {
+  //   path: '/login/:firstKey/:secondKey',
+  //   name: 'LoginNextRoute',
+  //   component: Login,
+  // },
+  // {
+  //   path: '/login/:firstKey/:secondKey/:thirdKey',
+  //   name: 'LoginThirdRoute',
+  //   component: Login,
+  // },
   {
     path: "/mypage",
     name: "mypage",
     component: mypage,
-    beforeEnter: requireAuth(),
+    // beforeEnter: requireAuth(),
   },
 ];
 
