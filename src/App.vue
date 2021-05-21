@@ -49,12 +49,12 @@
           
         <!-- <b-button size="sm" type="submit" style="margin-bottom:5px;">Login</b-button> -->
         <b-navbar-nav>
-        <b-nav-item @click="login">로그인</b-nav-item>
+        <b-nav-item href="/login">로그인</b-nav-item>
       </b-navbar-nav>
         </b-form>
       <!-- 회원가입 -->
       <b-navbar-nav>
-        <b-nav-item @click="join">회원가입</b-nav-item>
+        <b-nav-item href="/join">회원가입</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
   </div>
@@ -67,7 +67,7 @@
       </b-navbar-nav>
           <!-- 마이페이지 -->
       <b-navbar-nav>
-        <b-nav-item @click="mypage">마이페이지</b-nav-item>
+        <b-nav-item href="/mypage">마이페이지</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
   </div>

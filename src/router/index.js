@@ -42,36 +42,6 @@ const routes = [
     name: "mypage",
     component: mypage,
   },
-  {
-    path: "/join",
-    name: "join",
-    component: join,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: login,
-  },
-  {
-    path: "/mypage",
-    name: "mypage",
-    component: mypage,
-  },
-  {
-    path: "/join",
-    name: "join",
-    component: join,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: login,
-  },
-  {
-    path: "/mypage",
-    name: "mypage",
-    component: mypage,
-  },
 ];
 
 const router = new VueRouter({
