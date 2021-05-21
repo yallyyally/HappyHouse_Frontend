@@ -6,7 +6,9 @@
     <!-- 왼쪽: 로고, 커뮤니티(공지사항,큐앤에이,자유게시판),매물,동네정보\-->
     <!-- 로고 -->
     <b-navbar-brand href="#">
-      <img src="../src/assets/happyhouse_logo.png" id="logo"/>
+            <img src="../src/assets/logo.png" id="logo"/>
+
+      <img src="../src/assets/happyhouse_logo.png" id="happy_logo"/>
     </b-navbar-brand>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -81,8 +83,13 @@
 
 <style>
 #logo{
-  width:150px;
+  width:35px;
   margin-left: 50px;
+  margin-bottom:8px;
+}
+#happy_logo{
+  width:150px;
+  margin-left:7px;
 }
 
 /* #app {
