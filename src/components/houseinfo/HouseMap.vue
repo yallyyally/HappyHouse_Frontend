@@ -7,6 +7,7 @@
 <style scope>
 #map{
     background-color: aqua;
+    margin-bottom:20px;
 }
 </style>
 <script>

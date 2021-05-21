@@ -3,7 +3,7 @@
 
     <!-- 시군구 선택박스 -->
     <div class="title">
-        <h2>원하는 지역 선택하기</h2>
+        <h2>선택 지역 매물 조회</h2>
         <h5> <b-icon icon="geo-alt-fill" scale="1" ></b-icon> 서울특별시의 매물정보 조회</h5>
     </div>
   
@@ -21,6 +21,7 @@
         <span class="selectbox">
             <b-button @click="getMap" variant="primary" class="mb-2">
             검색 <b-icon icon="search" aria-hidden="true"></b-icon>
+              <b-spinner variant="light"></b-spinner>
             </b-button>
         </span>
     </div>
@@ -43,7 +44,6 @@
     }
 </style>
 <script>
-import { mapActions } from 'vuex';
 
 export default{
     name:"SearchHouse",
@@ -62,7 +62,9 @@ export default{
         }
     },
     methods:{
-        ...mapActions['getMap'],
+        getMap(){
+            alert('클릭')
+        }
     }
 
 }

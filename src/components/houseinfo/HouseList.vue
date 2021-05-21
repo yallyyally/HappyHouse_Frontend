@@ -6,6 +6,7 @@
     </b-container>
 </template>
 <script>
+import { computed } from '@vue/composition-api'
 export default{
     name:"HouseList",
         data() {
