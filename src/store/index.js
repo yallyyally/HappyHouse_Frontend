@@ -9,8 +9,8 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default new Vuex.Store({
   state: {
     acceccToken: null,
-    userId:'',
-    userName:'',
+    userId: "",
+    userName: "",
   },
   getters: {
     getAccessToken(state) {
@@ -18,35 +18,35 @@ export default new Vuex.Store({
       return localStorage.accessToken;
     },
     getUserId(state) {
-      if (state.userId !== '') return state.userId;
+      if (state.userId !== "") return state.userId;
       return localStorage.userId;
     },
     getUserName(state) {
-      if (state.userName !== '') return state.userName;
+      if (state.userName !== "") return state.userName;
       return localStorage.userName;
     },
   },
   mutations: {
     LOGIN(state, payload) {
-      state.accessToken = payload['auth-token'];
-      state.userId = payload['user-id'];
-      state.userName = payload['user-name'];
-      localStorage.accessToken = payload['auth-token'];
-      localStorage.userId = payload['user-id'];
-      localStorage.userName = payload['user-name'];
+      state.accessToken = payload["auth-token"];
+      state.userId = payload["user-id"];
+      state.userName = payload["user-name"];
+      localStorage.accessToken = payload["auth-token"];
+      localStorage.userId = payload["user-id"];
+      localStorage.userName = payload["user-name"];
     },
     LOGOUT(state) {
       state.accessToken = null;
       delete localStorage.accessToken;
       delete localStorage.userId;
       delete localStorage.userName;
-      state.userId = '';
-      state.userName = '';
+      state.userId = "";
+      state.userName = "";
     },
   },
   actions: {
     getMap() {
-      console.log("지도 불러오는듕");
+      console.log("지도 불러오는듕sss");
 
       const SERVICE_KEY = "fwt204pk0p";
       const SERVICE_URL =
@@ -57,21 +57,19 @@ export default new Vuex.Store({
       return axios
         .post(`${SERVER_URL}/user/confirm/login`, user)
         .then((response) => {
-          if (response.data.message == '로그인 실패') {
-            return 'fail';
+          if (response.data.message == "로그인 실패") {
+            return "fail";
           } else {
-            context.commit('LOGIN', response.data);
-            axios.defaults.headers.common[
-              'auth-token'
-            ] = `${response.data['auth-token']}`;
-            return 'success';
+            context.commit("LOGIN", response.data);
+            axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+            return "success";
           }
         })
         .catch(({ message }) => alert(message));
     },
     LOGOUT(context) {
-      axios.defaults.headers.common['auth-token'] = undefined;
-      context.commit('LOGOUT');
+      axios.defaults.headers.common["auth-token"] = undefined;
+      context.commit("LOGOUT");
     },
   },
   modules: {},
