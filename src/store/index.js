@@ -121,6 +121,12 @@ export default new Vuex.Store({
         commit("setHouses", resp.data);
       });
     },
+    getHousesByGu({ commit }, guName) {
+      http.get("/api/house/houseinfo/gu/" + guName).then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
+
     LOGIN(context, user) {
       return axios
         .post(`${SERVER_URL}/member/confirm/login`, user)

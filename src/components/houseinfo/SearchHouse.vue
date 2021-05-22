@@ -71,7 +71,8 @@ export default{
         ...mapActions({
             getOptionsGu:'getOptionsGu',
             getOptionsDong:'getOptionsDong',
-            getHousesByDong:'getHousesByDong'
+            getHousesByDong:'getHousesByDong',
+            getHousesByGu:'getHousesByGu'
             
         }),
         getMap(){
@@ -80,16 +81,17 @@ export default{
             // 3. 구, 동 둘다 설정->구로구 항동.
             // 4. 동만 설정 -> null 금촌동
             if(this.selectedGu == null && this.selectedDong == null){
-                alert('전체 매물 가져오기!')
+                // alert('전체 매물 가져오기!')
                 this.$store.dispatch("getHouses");
 
             }
             else if(this.selectedGu != null && this.selectedDong == null){
-                alert(this.selectedGu+"에 속한 전체 동네 매물");
+                // alert(this.selectedGu+"에 속한 전체 동네 매물");
+                this.getHousesByGu(this.selectedGu);
                 
             }
             else{
-                alert(this.selectedDong+"의 매물 바로불러오자");
+                // alert(this.selectedDong+"의 매물 바로불러오자");
                 this.getHousesByDong(this.selectedDong);
             }
         },
