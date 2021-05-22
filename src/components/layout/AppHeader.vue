@@ -61,7 +61,8 @@
     <!-- 로그인 후 보이는 버전 -->
           <b-navbar-nav id="afterLogin">
           <!-- 로그아웃 -->
-                <b-navbar-nav>
+          <b-navbar-nav>
+            <b-nav-item>{{ getUserId }} 님 환영합니다!</b-nav-item>
         <b-nav-item to="/logout" @click.prevent="onClickLogout">로그아웃</b-nav-item>
       </b-navbar-nav>
           <!-- 마이페이지 -->
@@ -69,18 +70,50 @@
         <b-nav-item href="/mypage">마이페이지</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
-  <!-- </div> -->
-
-
     </b-collapse>
   </b-navbar>
   </div>
 </template>
+
 <script>
+import { mapGetters } from 'vuex';
+import axios from 'axios';
+import Vue from 'vue';
+import swal from 'vue-swal';
+Vue.use(swal);
+
 export default {
-    
-}
+    data: () => ({
+      isLogin: false,
+    }),
+      computed: {
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName']),
+  },
+  methods: {
+    goHome() {
+      this.$router.push('/');
+    },
+    onClickLogout() {
+      this.$store
+        .dispatch('LOGOUT')
+        .then(() => {
+          this.$swal('로그아웃 완료 :)', '', 'success');
+          this.$router.replace('/');
+        })
+        .catch(() => {
+          alert('error');
+        });
+    },
+  },
+  mounted() {
+    this.$store.state.accessToken = this.getAccessToken;
+    this.$store.state.userId = this.getUserId;
+    this.$store.state.userName = this.getUserName;
+    axios.defaults.headers.common['auth-token'] = this.getAccessToken;
+  },
+};
 </script>
+
 <style scope>
     #logo{
   width:35px;
