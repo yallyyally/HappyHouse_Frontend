@@ -38,19 +38,10 @@
   <!-- 로그인 전 보이는 버전 -->
   <!-- <div v-if="!getAccessToken"> -->
       <b-navbar-nav id="beforeLogin">
-      <!-- 로그인 아이디, 비밀번호 입력 -->
-        <b-form>
-          <!-- 아이디 -->
-          <!-- 비밀번호 -->
-          <!-- <input type="text" style="margin-top:7px;border:none;" size="sm" placeholder="ID"/>&nbsp;
-          <input style="margin-top:7px;border:none;" type="password" size="sm" placeholder="Password"/>&nbsp; -->
-          <!-- 로그인 버튼 -->
-          
-        <!-- <b-button size="sm" type="submit" style="margin-bottom:5px;">Login</b-button> -->
+      <!-- 로그인 -->
         <b-navbar-nav>
         <b-nav-item href="/login">로그인</b-nav-item>
       </b-navbar-nav>
-        </b-form>
       <!-- 회원가입 -->
       <b-navbar-nav>
         <b-nav-item href="/join">회원가입</b-nav-item>

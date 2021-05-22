@@ -115,7 +115,6 @@ export default new Vuex.Store({
         commit("setHouses", resp.data);
       });
     },
-<<<<<<< HEAD
       LOGIN(context, user) {
         return axios
           .post(`${SERVER_URL}/api/member/confirm/login`, user)
@@ -134,38 +133,6 @@ export default new Vuex.Store({
         axios.defaults.headers.common["auth-token"] = undefined;
         context.commit("LOGOUT");
       },
-=======
-    getHousesByDong({ commit }, dongName) {
-      console.log("======비동기 통신 시작/" + dongName + "의 매물 불러오기======");
-      http.get("/api/house/houseinfo/dong/" + dongName).then((resp) => {
-        commit("setHouses", resp.data);
-      });
-    },
-    getHousesByGu({ commit }, guName) {
-      http.get("/api/house/houseinfo/gu/" + guName).then((resp) => {
-        commit("setHouses", resp.data);
-      });
-    },
-
-    LOGIN(context, user) {
-      return axios
-        .post(`${SERVER_URL}/member/confirm/login`, user)
-        .then((response) => {
-          if (response.data.message == "로그인 실패") {
-            return "fail";
-          } else {
-            context.commit("LOGIN", response.data);
-            axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
-            return "success";
-          }
-        })
-        .catch(({ message }) => alert(message));
-    },
-    LOGOUT(context) {
-      axios.defaults.headers.common["auth-token"] = undefined;
-      context.commit("LOGOUT");
-    },
->>>>>>> 326c5d0e7ae4322c18a2a0798a560c3b82a8119e
   },
   modules: {},
 });

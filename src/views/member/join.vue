@@ -24,7 +24,7 @@
         ></b-form-input>
         <label>패스워드</label>
         <b-form-input
-          v-model="user.uerpwd"
+          v-model="user.userpwd"
           type="password"
           :rules="passwordRules"
           placeholder="비밀번호를 입력해주세요."
@@ -48,7 +48,6 @@
         ></b-form-input>
         <label>이메일</label>
         <b-form-input
-          dense
           v-model="user.email"
           type="email"
           :rules="emailRules"
@@ -56,7 +55,6 @@
         ></b-form-input>
         <label>전화번호</label>
         <b-form-input
-          dense
           v-model="user.phone"
           type="text"
           required
