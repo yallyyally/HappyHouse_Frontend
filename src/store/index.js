@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from 'axios';
+import axios from "axios";
 import http from "@/util/http-commons";
 
 Vue.use(Vuex);
@@ -10,10 +10,11 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default new Vuex.Store({
   state: {
     acceccToken: null,
-    userId: '',
-    userName: '',
+    userId: "",
+    userName: "",
     houses: [],
     optionsGu: [],
+    optionsDong: [],
   },
   getters: {
     houses(state) {
@@ -22,6 +23,10 @@ export default new Vuex.Store({
     optionsGu(state) {
       console.log("=====get 구 목록=======");
       return state.optionsGu;
+    },
+    optionsDong(state) {
+      console.log("==========get 동목록==========");
+      return state.optionsDong;
     },
     getAccessToken(state) {
       if (state.accessToken !== null) return state.accessToken;
@@ -52,6 +57,11 @@ export default new Vuex.Store({
       state.optionsGu = payload;
       console.log("=======비동기 통신 완료/구목록==========");
     },
+    setOptionsDong(state, payload) {
+      state.optionsDong = payload;
+      console.log("==========비동기 완료/동목록=========");
+    },
+
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
       state.userId = payload["user-id"];
@@ -65,19 +75,19 @@ export default new Vuex.Store({
       delete localStorage.accessToken;
       delete localStorage.userId;
       delete localStorage.userName;
-      state.userId = '';
-      state.userName = '';
+      state.userId = "";
+      state.userName = "";
     },
   },
   actions: {
-    getMap() {
-      console.log("지도 불러오는듕sss");
+    // getMap() {
+    // console.log("지도 불러오는듕sss");
 
-      // const SERVICE_KEY = "fwt204pk0p";
-      // const SERVICE_URL =
-      //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
-      // axios.get(SERVICE_URL);
-    },
+    // const SERVICE_KEY = "fwt204pk0p";
+    // const SERVICE_URL =
+    //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
+    // axios.get(SERVICE_URL);
+    // },
 
     // 전체 구 목록 불러오기
     getOptionsGu({ commit }) {
@@ -89,6 +99,15 @@ export default new Vuex.Store({
         commit("setOptionsGu", resp.data);
       });
     },
+    // 구 목록에 따른 동 목록 불러오기
+    // 첫번째 인자는 디폴트로 무족건 context임에 유의
+    getOptionsDong({ commit }, selectedGu) {
+      console.log("=======비동기 통신 시작/동목록" + "구:" + selectedGu + "========");
+      // pathvariable로 선택된 구 이름 주는 get방식으로 받아오자!
+      http.get("/api/house/optionsDong/" + selectedGu).then((resp) => {
+        commit("setOptionsDong", resp.data);
+      });
+    },
     // 전체 houseinfo 매물 불러오기
     getHouses({ commit }) {
       console.log("=====비동기 통신 시작/매물목록========");
@@ -96,6 +115,7 @@ export default new Vuex.Store({
         commit("setHouses", resp.data);
       });
     },
+<<<<<<< HEAD
       LOGIN(context, user) {
         return axios
           .post(`${SERVER_URL}/api/member/confirm/login`, user)
@@ -114,6 +134,38 @@ export default new Vuex.Store({
         axios.defaults.headers.common["auth-token"] = undefined;
         context.commit("LOGOUT");
       },
+=======
+    getHousesByDong({ commit }, dongName) {
+      console.log("======비동기 통신 시작/" + dongName + "의 매물 불러오기======");
+      http.get("/api/house/houseinfo/dong/" + dongName).then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
+    getHousesByGu({ commit }, guName) {
+      http.get("/api/house/houseinfo/gu/" + guName).then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
+
+    LOGIN(context, user) {
+      return axios
+        .post(`${SERVER_URL}/member/confirm/login`, user)
+        .then((response) => {
+          if (response.data.message == "로그인 실패") {
+            return "fail";
+          } else {
+            context.commit("LOGIN", response.data);
+            axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+            return "success";
+          }
+        })
+        .catch(({ message }) => alert(message));
+    },
+    LOGOUT(context) {
+      axios.defaults.headers.common["auth-token"] = undefined;
+      context.commit("LOGOUT");
+    },
+>>>>>>> 326c5d0e7ae4322c18a2a0798a560c3b82a8119e
   },
   modules: {},
 });
