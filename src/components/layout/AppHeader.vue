@@ -81,8 +81,8 @@ export default {
     
 }
 </script>
-<style lang="">
-    /* #logo{
+<style scope>
+    #logo{
   width:35px;
   margin-left: 50px;
   margin-bottom:8px;
@@ -90,5 +90,5 @@ export default {
 #happy_logo{
   width:150px;
   margin-left:7px;
-} */
+}
 </style>
