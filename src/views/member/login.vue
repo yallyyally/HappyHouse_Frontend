@@ -66,11 +66,11 @@ export default {
         show: true,
         message: '',
         valid: false,
-        idRules: [
-      (b) => !!b || 'id is required',
-      (b) => b.length <= 20 || 'id must be less than 20 characters',
-    ],
-    passwordRules: [(b) => !!b || 'password is required'],
+    //     idRules: [
+    //   (b) => !!b || 'id is required',
+    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
+    // ],
+    // passwordRules: [(b) => !!b || 'password is required'],
   }),
 
   computed: {

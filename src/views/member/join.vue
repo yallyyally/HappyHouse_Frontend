@@ -66,7 +66,8 @@
     </b-card-text>
 
     <!-- <b-button class="ml-auto" depressed color="primary" @click="joinUser">Sign up</b-button> -->
-    <b-button class="ml-auto" variant="primary" depressed color="success" @click="joinUser">Sign up</b-button>
+    <!-- <b-button class="ml-auto" variant="primary" depressed color="success" @click="joinUser">Sign up</b-button> -->
+    <b-button class="ml-auto" type="submit" variant="primary" color="primary" @click="joinUser">Sign up</b-button> 
   </b-card>
 </div>
 </template>
@@ -91,26 +92,26 @@ export default {
     },
     valid: false,
     confirmPassword: '',
-    idRules: [
-      (b) => !!b || 'id is required',
-      (b) => b.length <= 20 || 'id must be less than 20 characters',
-    ],
-    passwordRules: [(b) => !!b || 'password is required'],
-    nameRules: [(b) => !!b || 'name is required'],
-    emailRules: [
-      (b) => !!b || 'E-mail is required',
-      (b) => /.+@.+/.test(b) || 'E-mail must be valid',
-    ],
+    // idRules: [
+    //   (b) => !!b || 'id is required',
+    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
+    // ],
+    // passwordRules: [(b) => !!b || 'password is required'],
+    // nameRules: [(b) => !!b || 'name is required'],
+    // emailRules: [
+    //   (b) => !!b || 'E-mail is required',
+    //   (b) => /.+@.+/.test(b) || 'E-mail must be valid',
+    // ],
   }),
   methods: {
     joinUser: function() {
       axios
-        .post(`${SERVER_URL}/member/join`, {
+        .post(`${SERVER_URL}/api/member/regist`, {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
           username: this.user.username,
           email: this.user.email,
-          address: this.user.phone,
+          phone: this.user.phone,
         })
         .then((response) => {
           if (response.data == 'success') {

@@ -98,7 +98,7 @@ export default new Vuex.Store({
     },
       LOGIN(context, user) {
         return axios
-          .post(`${SERVER_URL}/member/confirm/login`, user)
+          .post(`${SERVER_URL}/api/member/confirm/login`, user)
           .then((response) => {
             if (response.data.message == "로그인 실패") {
               return "fail";

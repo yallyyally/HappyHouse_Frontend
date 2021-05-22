@@ -81,21 +81,21 @@ export default {
     user: null,
     valid: false,
     confirmPassword: '',
-    idRules: [
-      (b) => !!b || 'id is required',
-      (b) => b.length <= 20 || 'id must be less than 20 characters',
-    ],
-    passwordRules: [(b) => !!b || 'password is required'],
-    nameRules: [(b) => !!b || 'name is required'],
-    emailRules: [
-      (b) => !!b || 'E-mail is required',
-      (b) => /.+@.+/.test(b) || 'E-mail must be valid',
-    ],
+    // idRules: [
+    //   (b) => !!b || 'id is required',
+    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
+    // ],
+    // passwordRules: [(b) => !!b || 'password is required'],
+    // nameRules: [(b) => !!b || 'name is required'],
+    // emailRules: [
+    //   (b) => !!b || 'E-mail is required',
+    //   (b) => /.+@.+/.test(b) || 'E-mail must be valid',
+    // ],
   }),
 
   created() {
     axios
-      .get(`${SERVER_URL}/member/info`)
+      .get(`${SERVER_URL}/api/member/info`)
       .then((response) => {
         this.user = response.data.user;
       })
@@ -107,12 +107,12 @@ export default {
   methods: {
     updateUser: function() {
       axios
-        .put(`${SERVER_URL}/member/update`, {
+        .put(`${SERVER_URL}/api/member/update`, {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
           username: this.user.username,
           email: this.user.email,
-          address: this.user.phone,
+          phone: this.user.phone,
         })
         .then((response) => {
           if (response.data == 'success') {
@@ -132,7 +132,7 @@ export default {
 
     deleteUser: function() {
       axios
-        .delete(`${SERVER_URL}/member/delete?userid=${this.user.userid}`)
+        .delete(`${SERVER_URL}/api/member/delete?userid=${this.user.userid}`)
         .then((response) => {
           if (response.data == 'success') {
             this.$swal('탈퇴되었습니다', '', 'success');
