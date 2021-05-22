@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
+import http from "@/util/http-commons";
 
 Vue.use(Vuex);
 
@@ -11,8 +11,12 @@ export default new Vuex.Store({
     // acceccToken: null,
     // userId: "",
     // userName: "",
+    houses: [],
   },
   getters: {
+    houses(state) {
+      return state.houses;
+    },
     // getAccessToken(state) {
     //   if (state.accessToken !== null) return state.accessToken;
     //   return localStorage.accessToken;
@@ -27,6 +31,10 @@ export default new Vuex.Store({
     // },
   },
   mutations: {
+    setHouses(state, payload) {
+      state.houses = payload;
+      console.log("mutation - house set 오나료");
+    },
     // LOGIN(state, payload) {
     //   state.accessToken = payload["auth-token"];
     //   state.userId = payload["user-id"];
@@ -48,29 +56,48 @@ export default new Vuex.Store({
     getMap() {
       console.log("지도 불러오는듕sss");
 
-      const SERVICE_KEY = "fwt204pk0p";
-      const SERVICE_URL =
-        "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
-      axios.get(SERVICE_URL);
+      // const SERVICE_KEY = "fwt204pk0p";
+      // const SERVICE_URL =
+      //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
+      // axios.get(SERVICE_URL);
     },
-  //   LOGIN(context, user) {
-  //     return axios
-  //       .post(`${SERVER_URL}/user/confirm/login`, user)
-  //       .then((response) => {
-  //         if (response.data.message == "로그인 실패") {
-  //           return "fail";
-  //         } else {
-  //           context.commit("LOGIN", response.data);
-  //           axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
-  //           return "success";
-  //         }
-  //       })
-  //       .catch(({ message }) => alert(message));
-  //   },
-  //   LOGOUT(context) {
-  //     axios.defaults.headers.common["auth-token"] = undefined;
-  //     context.commit("LOGOUT");
-  //   },
+    getHouses({ commit }) {
+      // var house = {
+      //   no: "",
+      //   dong: "",
+      //   aptname: "",
+      //   buildyear: "",
+      //   jibun: "",
+      //   lat: "",
+      //   lng: "",
+      // };
+      console.log("=====비동기 통신 시작========");
+      http.get("/api/house/houseinfo").then((resp) => {
+        console.log("받은거==========");
+        for (const [key, value] of Object.entries(resp.data)) {
+          console.log(`${key}:${value.aptname}`);
+        }
+        commit("setHouses", resp.data);
+      });
+    },
+    //   LOGIN(context, user) {
+    //     return axios
+    //       .post(`${SERVER_URL}/user/confirm/login`, user)
+    //       .then((response) => {
+    //         if (response.data.message == "로그인 실패") {
+    //           return "fail";
+    //         } else {
+    //           context.commit("LOGIN", response.data);
+    //           axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+    //           return "success";
+    //         }
+    //       })
+    //       .catch(({ message }) => alert(message));
+    //   },
+    //   LOGOUT(context) {
+    //     axios.defaults.headers.common["auth-token"] = undefined;
+    //     context.commit("LOGOUT");
+    //   },
   },
   modules: {},
 });

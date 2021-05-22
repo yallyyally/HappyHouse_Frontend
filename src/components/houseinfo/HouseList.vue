@@ -1,24 +1,24 @@
 <template>
     <b-container>
          <div>
-        <b-table hover :items="items"></b-table>
+        <b-table hover :items="houses"></b-table>
      </div>
     </b-container>
 </template>
 <script>
-// import { computed } from '@vue/composition-api'
+import { mapGetters } from "vuex";
+
 export default{
     name:"HouseList",
-        data() {
-      return {
-        items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
-      }
-    }
+    computed:{
+        ...mapGetters(["houses"])
+    },
+
+        created(){
+        // 페이지 로딩시 전체 매물 목록 불러오기
+        console.log("created - 전체 집 불러오기시작");
+        this.$store.dispatch("getHouses");
+    },
 }
 
 </script>

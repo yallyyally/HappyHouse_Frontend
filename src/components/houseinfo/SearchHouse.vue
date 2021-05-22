@@ -46,8 +46,10 @@
 <script>
 
 export default{
+
     name:"SearchHouse",
     data(){
+        //이거 mapState로 바꿀것.
         return{
         selectedGu:null,
         optionsGu:[
@@ -61,6 +63,7 @@ export default{
         ]
         }
     },
+
     methods:{
         getMap(){
             alert('클릭')
