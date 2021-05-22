@@ -13,8 +13,7 @@ export default{
     computed:{
         ...mapGetters(["houses"])
     },
-
-        created(){
+    created(){
         // 페이지 로딩시 전체 매물 목록 불러오기
         console.log("created - 전체 집 불러오기시작");
         this.$store.dispatch("getHouses");

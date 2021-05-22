@@ -10,12 +10,13 @@
     <div class="content">
         <span class="selectbox">
             <b-form-select  v-model = "selectedGu" :options= "optionsGu" class="mb-3">
-            <b-form-select-option :value= "null" disabled>-- 구를 선택해 주십시오 --</b-form-select-option>
+            <b-form-select-option :value= "null" >-- 구 전체 --</b-form-select-option>
+            
             </b-form-select>
         </span>
         <span class="selectbox">
             <b-form-select  v-model = "selectedDong" :options= "optionsDong" class="mb-3">
-            <b-form-select-option :value= "null" disabled>-- 동을 선택해 주십시오 --</b-form-select-option>
+            <b-form-select-option :value= "null" >-- 동 전체 --</b-form-select-option>
             </b-form-select>
         </span>
         <span class="selectbox">
@@ -44,18 +45,28 @@
     }
 </style>
 <script>
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default{
 
     name:"SearchHouse",
+    computed:{
+        // 소괄호 안써서 한시간 넘게 날림 ,,^^
+        ...mapGetters(['optionsGu'])
+    },
+    created(){
+        console.log("구 이름 불러오기 시작");
+        this.getOptionsGu();
+    },
     data(){
         //이거 mapState로 바꿀것.
         return{
         selectedGu:null,
-        optionsGu:[
-            {text:'은평구',value: "은평구"},
-            {text:"강동구", value:'강동구'},
-        ],
+        // optionsGu:[
+        //     {text:'은평구',value: "은평구"},
+        //     {text:"강동구", value:'강동구'},
+        // ],
         selectedDong:null,
         optionsDong:[
             {text:'냐냐동',value:'냐ㅑㄴ동'},
@@ -65,6 +76,9 @@ export default{
     },
 
     methods:{
+        ...mapActions({
+            getOptionsGu:'getOptionsGu'
+        }),
         getMap(){
             alert('클릭')
         }

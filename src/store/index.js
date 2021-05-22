@@ -12,10 +12,16 @@ export default new Vuex.Store({
     // userId: "",
     // userName: "",
     houses: [],
+    optionsGu: [],
   },
   getters: {
     houses(state) {
       return state.houses;
+    },
+    optionsGu(state) {
+      console.log(state.optionsGu);
+      console.log("=====get 구 목록=======");
+      return state.optionsGu;
     },
     // getAccessToken(state) {
     //   if (state.accessToken !== null) return state.accessToken;
@@ -33,7 +39,11 @@ export default new Vuex.Store({
   mutations: {
     setHouses(state, payload) {
       state.houses = payload;
-      console.log("mutation - house set 오나료");
+      console.log("=======비동기 통신 완료/매물목록========");
+    },
+    setOptionsGu(state, payload) {
+      state.optionsGu = payload;
+      console.log("=======비동기 통신 완료/구목록==========");
     },
     // LOGIN(state, payload) {
     //   state.accessToken = payload["auth-token"];
@@ -61,22 +71,21 @@ export default new Vuex.Store({
       //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
       // axios.get(SERVICE_URL);
     },
+
+    // 전체 구 목록 불러오기
+    getOptionsGu({ commit }) {
+      console.log("========비동기통신 시작/구 목록=========");
+      http.get("/api/house/optionsGu").then((resp) => {
+        // console.log("받은거 1" + JSON.stringify(resp));
+
+        // console.log("받은거 " + resp.data.key);
+        commit("setOptionsGu", resp.data);
+      });
+    },
+    // 전체 houseinfo 매물 불러오기
     getHouses({ commit }) {
-      // var house = {
-      //   no: "",
-      //   dong: "",
-      //   aptname: "",
-      //   buildyear: "",
-      //   jibun: "",
-      //   lat: "",
-      //   lng: "",
-      // };
-      console.log("=====비동기 통신 시작========");
+      console.log("=====비동기 통신 시작/매물목록========");
       http.get("/api/house/houseinfo").then((resp) => {
-        console.log("받은거==========");
-        for (const [key, value] of Object.entries(resp.data)) {
-          console.log(`${key}:${value.aptname}`);
-        }
         commit("setHouses", resp.data);
       });
     },
