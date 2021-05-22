@@ -18,6 +18,7 @@
           v-model="user.userid"
           type="text"
           :rules="idRules"
+          :counter="20"
           placeholder="Enter ID"
           required
         ></b-form-input>
@@ -25,11 +26,12 @@
 
       <b-form-group label="패스워드">
         <b-form-input
-          v-model="user.uerpwd"
+          v-model="user.userpwd"
           type="password"
           :rules="passwordRules"
           placeholder="Enter PASSWORD"
           required
+          @keypress.enter="login"
         ></b-form-input>
       </b-form-group>
 
