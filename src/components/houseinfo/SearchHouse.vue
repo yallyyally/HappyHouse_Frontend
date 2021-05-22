@@ -9,7 +9,7 @@
   
     <div class="content">
         <span class="selectbox">
-            <b-form-select  v-model = "selectedGu" :options= "optionsGu" class="mb-3">
+            <b-form-select  @change="changeGu()" v-model = "selectedGu" :options= "optionsGu" class="mb-3">
             <b-form-select-option :value= "null" >-- 구 전체 --</b-form-select-option>
             
             </b-form-select>
@@ -81,6 +81,9 @@ export default{
         }),
         getMap(){
             alert('클릭')
+        },
+        changeGu(){
+            alert(this.selectedGu+' 선택!')
         }
     }
 

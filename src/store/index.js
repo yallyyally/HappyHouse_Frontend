@@ -19,7 +19,6 @@ export default new Vuex.Store({
       return state.houses;
     },
     optionsGu(state) {
-      console.log(state.optionsGu);
       console.log("=====get 구 목록=======");
       return state.optionsGu;
     },
@@ -42,6 +41,13 @@ export default new Vuex.Store({
       console.log("=======비동기 통신 완료/매물목록========");
     },
     setOptionsGu(state, payload) {
+      // value랑 text를 알아서 메핑하나부네 신기하다
+      // payload.forEach((guName) => {
+      //   var tmp = new Object();
+      //   tmp.text = guName;
+      //   tmp.value = guName;
+      //   state.optionsGu.push(tmp);
+      // });
       state.optionsGu = payload;
       console.log("=======비동기 통신 완료/구목록==========");
     },
