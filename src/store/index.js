@@ -13,6 +13,7 @@ export default new Vuex.Store({
     // userName: "",
     houses: [],
     optionsGu: [],
+    optionsDong: [],
   },
   getters: {
     houses(state) {
@@ -21,6 +22,10 @@ export default new Vuex.Store({
     optionsGu(state) {
       console.log("=====get 구 목록=======");
       return state.optionsGu;
+    },
+    optionsDong(state) {
+      console.log("==========get 동목록==========");
+      return state.optionsDong;
     },
     // getAccessToken(state) {
     //   if (state.accessToken !== null) return state.accessToken;
@@ -50,6 +55,10 @@ export default new Vuex.Store({
       // });
       state.optionsGu = payload;
       console.log("=======비동기 통신 완료/구목록==========");
+    },
+    setOptionsDong(state, payload) {
+      state.optionsDong = payload;
+      console.log("==========비동기 완료/동목록=========");
     },
     // LOGIN(state, payload) {
     //   state.accessToken = payload["auth-token"];
@@ -86,6 +95,15 @@ export default new Vuex.Store({
 
         // console.log("받은거 " + resp.data.key);
         commit("setOptionsGu", resp.data);
+      });
+    },
+    // 구 목록에 따른 동 목록 불러오기
+    // 첫번째 인자는 디폴트로 무족건 context임에 유의
+    getOptionsDong({ commit }, selectedGu) {
+      console.log("=======비동기 통신 시작/동목록" + "구:" + selectedGu + "========");
+      // pathvariable로 선택된 구 이름 주는 get방식으로 받아오자!
+      http.get("/api/house/optionsDong/" + selectedGu).then((resp) => {
+        commit("setOptionsDong", resp.data);
       });
     },
     // 전체 houseinfo 매물 불러오기

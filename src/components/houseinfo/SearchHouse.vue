@@ -53,7 +53,7 @@ export default{
     name:"SearchHouse",
     computed:{
         // 소괄호 안써서 한시간 넘게 날림 ,,^^
-        ...mapGetters(['optionsGu'])
+        ...mapGetters(['optionsGu','optionsDong'])
     },
     created(){
         console.log("구 이름 불러오기 시작");
@@ -68,22 +68,25 @@ export default{
         //     {text:"강동구", value:'강동구'},
         // ],
         selectedDong:null,
-        optionsDong:[
-            {text:'냐냐동',value:'냐ㅑㄴ동'},
-            {text:"여여동", value:'여여동'}
-        ]
+        // optionsDong:[
+        //     {text:'냐냐동',value:'냐ㅑㄴ동'},
+        //     {text:"여여동", value:'여여동'}
+        // ]
         }
     },
 
     methods:{
         ...mapActions({
-            getOptionsGu:'getOptionsGu'
+            getOptionsGu:'getOptionsGu',
+            getOptionsDong:'getOptionsDong'
         }),
         getMap(){
             alert('클릭')
         },
         changeGu(){
             alert(this.selectedGu+' 선택!')
+            // 구목록에 따라서 동 목록 로딩하기!
+            this.getOptionsDong(this.selectedGu);
         }
     }
 
