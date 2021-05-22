@@ -13,7 +13,8 @@
   </b-card-title>
     <b-card-text>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show" v-model="valid" style="text-align:center">
-      <b-form-group label="아이디">
+      <b-form-group>
+        <label>아이디</label>
         <b-form-input
           v-model="user.userid"
           type="text"
@@ -24,7 +25,8 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group label="패스워드">
+      <b-form-group>
+        <label>패스워드</label>
         <b-form-input
           v-model="user.userpwd"
           type="password"
