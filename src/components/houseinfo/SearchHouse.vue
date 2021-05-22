@@ -63,29 +63,39 @@ export default{
         //이거 mapState로 바꿀것.
         return{
         selectedGu:null,
-        // optionsGu:[
-        //     {text:'은평구',value: "은평구"},
-        //     {text:"강동구", value:'강동구'},
-        // ],
         selectedDong:null,
-        // optionsDong:[
-        //     {text:'냐냐동',value:'냐ㅑㄴ동'},
-        //     {text:"여여동", value:'여여동'}
-        // ]
         }
     },
 
     methods:{
         ...mapActions({
             getOptionsGu:'getOptionsGu',
-            getOptionsDong:'getOptionsDong'
+            getOptionsDong:'getOptionsDong',
+            getHousesByDong:'getHousesByDong'
+            
         }),
         getMap(){
-            alert('클릭')
+            // 1. 둘 다 전체 -> 0
+            // 2. 구만 설정 -> 종로구 null
+            // 3. 구, 동 둘다 설정->구로구 항동.
+            // 4. 동만 설정 -> null 금촌동
+            if(this.selectedGu == null && this.selectedDong == null){
+                alert('전체 매물 가져오기!')
+                this.$store.dispatch("getHouses");
+
+            }
+            else if(this.selectedGu != null && this.selectedDong == null){
+                alert(this.selectedGu+"에 속한 전체 동네 매물");
+                
+            }
+            else{
+                alert(this.selectedDong+"의 매물 바로불러오자");
+                this.getHousesByDong(this.selectedDong);
+            }
         },
         changeGu(){
-            alert(this.selectedGu+' 선택!')
             // 구목록에 따라서 동 목록 로딩하기!
+            this.selectedDong = null;
             this.getOptionsDong(this.selectedGu);
         }
     }

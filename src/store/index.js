@@ -80,14 +80,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getMap() {
-      console.log("지도 불러오는듕sss");
+    // getMap() {
+    // console.log("지도 불러오는듕sss");
 
-      // const SERVICE_KEY = "fwt204pk0p";
-      // const SERVICE_URL =
-      //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
-      // axios.get(SERVICE_URL);
-    },
+    // const SERVICE_KEY = "fwt204pk0p";
+    // const SERVICE_URL =
+    //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
+    // axios.get(SERVICE_URL);
+    // },
 
     // 전체 구 목록 불러오기
     getOptionsGu({ commit }) {
@@ -112,6 +112,12 @@ export default new Vuex.Store({
     getHouses({ commit }) {
       console.log("=====비동기 통신 시작/매물목록========");
       http.get("/api/house/houseinfo").then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
+    getHousesByDong({ commit }, dongName) {
+      console.log("======비동기 통신 시작/" + dongName + "의 매물 불러오기======");
+      http.get("/api/house/houseinfo/dong/" + dongName).then((resp) => {
         commit("setHouses", resp.data);
       });
     },
