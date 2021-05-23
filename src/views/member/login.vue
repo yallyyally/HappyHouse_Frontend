@@ -1,50 +1,40 @@
 <template lang="">
   <div class="mt-15 mx-auto">
-  <b-card 
-    img-src="@/assets/logo.png"
-    img-alt="Image"
-    img-top
-    tag="article"
-    min-width="500" 
-    class="mt-15 px-10 py-5"
-  >
-  <b-card-title sub class="my-2 justify-center pa-0">
-        <h2>로그인</h2>
-  </b-card-title>
-    <b-card-text>
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" v-model="valid" style="text-align:center">
-      <b-form-group>
-        <label>아이디</label>
-        <b-form-input
-          v-model="user.userid"
-          type="text"
-          :rules="idRules"
-          :counter="20"
-          placeholder="Enter ID"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group>
-        <label>패스워드</label>
-        <b-form-input
-          v-model="user.userpwd"
-          type="password"
-          :rules="passwordRules"
-          placeholder="Enter PASSWORD"
-          required
-          @keypress.enter="login"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary" color="primary" @click="login">Login</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    </b-card-text>
-
-    <b-button class="ml-6" variant="primary" depressed color="success" @click="join">Sign up</b-button>
-  </b-card>
-</div>
+    <v-card min-width="500" class="mt-15 px-10 py-5">
+      <v-card-title sub class="subtitle-1 justify-center pb-0">
+        오늘의 매물을 보시려면 로그인을 해주세요!
+      </v-card-title>
+      <v-card-title sub class="my-2 justify-center pa-0">
+        <h2>"로그인"</h2>
+      </v-card-title>
+      <v-card-text>
+        <v-form v-model="valid" style="text-align:center">
+          <v-text-field
+            v-model="user.userid"
+            :rules="idRules"
+            :counter="20"
+            label="아이디"
+            required
+          ></v-text-field>
+          <v-text-field
+            class="mb-10"
+            type="Password"
+            v-model="user.userpwd"
+            :rules="passwordRules"
+            label="패스워드"
+            required
+            @keypress.enter="login"
+          ></v-text-field>
+          <v-btn depressed color="primary" @click="login">
+            로그인
+          </v-btn>
+          <v-btn class="ml-6" depressed color="success" @click="join">
+            회원가입
+          </v-btn>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -66,11 +56,11 @@ export default {
         show: true,
         message: '',
         valid: false,
-    //     idRules: [
-    //   (b) => !!b || 'id is required',
-    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
-    // ],
-    // passwordRules: [(b) => !!b || 'password is required'],
+        idRules: [
+      (b) => !!b || 'id is required',
+      (b) => b.length <= 20 || 'id must be less than 20 characters',
+    ],
+    passwordRules: [(b) => !!b || 'password is required'],
   }),
 
   computed: {
