@@ -16,6 +16,7 @@ export default new Vuex.Store({
     optionsGu: [],
     optionsDong: [],
     selectedHouseNo: "",
+    selectedHouse: {},
   },
   getters: {
     houses(state) {
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     getUserName(state) {
       if (state.userName !== "") return state.userName;
       return localStorage.userName;
+    },
+    selectedHouse(state) {
+      return state.selectedHouse;
     },
   },
   mutations: {
@@ -77,9 +81,8 @@ export default new Vuex.Store({
       state.userName = "";
     },
     SET_SELECTED_HOUSE(state, payload) {
-      console.log("무시 ㄱ");
-      console.log(state);
-      console.log(payload);
+      state.selectedHouse = payload;
+      console.log(state.selectedHouse);
     },
   },
   actions: {
@@ -131,8 +134,7 @@ export default new Vuex.Store({
         })
         .then((resp) => {
           console.log("거래 상세 내역");
-          console.log(resp.data);
-          commit("SET_SELECTED_HOUSE", resp.data);
+          commit("SET_SELECTED_HOUSE", resp.data[0]);
         });
     },
 

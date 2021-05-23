@@ -7,8 +7,8 @@
         <div class="p-3">
           <h4 id="sidebar-no-header-title">Custom header sidebar</h4>
           <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+            아파트명 {{selectedHouse.aptname}}
+            면적 {{selectedHouse.area}}
           </p>
           <nav class="mb-3">
             <b-nav vertical>
@@ -43,7 +43,7 @@ export default{
 
     },
     computed:{
-        ...mapGetters(["houses"])
+        ...mapGetters(["houses",'selectedHouse'])
     },
     created(){
         // 페이지 로딩시 전체 매물 목록 불러오기
