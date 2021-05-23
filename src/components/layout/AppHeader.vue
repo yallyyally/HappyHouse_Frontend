@@ -15,8 +15,8 @@
             <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="커뮤니티" right>
           <b-dropdown-item href="/Board">자유게시판</b-dropdown-item>
-          <b-dropdown-item href="#">Q&A</b-dropdown-item>
-          <b-dropdown-item href="#">공지사항</b-dropdown-item>
+          <b-dropdown-item href="/QnABoard">Q&A</b-dropdown-item>
+          <b-dropdown-item href="/NoticeBoard">공지사항</b-dropdown-item>
          </b-nav-item-dropdown>
 
 <!-- 있어보이는 단어로 바꿀 것.. -->

@@ -12,6 +12,7 @@ import DetailBoard from "../components/board/DetailBoard.vue";
 import UpdateBoard from "../components/board/UpdateBoard.vue";
 import UpdateSuccess from '../components/board/UpdateSuccess.vue';
 import DeleteSuccess from '../components/board/DeleteSuccess.vue';
+import notice from '../views/NoticeBoard.vue';
 
 Vue.use(VueRouter);
 
@@ -110,6 +111,12 @@ const routes = [
     path: '/delete/success',
     name: 'DeleteSuccess',
     component: DeleteSuccess,
+  },
+  {
+    path: '/notice',
+    name: 'notice',
+    // beforeEnter: requireAuth(),
+    component: notice,
   },
 ];
 
