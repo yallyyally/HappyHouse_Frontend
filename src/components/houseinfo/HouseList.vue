@@ -5,19 +5,21 @@
                  <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow>
       <template #default="{ hide }">
         <div class="p-3">
-          <h4 id="sidebar-no-header-title">Custom header sidebar</h4>
-          <p>
-            아파트명 {{selectedHouse.aptname}}
-            면적 {{selectedHouse.area}}
+          <h4 id="sidebar-no-header-title">
+               <b-icon icon="building" aria-hidden="true"></b-icon>
+               {{selectedHouse.aptname}}</h4>
+            <hr>
+          <p >
+            <b>건축년도</b> {{selectedHouse.buildyear}}<br/>
+            <b>지번</b> {{selectedHouse.jibun}}<br/>
+            <b>거래 평균 금액 </b>{{avgDealAmount}}원
           </p>
-          <nav class="mb-3">
-            <b-nav vertical>
-              <b-nav-item active @click="hide">Active</b-nav-item>
-              <b-nav-item href="#link-1" @click="hide">Link</b-nav-item>
-              <b-nav-item href="#link-2" @click="hide">Another Link</b-nav-item>
-            </b-nav>
-          </nav>
-          <b-button variant="primary" block @click="hide">Close Sidebar</b-button>
+          <div style="margin-top:15px;">
+          <h5> <b-icon icon="graph-up" aria-hidden="true"></b-icon>
+          거래 내역</h5>
+          </div>
+          <b-table :items= "selectedHouseDeal"></b-table>
+          <b-button variant="secondary" block @click="hide">닫기</b-button>
         </div>
       </template>
     </b-sidebar>
@@ -43,7 +45,7 @@ export default{
 
     },
     computed:{
-        ...mapGetters(["houses",'selectedHouse'])
+        ...mapGetters(["houses",'selectedHouse','selectedHouseDeal','avgDealAmount'])
     },
     created(){
         // 페이지 로딩시 전체 매물 목록 불러오기

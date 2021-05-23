@@ -17,6 +17,8 @@ export default new Vuex.Store({
     optionsDong: [],
     selectedHouseNo: "",
     selectedHouse: {},
+    selectedHouseDeal: [],
+    avgDealAmount: "",
   },
   getters: {
     houses(state) {
@@ -42,6 +44,12 @@ export default new Vuex.Store({
     },
     selectedHouse(state) {
       return state.selectedHouse;
+    },
+    selectedHouseDeal(state) {
+      return state.selectedHouseDeal;
+    },
+    avgDealAmount(state) {
+      return state.avgDealAmount;
     },
   },
   mutations: {
@@ -82,7 +90,24 @@ export default new Vuex.Store({
     },
     SET_SELECTED_HOUSE(state, payload) {
       state.selectedHouse = payload;
-      console.log(state.selectedHouse);
+    },
+    // 거래내역 -> 배열로 저장.
+    SET_SELECTED_HOUSEDEAL(state, payload) {
+      var sum = 0;
+      var cnt = 0;
+      payload.forEach((item) => {
+        var tmp = {
+          층: item.floor,
+          거래금액: item.dealamount.replace(",", ""),
+          거래일: item.dealyear + "." + item.dealmonth + "." + item.dealday,
+          면적: item.area,
+        };
+        sum += parseInt(tmp["거래금액"], 10);
+        cnt++;
+        console.log("합계 " + sum);
+        state.selectedHouseDeal.push(tmp);
+      });
+      state.avgDealAmount = sum / cnt;
     },
   },
   actions: {
@@ -134,7 +159,9 @@ export default new Vuex.Store({
         })
         .then((resp) => {
           console.log("거래 상세 내역");
+          console.log(resp.data);
           commit("SET_SELECTED_HOUSE", resp.data[0]);
+          commit("SET_SELECTED_HOUSEDEAL", resp.data);
         });
     },
 
