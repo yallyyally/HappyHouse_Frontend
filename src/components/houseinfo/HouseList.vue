@@ -19,7 +19,7 @@
           <b> 거래 내역</b></h5>
           </div>
           <!-- 거래내역 그래프로 -->
-          <housedeal-chart :selectedHouseDealAmount= "selectedHouseDealAmount" :selectedHouseDealDate= "selectedHouseDealDate"></housedeal-chart>
+          <housedeal-chart :chartoptions = "{responsive: true, maintainAspectRatio: false}" :selectedHouseDealAmount= "selectedHouseDealAmount" :selectedHouseDealDate= "selectedHouseDealDate" ></housedeal-chart>
           <b-table :items= "selectedHouseDeal"></b-table>
           <b-button variant="secondary" block @click="hide">닫기</b-button>
         </div>
@@ -30,7 +30,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
-import HousedealChart from '../houseinfo/HousedealChart.vue';
+import HousedealChart from './HousedealChart.js';
 
 export default{
     components:{
