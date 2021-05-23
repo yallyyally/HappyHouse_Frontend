@@ -1,15 +1,14 @@
 <template>
-<b-container>
-<div id="map" style="width:100%;height:400px;">지도</div>
-</b-container>
-
+  <!-- <google-map-autocomplete
+      model="String"
+      types="Array"
+      controls="Boolean"
+      update-map="Boolean"
+      place-changed="Function"
+  /> -->
+  <div>지도</div>
 </template>
-<style scope>
-#map{
-    background-color: aqua;
-    margin-bottom:20px;
-}
-</style>
+
 <script>
 //     var mapOptions = {
 //     center: new naver.maps.LatLng(37.3595704, 127.105399),

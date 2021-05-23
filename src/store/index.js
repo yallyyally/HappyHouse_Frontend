@@ -15,17 +15,16 @@ export default new Vuex.Store({
     houses: [],
     optionsGu: [],
     optionsDong: [],
+    selectedHouseNo: "",
   },
   getters: {
     houses(state) {
       return state.houses;
     },
     optionsGu(state) {
-      console.log("=====get 구 목록=======");
       return state.optionsGu;
     },
     optionsDong(state) {
-      console.log("==========get 동목록==========");
       return state.optionsDong;
     },
     getAccessToken(state) {
@@ -61,7 +60,6 @@ export default new Vuex.Store({
       state.optionsDong = payload;
       console.log("==========비동기 완료/동목록=========");
     },
-
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
       state.userId = payload["user-id"];
@@ -77,6 +75,11 @@ export default new Vuex.Store({
       delete localStorage.userName;
       state.userId = "";
       state.userName = "";
+    },
+    SET_SELECTED_HOUSE(state, payload) {
+      console.log("무시 ㄱ");
+      console.log(state);
+      console.log(payload);
     },
   },
   actions: {
@@ -115,24 +118,53 @@ export default new Vuex.Store({
         commit("setHouses", resp.data);
       });
     },
-      LOGIN(context, user) {
-        return axios
-          .post(`${SERVER_URL}/api/member/confirm/login`, user)
-          .then((response) => {
-            if (response.data.message == "로그인 실패") {
-              return "fail";
-            } else {
-              context.commit("LOGIN", response.data);
-              axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
-              return "success";
-            }
-          })
-          .catch(({ message }) => alert(message));
-      },
-      LOGOUT(context) {
-        axios.defaults.headers.common["auth-token"] = undefined;
-        context.commit("LOGOUT");
-      },
+    setSelectedHouse({ commit }, obj) {
+      // 선택된 번호의 매물 목록 가져오기~
+      console.log("동 잘왔나 " + obj.dongName);
+      console.log("아파트 잘왔나 " + obj.aptname);
+      http
+        .get("/api/house/housedeal", {
+          params: {
+            dong: obj.dongName,
+            aptname: obj.aptname,
+          },
+        })
+        .then((resp) => {
+          console.log("거래 상세 내역");
+          console.log(resp.data);
+          commit("SET_SELECTED_HOUSE", resp.data);
+        });
+    },
+
+    LOGIN(context, user) {
+      return axios
+        .post(`${SERVER_URL}/api/member/confirm/login`, user)
+        .then((response) => {
+          if (response.data.message == "로그인 실패") {
+            return "fail";
+          } else {
+            context.commit("LOGIN", response.data);
+            axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+            return "success";
+          }
+        })
+        .catch(({ message }) => alert(message));
+    },
+    LOGOUT(context) {
+      axios.defaults.headers.common["auth-token"] = undefined;
+      context.commit("LOGOUT");
+    },
+    getHousesByDong({ commit }, dongName) {
+      console.log("======비동기 통신 시작/" + dongName + "의 매물 불러오기======");
+      http.get("/api/house/houseinfo/dong/" + dongName).then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
+    getHousesByGu({ commit }, guName) {
+      http.get("/api/house/houseinfo/gu/" + guName).then((resp) => {
+        commit("setHouses", resp.data);
+      });
+    },
   },
   modules: {},
 });

@@ -22,7 +22,7 @@
         <span class="selectbox">
             <b-button @click="getMap" variant="primary" class="mb-2">
             검색 <b-icon icon="search" aria-hidden="true"></b-icon>
-              <b-spinner variant="light"></b-spinner>
+              <!-- <b-spinner variant="light"></b-spinner> -->
             </b-button>
         </span>
     </div>
