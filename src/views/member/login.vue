@@ -1,4 +1,5 @@
 <template lang="">
+<v-app>
   <div class="mt-15 mx-auto">
     <v-card min-width="500" class="mt-15 px-10 py-5">
       <v-card-title sub class="subtitle-1 justify-center pb-0">
@@ -35,6 +36,7 @@
       </v-card-text>
     </v-card>
   </div>
+  </v-app>
 </template>
 
 <script>

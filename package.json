@@ -19,7 +19,7 @@
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-naver-maps": "^0.14.2",
-    "vue-router": "^3.2.0",
+    "vue-router": "^3.5.1",
     "vue-swal": "^1.0.0",
     "vuejs-google-maps": "^0.1.0",
     "vuetify": "^2.5.0",

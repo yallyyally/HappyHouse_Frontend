@@ -6,6 +6,10 @@ import HouseInfo from "../views/HouseInfo.vue";
 import join from "../views/member/join.vue";
 import login from "../views/member/login.vue";
 import mypage from "../views/member/mypage.vue";
+import Board from "../views/Board.vue";
+import insertBoard from "../components/board/insert.vue";
+import detailBoard from "../components/board/detail.vue";
+import updateBoard from "../components/board/update.vue";
 
 Vue.use(VueRouter);
 
@@ -63,6 +67,26 @@ const routes = [
     name: "mypage",
     component: mypage,
     // beforeEnter: requireAuth(),
+  },
+  {
+    path: '/Board',
+    name: 'Baord',
+    component: Board,
+  },
+  {
+    path: '/board/insertBoard',
+    name: 'insertBoard',
+    component: insertBoard,
+  },
+  {
+    path: '/board/detailBoard',
+    name: 'detailBoard',
+    component: detailBoard,
+  },
+  {
+    path: '/board/updateBoard',
+    name: 'updateBoard',
+    component: updateBoard,
   },
 ];
 
