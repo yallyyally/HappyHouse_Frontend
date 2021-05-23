@@ -1,69 +1,67 @@
 <template>
   <div class="mt-15 mx-auto" style="min-width:600px">
-    <b-card class="mt-15 px-10 pb-5" style="text-align:center">
-      <b-card-title sub class="my-2 justify-center pt-5 mt-5">
+    <v-card class="mt-15 px-10 pb-5" style="text-align:center">
+      <v-card-title sub class="my-2 justify-center pt-5 mt-5">
         <h2>"마이 페이지"</h2>
-      </b-card-title>
-      <b-form v-model="valid">
-        <b-container>
-        <label>아이디</label>
-          <b-form-input
+      </v-card-title>
+      <v-form v-model="valid">
+        <v-container>
+          <v-text-field
             v-model="user.userid"
             :rules="idRules"
             :counter="20"
+            label="아이디"
             disabled
             required
-          ></b-form-input>
-          <label>패스워드 변경</label>
-          <b-form-input
+          ></v-text-field>
+          <v-text-field
             v-model="user.userpwd"
             type="Password"
             :rules="passwordRules"
+            label="패스워드 변경"
             required
             placeholder="비밀번호를 입력해주세요"
-          ></b-form-input>
-          <label>패스워드 확인</label>
-          <b-form-input
+          ></v-text-field>
+          <v-text-field
             v-model="confirmPassword"
             type="Password"
             :rules="[user.userpwd === confirmPassword || 'Password must match']"
+            label="패스워드 확인"
             required
             placeholder="비밀번호를 확인해주세요"
-          ></b-form-input>
-          <label>사용자 이름</label>
-          <b-form-input
+          ></v-text-field>
+          <v-text-field
             v-model="user.username"
             :rules="nameRules"
+            label="사용자 이름"
             required
             placeholder="이름을 입력해주세요"
-          ></b-form-input>
-          <label>이메일</label>
-          <b-form-input
+          ></v-text-field>
+          <v-text-field
+            dense
+            v-model="user.phone"
+            label="전화번호 변경"
+            required
+            placeholder="전화번호를 입력해주세요"
+          ></v-text-field>
+          <v-text-field
             dense
             v-model="user.email"
             :rules="emailRules"
+            label="이메일 변경"
             required
             placeholder="이메일을 입력해주세요"
-          ></b-form-input>
-          <label>전화번호</label>
-          <b-form-input
-            v-model="user.phone"
-            id="userRoadAddress"
-            label="전화번호"
-            required
-            disabled
-            placeholder="전화번호를 입력해주세요"
-          ></b-form-input>
-          <b-button color="success" @click="updateUser">
+          ></v-text-field>
+          <v-btn color="success" @click="updateUser">
             회원 정보 수정
-          </b-button>
-          <b-space></b-space>
-          <b-button color="error" class="ml-4" @click="deleteUser">
+          </v-btn>
+          <v-space></v-space>
+          <v-btn color="error" class="ml-4" @click="deleteUser">
             회원 탈퇴
-          </b-button>
-        </b-container>
-      </b-form>
-    </b-card>
+          </v-btn>
+        </v-container>
+      </v-form>
+    </v-card>
   </div>
 </template>
 
@@ -74,28 +72,30 @@ import swal from 'vue-swal';
 
 Vue.use(swal);
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   data: () => ({
     user: null,
     valid: false,
     confirmPassword: '',
-    // idRules: [
-    //   (b) => !!b || 'id is required',
-    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
-    // ],
-    // passwordRules: [(b) => !!b || 'password is required'],
-    // nameRules: [(b) => !!b || 'name is required'],
-    // emailRules: [
-    //   (b) => !!b || 'E-mail is required',
-    //   (b) => /.+@.+/.test(b) || 'E-mail must be valid',
-    // ],
+    idRules: [
+      (v) => !!v || 'id is required',
+      (v) => v.length <= 20 || 'id must be less than 20 characters',
+    ],
+    passwordRules: [(v) => !!v || 'password is required'],
+    nameRules: [(v) => !!v || 'name is required'],
+    emailRules: [
+      (v) => !!v || 'E-mail is required',
+      (v) => /.+@.+/.test(v) || 'E-mail must be valid',
+    ],
   }),
 
   created() {
     axios
-      .get(`${SERVER_URL}/api/member/info`)
+    // http
+      // .get(`${SERVER_URL}/api/member/info`)
+      .get("/api/member/info")
       .then((response) => {
         this.user = response.data.user;
       })
@@ -107,12 +107,14 @@ export default {
   methods: {
     updateUser: function() {
       axios
-        .put(`${SERVER_URL}/api/member/update`, {
+      // http
+        // .put(`${SERVER_URL}/api/member/update`, {
+          .put("http://localhost:9999/vue/api/member/update", {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
           username: this.user.username,
-          email: this.user.email,
-          phone: this.user.phone,
+          email: this.user.phone,
+          phone: this.user.email,
         })
         .then((response) => {
           if (response.data == 'success') {
@@ -132,7 +134,9 @@ export default {
 
     deleteUser: function() {
       axios
-        .delete(`${SERVER_URL}/api/member/delete?userid=${this.user.userid}`)
+      // http
+      .delete("http://localhost:9999/vue/api/member/delete?userid=${this.user.userid}")
+        // .delete(`${SERVER_URL}/api/member/delete?userid=${this.user.userid}`)
         .then((response) => {
           if (response.data == 'success') {
             this.$swal('탈퇴되었습니다', '', 'success');

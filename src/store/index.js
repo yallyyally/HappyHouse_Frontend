@@ -5,7 +5,7 @@ import http from "@/util/http-commons";
 
 Vue.use(Vuex);
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default new Vuex.Store({
   state: {
@@ -167,7 +167,9 @@ export default new Vuex.Store({
 
     LOGIN(context, user) {
       return axios
-        .post(`${SERVER_URL}/api/member/confirm/login`, user)
+      // http
+        // .post(`${SERVER_URL}/api/member/confirm/login`, user)
+        .post("http://localhost:9999/vue/api/member/confirm/login", user)
         .then((response) => {
           if (response.data.message == "로그인 실패") {
             return "fail";

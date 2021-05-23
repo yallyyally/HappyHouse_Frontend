@@ -1,73 +1,65 @@
 <template lang="">
-<div class="mt-15 mx-auto" style="min-width:600px">
-  <b-card 
-    img-src="@/assets/logo.png"
-    img-alt="Image"
-    img-top
-    tag="article"
-    min-width="500" 
-    class="mt-15 px-10 py-5"
-  >
-  <b-card-title sub class="my-2 justify-center pa-0">
-        <h2>회원가입</h2>
-  </b-card-title>
-    <b-card-text>
-      <b-form v-model="valid">
-      <b-container> 
-        <label>아이디</label>
-        <b-form-input
-          v-model="user.userid"
-          type="text"
-          :rules="idRules"
-          :counter="20"
-          required
-        ></b-form-input>
-        <label>패스워드</label>
-        <b-form-input
-          v-model="user.userpwd"
-          type="password"
-          :rules="passwordRules"
-          placeholder="비밀번호를 입력해주세요."
-          required
-        ></b-form-input>
-        <label>패스워드 확인</label>
-        <b-form-input
-          v-model="confirmPassword"
-          type="password"
-          :rules="[user.userpwd === confirmPassword || 'Password must match']"
-          placeholder="비밀번호를 확인해주세요."
-          required
-        ></b-form-input>
-        <label>사용자 이름</label>
-        <b-form-input
-          v-model="user.username"
-          type="text"
-          :rules="nameRules"
-          placeholder="이름을 입력해주세요"
-          required
-        ></b-form-input>
-        <label>이메일</label>
-        <b-form-input
-          v-model="user.email"
-          type="email"
-          :rules="emailRules"
-          required
-        ></b-form-input>
-        <label>전화번호</label>
-        <b-form-input
-          v-model="user.phone"
-          type="text"
-          required
-        ></b-form-input>
-      </b-container>
-    </b-form>
-    </b-card-text>
-
-    <!-- <b-button class="ml-auto" depressed color="primary" @click="joinUser">Sign up</b-button> -->
-    <!-- <b-button class="ml-auto" variant="primary" depressed color="success" @click="joinUser">Sign up</b-button> -->
-    <b-button class="ml-auto" type="submit" variant="primary" color="primary" @click="joinUser">Sign up</b-button> 
-  </b-card>
-</div>
+  <div class="mt-15 mx-auto" style="min-width:600px">
+    <v-card class="mt-15 px-10 pb-5">
+      <v-card-title sub class="subtitle-1 justify-center pb-0">
+        Happyhouse 회원이 되어보세요!
+      </v-card-title>
+      <v-card-title sub class="my-2 justify-center pa-0">
+        <h2>"회원가입"</h2>
+      </v-card-title>
+      <v-form v-model="valid">
+        <v-container>
+          <v-text-field
+            v-model="user.userid"
+            :rules="idRules"
+            :counter="20"
+            label="아이디"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="user.userpwd"
+            type="Password"
+            :rules="passwordRules"
+            label="패스워드 입력"
+            required
+            placeholder="비밀번호를 입력해주세요"
+          ></v-text-field>
+          <v-text-field
+            dense
+            v-model="confirmPassword"
+            type="Password"
+            :rules="[user.userpwd === confirmPassword || 'Password must match']"
+            label="패스워드 확인"
+            required
+            placeholder="비밀번호를 확인해주세요"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.username"
+            :rules="nameRules"
+            label="사용자 이름"
+            required
+            placeholder="이름을 입력해주세요"
+          ></v-text-field>
+          <v-text-field
+            dense
+            v-model="user.phone"
+            label="전화번호"
+            required
+          ></v-text-field>
+          <v-text-field
+            dense
+            v-model="user.email"
+            :rules="emailRules"
+            label="이메일"
+            required
+          ></v-text-field>
+          <v-btn class="ml-auto" depressed color="primary" @click="joinUser">
+            회원 가입
+          </v-btn>
+        </v-container>
+      </v-form>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -77,7 +69,7 @@ import swal from 'vue-swal';
 
 Vue.use(swal);
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
     data: () => ({
@@ -90,26 +82,28 @@ export default {
     },
     valid: false,
     confirmPassword: '',
-    // idRules: [
-    //   (b) => !!b || 'id is required',
-    //   (b) => b.length <= 20 || 'id must be less than 20 characters',
-    // ],
-    // passwordRules: [(b) => !!b || 'password is required'],
-    // nameRules: [(b) => !!b || 'name is required'],
-    // emailRules: [
-    //   (b) => !!b || 'E-mail is required',
-    //   (b) => /.+@.+/.test(b) || 'E-mail must be valid',
-    // ],
+    idRules: [
+      (v) => !!v || 'id is required',
+      (v) => v.length <= 20 || 'id must be less than 20 characters',
+    ],
+    passwordRules: [(v) => !!v || 'password is required'],
+    nameRules: [(v) => !!v || 'name is required'],
+    emailRules: [
+      (v) => !!v || 'E-mail is required',
+      (v) => /.+@.+/.test(v) || 'E-mail must be valid',
+    ],
   }),
   methods: {
     joinUser: function() {
       axios
-        .post(`${SERVER_URL}/api/member/regist`, {
+      // http
+        // .post(`${SERVER_URL}/api/member/regist`, {
+          .post("http://localhost:9999/vue/api/member/regist", {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
           username: this.user.username,
-          email: this.user.email,
-          phone: this.user.phone,
+          email: this.user.phone,
+          phone: this.user.email,
         })
         .then((response) => {
           if (response.data == 'success') {
