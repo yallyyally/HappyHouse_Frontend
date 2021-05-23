@@ -37,7 +37,7 @@
   
   <!-- 로그인 전 보이는 버전 -->
    <!-- <div v-if="!getAccessToken"> -->
-      <b-navbar-nav v-if="!getAccessToken" id="beforeLogin">
+      <b-navbar-nav id="beforeLogin">
       <!-- 로그인 -->
         <b-navbar-nav>
         <b-nav-item href="/login">로그인</b-nav-item>
@@ -50,7 +50,7 @@
   <!-- </div> -->
   <!-- <div v-else>  -->
     <!-- 로그인 후 보이는 버전 -->
-          <b-navbar-nav v-else id="afterLogin">
+          <b-navbar-nav id="afterLogin">
           <!-- 로그아웃 -->
           <b-navbar-nav>
             <!-- <b-nav-item>{{ getUserId }} 님 환영합니다!</b-nav-item> -->

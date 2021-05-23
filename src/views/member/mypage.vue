@@ -95,7 +95,7 @@ export default {
     axios
     // http
       // .get(`${SERVER_URL}/api/member/info`)
-      .get("/api/member/info")
+      .get("http://localhost:9999/vue/api/member/info")
       .then((response) => {
         this.user = response.data.user;
       })
