@@ -43,10 +43,20 @@
           </v-row>
         </v-card-actions>
       </v-card-text>
-
       <v-divider class="mx-4"></v-divider>
-
-      <v-card-text>
+       <v-card-text>
+        <v-row align="center" class="mx-0 .col-md-3">
+          <a class="indigo--text m-6 h6 font-weight-bold">
+            게시글 평가
+          </a>
+          <v-rating
+            :value="4.5"
+            color="amber"
+            dense
+            half-increments
+            size="14"
+          ></v-rating>
+        </v-row>
         <div class="subtitle-4">
           #<b>{{ detail.bno }}</b
           >, 작성시간 {{ detail.bregtime }}

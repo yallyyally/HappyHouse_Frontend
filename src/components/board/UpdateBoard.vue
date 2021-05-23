@@ -16,27 +16,23 @@
             required
             ref="formTitle"
           ></v-text-field>
-
           <v-textarea
             v-model="detail.bcontent"
             label="내용"
             required
             ref="formContent"
           ></v-textarea>
-
           <v-btn
             :disabled="!valid"
             color="success"
             class="mr-4"
-            @click="updateQnA"
+            @click="updateBoard"
           >
             수정
           </v-btn>
-
           <v-btn color="error" class="mr-4" @click="reset">
             초기화
           </v-btn>
-
           <v-btn class="warning" v-on:click="listBoard">
             취소
           </v-btn>
@@ -52,6 +48,7 @@
   </div>
 </v-app>
 </template>
+
 <script>
 import http from "@/util/http-commons";
 import Vue from 'vue';
@@ -60,16 +57,16 @@ import swal from 'vue-swal';
 Vue.use(swal);
 
 export default {
-  name: 'updateBoard',
-  props: ['no'],
+  name: 'UpdateBoard',
+  props: ['bno'],
   data() {
     return {
       info: null,
       loading: true,
       errored: false,
       userid: '',
-      title: '',
-      content: '',
+      btitle: '',
+      bcontent: '',
       submitted: false,
       detail: {},
     };
@@ -134,7 +131,7 @@ export default {
           this.errored = true;
         })
         .finally(() => {
-          this.$router.push('/board');
+          this.$router.push('/Board');
         });
     },
   },

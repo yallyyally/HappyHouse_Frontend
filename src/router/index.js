@@ -1,27 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import store from '../store';
+import store from '../store';
 import Home from "../views/Home.vue";
 import HouseInfo from "../views/HouseInfo.vue";
 import join from "../views/member/join.vue";
 import login from "../views/member/login.vue";
 import mypage from "../views/member/mypage.vue";
 import Board from "../views/Board.vue";
-import insertBoard from "../components/board/insert.vue";
-import detailBoard from "../components/board/detail.vue";
-import updateBoard from "../components/board/update.vue";
+import InsertBoard from "../components/board/InsertBoard.vue";
+import DetailBoard from "../components/board/DetailBoard.vue";
+import UpdateBoard from "../components/board/UpdateBoard.vue";
+import UpdateSuccess from '../components/board/UpdateSuccess.vue';
+import DeleteSuccess from '../components/board/DeleteSuccess.vue';
 
 Vue.use(VueRouter);
 
-// const requireAuth = () => (to, from, next) => {
-// const nextRoute = to.path;
+const requireAuth = () => (to, from, next) => {
+const nextRoute = to.path;
 
-//   if (store.getters.getAccessToken) {
-//     return next();
-//   } else {
-//     return next('/login' + nextRoute);
-//   }
-// };
+  if (store.getters.getAccessToken) {
+    return next();
+  } else {
+    return next('/login' + nextRoute);
+  }
+};
 
 const routes = [
   {
@@ -66,7 +68,7 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: mypage,
-    // beforeEnter: requireAuth(),
+    beforeEnter: requireAuth(),
   },
   {
     path: '/Board',
@@ -74,19 +76,40 @@ const routes = [
     component: Board,
   },
   {
-    path: '/board/insertBoard',
-    name: 'insertBoard',
-    component: insertBoard,
+    path: '/Board/InsertBoard',
+    name: 'InsertBoard',
+    component: InsertBoard,
+    // beforeEnter: requireAuth(),
   },
   {
-    path: '/board/detailBoard',
-    name: 'detailBoard',
-    component: detailBoard,
+    path: '/Board/:no',
+    name: 'BoardNo',
+    component: Board,
+    props: true,
+    children: [
+      {
+        path: 'Detail',
+        name: 'DetailBoard',
+        component: DetailBoard,
+        props: true,
+      },
+      {
+        path: 'Update',
+        name: 'UpdateBoard',
+        component: UpdateBoard,
+        props: true,
+      },
+    ],
   },
   {
-    path: '/board/updateBoard',
-    name: 'updateBoard',
-    component: updateBoard,
+    path: '/update/success',
+    name: 'UpdateSuccess',
+    component: UpdateSuccess,
+  },
+  {
+    path: '/delete/success',
+    name: 'DeleteSuccess',
+    component: DeleteSuccess,
   },
 ];
 

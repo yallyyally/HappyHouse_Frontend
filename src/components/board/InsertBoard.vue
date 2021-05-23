@@ -31,11 +31,10 @@
           >
             등록
           </v-btn>
-
           <v-btn color="warning" class="mr-4" @click="reset">
             초기화
           </v-btn>
-          <v-btn color="error" class="mr-4" @click="showQnA">
+          <v-btn color="error" class="mr-4" @click="listBoard">
             취소
           </v-btn>
         </v-form>
@@ -60,7 +59,7 @@
             <v-btn
               color="#4181a6"
               style="color:white; margin-left:25%"
-              @click="showBoard"
+              @click="listBoard"
             >
               전체 목록으로 돌아가기
             </v-btn>
@@ -121,8 +120,8 @@ export default {
       http
         .post('/api/board/write', {
           userid: this.inputData.userid,
-          title: this.inputData.btilte,
-          content: this.inputData.bcontent,
+          btitle: this.inputData.btilte,
+          bcontent: this.inputData.bcontent,
         })
         .then((response) => {
           if (response.data == 'success') {
@@ -141,7 +140,7 @@ export default {
         (this.bcontent = ''),
         (this.errored = false);
     },
-    showBoard() {
+    listBoard() {
       http
         .get('/api/board/retrieve')
         .then((response) => (this.bno = response.data))
@@ -149,7 +148,7 @@ export default {
           this.errored = true;
         })
         .finally(() => {
-          this.$router.push('/board');
+          this.$router.push('/Board');
         });
     },
   },
