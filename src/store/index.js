@@ -19,6 +19,9 @@ export default new Vuex.Store({
     selectedHouse: {},
     selectedHouseDeal: [],
     avgDealAmount: "",
+    selectedHouseDealAmount: [],
+    selectedHouseDealDate: [],
+    cnt: 0,
   },
   getters: {
     houses(state) {
@@ -50,6 +53,19 @@ export default new Vuex.Store({
     },
     avgDealAmount(state) {
       return state.avgDealAmount;
+    },
+    selectedHouseDealAmount(state) {
+      console.log("거래액 그래프 get=====");
+      console.log(state.selectedHouseDealAmount);
+      return state.selectedHouseDealAmount;
+    },
+    selectedHouseDealDate(state) {
+      console.log("거래날짜 그래프 get=====");
+      console.log(state.selectedHouseDealDate);
+      return state.selectedHouseDealDate;
+    },
+    cnt(state) {
+      return state.cnt;
     },
   },
   mutations: {
@@ -93,21 +109,27 @@ export default new Vuex.Store({
     },
     // 거래내역 -> 배열로 저장.
     SET_SELECTED_HOUSEDEAL(state, payload) {
+      state.cnt = (state.cnt + 1) % 2;
+
+      state.selectedHouseDeal = [];
+      state.selectedHouseDealAmount = [];
+      state.selectedHouseDealDate = [];
       var sum = 0;
       var cnt = 0;
       payload.forEach((item) => {
         var tmp = {
           층: item.floor,
-          거래금액: item.dealamount.replace(",", ""),
+          거래액: item.dealamount.replace(",", ""),
           거래일: item.dealyear + "." + item.dealmonth + "." + item.dealday,
           면적: item.area,
         };
-        sum += parseInt(tmp["거래금액"], 10);
+        sum += parseInt(tmp["거래액"], 10);
         cnt++;
-        console.log("합계 " + sum);
         state.selectedHouseDeal.push(tmp);
+        state.selectedHouseDealAmount.push(parseInt(tmp["거래액"], 10));
+        state.selectedHouseDealDate.push(tmp["거래일"]);
       });
-      state.avgDealAmount = sum / cnt;
+      state.avgDealAmount = Math.floor(sum / cnt);
     },
   },
   actions: {

@@ -7,7 +7,7 @@
         <div class="p-3">
           <h4 id="sidebar-no-header-title">
                <b-icon icon="building" aria-hidden="true"></b-icon>
-               {{selectedHouse.aptname}}</h4>
+               <b> {{selectedHouse.aptname}}</b></h4>
             <hr>
           <p >
             <b>건축년도</b> {{selectedHouse.buildyear}}<br/>
@@ -16,8 +16,10 @@
           </p>
           <div style="margin-top:15px;">
           <h5> <b-icon icon="graph-up" aria-hidden="true"></b-icon>
-          거래 내역</h5>
+          <b> 거래 내역</b></h5>
           </div>
+          <!-- 거래내역 그래프로 -->
+          <housedeal-chart :selectedHouseDealAmount= "selectedHouseDealAmount" :selectedHouseDealDate= "selectedHouseDealDate"></housedeal-chart>
           <b-table :items= "selectedHouseDeal"></b-table>
           <b-button variant="secondary" block @click="hide">닫기</b-button>
         </div>
@@ -28,7 +30,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
+import HousedealChart from '../houseinfo/HousedealChart.vue';
+
 export default{
+    components:{
+      HousedealChart
+   },
     name:"HouseList",
     data(){
         return {
@@ -45,7 +52,7 @@ export default{
 
     },
     computed:{
-        ...mapGetters(["houses",'selectedHouse','selectedHouseDeal','avgDealAmount'])
+        ...mapGetters(["houses",'selectedHouse','selectedHouseDeal','avgDealAmount','selectedHouseDealAmount','selectedHouseDealDate'])
     },
     created(){
         // 페이지 로딩시 전체 매물 목록 불러오기
