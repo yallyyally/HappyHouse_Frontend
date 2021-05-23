@@ -1,17 +1,36 @@
 <template>
     <b-container>
-             <b-table hover  @click = "clickHouse($event)" :items= "houses" :fields= "fields">
+             <b-table v-b-toggle.sidebar-no-header hover @row-clicked = "clickHouse($event)" :items= "houses" :fields= "fields">
              </b-table>
-        <!-- <b-table hover :items="houses"></b-table> -->
+                 <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow>
+      <template #default="{ hide }">
+        <div class="p-3">
+          <h4 id="sidebar-no-header-title">Custom header sidebar</h4>
+          <p>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+          </p>
+          <nav class="mb-3">
+            <b-nav vertical>
+              <b-nav-item active @click="hide">Active</b-nav-item>
+              <b-nav-item href="#link-1" @click="hide">Link</b-nav-item>
+              <b-nav-item href="#link-2" @click="hide">Another Link</b-nav-item>
+            </b-nav>
+          </nav>
+          <b-button variant="primary" block @click="hide">Close Sidebar</b-button>
+        </div>
+      </template>
+    </b-sidebar>
     </b-container>
 </template>
 <script>
 import { mapGetters } from "vuex";
-
+import { mapActions } from "vuex";
 export default{
     name:"HouseList",
     data(){
         return {
+            sidebar: false,
             fields:
             [
             {key:'no',label:'순번'},
@@ -32,9 +51,19 @@ export default{
         this.$store.dispatch("getHouses");
     },
     methods:{
+        ...mapActions(['setSelectedHouse']),
         clickHouse(event){
+            // this.sidebar = true,
+            // json obj -> string으로 변환하고 전달해줘야 함
+            const dongName=JSON.stringify(event.dong);
+            console.log("선택한 동"+dongName)
+            const aptname = JSON.stringify(event.aptname);
+            console.log("선택아파트 "+aptname)
+            var obj = new Object();
+            obj.dongName=dongName;
+            obj.aptname = aptname;
+            this.setSelectedHouse(obj);
 
-            alert(event.currentTarget+"클릭!")
         }
     }
 }
