@@ -162,12 +162,12 @@ const routes = [
     ],
   },
   {
-    path: "/update/success",
+    path: "/qna/update/success",
     name: "qnaUpdateSuccess",
     component: qnaUpdateSuccess,
   },
   {
-    path: "/delete/success",
+    path: "/qna/delete/success",
     name: "qnaDeleteSuccess",
     component: qnaDeleteSuccess,
   },

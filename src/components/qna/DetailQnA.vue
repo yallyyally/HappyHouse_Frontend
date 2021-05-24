@@ -48,7 +48,7 @@
       <v-card-text>
         <v-row align="center" class="mx-0 .col-md-3">
           <a class="indigo--text m-6 h6 font-weight-bold">
-            게시물 평가
+            답변
           </a>
           <v-rating
             :value="4.5"
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import http from '../../util/http-commons';
+import http from '@/util/http-commons';
 import { mapGetters } from 'vuex';
 import Vue from 'vue';
 import swal from 'vue-swal';
@@ -108,8 +108,8 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
-      this.$swal(this.qnaNum + '번 게시글이 삭제 되었습니다.', '', 'success');
-      this.$router.push('/delete/success');
+      this.$swal(this.qnaNum + '번 질문이 삭제 되었습니다.', '', 'success');
+      this.$router.push('/qna/delete/success');
     },
   },
   watch: {

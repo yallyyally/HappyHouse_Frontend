@@ -77,8 +77,9 @@
 
 <script>
 import http from '@/util/http-commons';
-// import http from '../util/http-commons';
+
 export default {
+  
   data() {
     return {
       icon: 'mdi-pencil',
@@ -114,7 +115,7 @@ export default {
     },
     showQnA() {
       http
-        .get('api/qna//question')
+        .get('api/qna/question')
         .then((response) => {
           this.articles = response.data;
           this.detailno = this.articles[0].qnaNum;

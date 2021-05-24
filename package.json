@@ -16,7 +16,7 @@
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
     "core-js": "^3.6.5",
-    "quasar": "^1.15.15",
+    "cors": "^2.8.5",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-naver-maps": "^0.14.2",

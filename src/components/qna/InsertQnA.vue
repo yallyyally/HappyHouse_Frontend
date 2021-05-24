@@ -2,7 +2,7 @@
   <div>
     <div v-if="!submitted">
       <v-card class="pa-6 mx-auto my-12" max-width="500">
-        <v-card-title>게시물 등록</v-card-title>
+        <v-card-title>질문 등록</v-card-title>
         <v-form v-model="valid" lazy-validation style="text-align:center">
           <v-text-field
             v-model="inputData.userid"
@@ -128,7 +128,7 @@ export default {
             this.$swal('우왕!!', 'QnA 등록 성공!!', 'success');
             this.resultString = '질문이 등록 되었습니다.';
           } else {
-            this.$swal('흑흑..', 'QnA가 등록 실패..', 'return');
+            this.$swal('흑흑..', 'QnA 등록 실패..', 'return');
             this.resultString = '질문이 등록되지 않았습니다.';
           }
         });

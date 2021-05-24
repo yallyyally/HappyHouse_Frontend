@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import http from '../../util/http-commons';
+import http from '@/util/http-commons';
 export default {
   methods: {
     showQnA() {

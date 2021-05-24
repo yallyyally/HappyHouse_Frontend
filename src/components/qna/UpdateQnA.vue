@@ -74,7 +74,7 @@ export default {
   },
   mounted() {
     http
-      .get('/api/qna//question/' + this.qnaNum + '/edit')
+      .get('/api/qna/question/' + this.qnaNum + '/edit')
       .then((response) => {
         this.detail = response.data;
       })
@@ -110,10 +110,10 @@ export default {
         })
         .then((response) => {
           if (response.data == 'success') {
-            this.$router.replace('/update/success');
-            this.$swal('게시물을 수정 되었습니다.', '', 'success');
+            this.$router.replace('/qna/update/success');
+            this.$swal('질문이 수정 되었습니다.', '', 'success');
           } else {
-            this.$swal('게시물을 수정되지 않았습니다.', '', 'error');
+            this.$swal('질문이 수정되지 않았습니다.', '', 'error');
           }
         });
       this.submitted = true;
