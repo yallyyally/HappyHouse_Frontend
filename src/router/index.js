@@ -88,7 +88,7 @@ const routes = [
     // beforeEnter: requireAuth(),
   },
   {
-    path: "/Board/:no",
+    path: "/Board/:bno",
     name: "BoardNo",
     component: Board,
     props: true,
