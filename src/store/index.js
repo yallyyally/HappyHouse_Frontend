@@ -28,6 +28,7 @@ export default new Vuex.Store({
     totalPopulation: 0,
     selectComplete: false,
     barColor: [],
+    moveData: [],
   },
   getters: {
     houses(state) {
@@ -91,6 +92,9 @@ export default new Vuex.Store({
     },
     barColor(state) {
       return state.barColor;
+    },
+    moveData(state) {
+      return state.moveData;
     },
   },
   mutations: {
@@ -169,6 +173,8 @@ export default new Vuex.Store({
       state.populations = [];
       state.totalPopulation = 0;
       state.barColor = [];
+      state.moveData = [];
+
       var letters = "0123456789ABCDEF".split("");
       payload.forEach((item) => {
         var color = "#";
@@ -179,6 +185,12 @@ export default new Vuex.Store({
         state.populations.push(item["population"]);
         state.totalPopulation += item["population"];
         state.barColor.push(color);
+        state.moveData.push({
+          동: item["dong"],
+          전입: item["movein"],
+          전출: item["moveout"],
+          증감: parseInt(item["movein"], 10) - parseInt(item["moveout"], 10),
+        });
       });
       state.selectComplete = true;
     },
