@@ -54,7 +54,7 @@
             {{ ansdetail.ansContent }}
           </div>
           <v-slider
-      v-model="length"
+      v-model= "length"
       color="red darken-4"
       min="1"
       max="15"
@@ -96,6 +96,8 @@ export default {
   props: ['qnaNum'],
   data() {
     return {
+      rating: 0,
+      length:'',
       upHere: false,
       detail: {},
       ansdetail: {},

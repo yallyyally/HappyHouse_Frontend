@@ -2,8 +2,8 @@
   <div class="grey lighten-2 ">
     <v-main>
       <v-container class="py-8 px-6">
-        <v-row text-align: center>
-          <v-col cols="12" :justify="center">
+        <v-row align="center">
+          <v-col cols="12" justify= "center">
             <v-img
               position="center"
               lazy-src="@/assets/QnABoard-banner.jpg"
@@ -99,6 +99,7 @@ export default {
       ],
       articles: [],
       errored: false,
+      loading:true
     };
   },
   watch: {

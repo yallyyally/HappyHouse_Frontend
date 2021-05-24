@@ -16,10 +16,10 @@ import UpdateBoard from "../components/board/UpdateBoard.vue";
 import UpdateSuccess from "../components/board/UpdateSuccess.vue";
 import DeleteSuccess from "../components/board/DeleteSuccess.vue";
 import notice from "../views/NoticeBoard.vue";
-import QnA from '../views/QnABoard.vue';
-import UpdateQnA from '../components/qna/UpdateQnA.vue';
-import DetailQnA from '../components/qna/DetailQnA.vue';
-import InsertQnA from '../components/qna/InsertQnA.vue';
+import QnA from "../views/QnABoard.vue";
+import UpdateQnA from "../components/qna/UpdateQnA.vue";
+import DetailQnA from "../components/qna/DetailQnA.vue";
+import InsertQnA from "../components/qna/InsertQnA.vue";
 import qnaUpdateSuccess from "../components/qna/UpdateSuccess.vue";
 import qnaDeleteSuccess from "../components/qna/DeleteSuccess.vue";
 // 동네정보 관련
@@ -84,7 +84,7 @@ const routes = [
   },
   {
     path: "/Board",
-    name: "Baord",
+    name: "Board",
     component: Board,
   },
   {
@@ -130,32 +130,32 @@ const routes = [
     component: notice,
   },
   {
-    path: '/qna',
-    name: 'QnA',
+    path: "/qna",
+    name: "QnA",
     component: QnA,
   },
   {
-    path: '/qna/insert',
-    name: 'InsertQnA',
+    path: "/qna/insert",
+    name: "InsertQnA",
     component: InsertQnA,
     // beforeEnter: requireAuth(),
   },
 
   {
-    path: '/qna/:qnaNum',
-    name: 'QnANo',
+    path: "/qna/:qnaNum",
+    name: "QnANo",
     component: QnA,
     props: true,
     children: [
       {
-        path: 'detail',
-        name: 'DetailQnA',
+        path: "detail",
+        name: "DetailQnA",
         component: DetailQnA,
         props: true,
       },
       {
-        path: 'update',
-        name: 'UpdateQnA',
+        path: "update",
+        name: "UpdateQnA",
         component: UpdateQnA,
         props: true,
       },

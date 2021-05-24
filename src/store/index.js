@@ -56,7 +56,9 @@ export default new Vuex.Store({
       return localStorage.accessToken;
     },
     getUserId(state) {
-      if (state.userId !== "") return state.userId;
+      console.log("1" + state.userId); //null -> 이게 왜 null일까 ?
+      console.log("2" + localStorage.userId); //ab
+      if (state.userId != null) return state.userId;
       return localStorage.userId;
     },
     getUserName(state) {
@@ -149,11 +151,12 @@ export default new Vuex.Store({
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
       console.log("중간점검 " + state.accessToken);
-      state.userId = payload["user-id"];
-      state.userName = payload["user-name"];
+      state.userId = payload["userid"];
+      state.userName = payload["username"];
+      console.log("중간점검2" + state.userId + " " + payload["username"]);
       localStorage.accessToken = payload["auth-token"];
-      localStorage.userId = payload["user-id"];
-      localStorage.userName = payload["user-name"];
+      localStorage.userId = payload["userid"];
+      localStorage.userName = payload["username"];
     },
     LOGOUT(state) {
       state.accessToken = null;
@@ -256,9 +259,9 @@ export default new Vuex.Store({
       console.log("구 위치 세팅 " + JSON.stringify(state.guPosition));
     },
     // 문화공간 정보 받아오기
-    // SET_CULTURAL_SPACES(state, payload) {
-    //   state.culturalSpaces = [];
-    // },
+    SET_CULTURAL_SPACES(state, payload) {
+      state.culturalSpaces = [];
+    },
   },
   actions: {
     // getMap() {
@@ -372,9 +375,7 @@ export default new Vuex.Store({
       http.get("/api/town/gupos/" + selectedGu).then((resp) => {
         commit("SET_GU_POSITION", resp.data);
       });
-      // http.get('/api/town/cultural/' + selectedGu).then((resp) => {
-
-      // });
+      http.get("/api/town/cultural/" + selectedGu).then((resp) => {});
     },
   },
   modules: {},

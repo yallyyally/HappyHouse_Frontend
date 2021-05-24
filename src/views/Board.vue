@@ -3,10 +3,10 @@
   <div class="grey lighten-2 ">
     <v-main>
       <v-container class="py-8 px-6">
-        <v-row text-align: center>
-          <v-col cols="12" :justify="center">
+        <v-row align="center">
+          <v-col cols="12" align= "center">
             <v-img
-              position="center"
+             align="center"
               lazy-src="@/assets/Board-banner.jpg"
               max-height="300"
               max-width="1300"
@@ -19,7 +19,7 @@
             <v-text-field
               loader-height="0"
               dense
-              :value="itemsPerPage"
+              value= "itemsPerPage"
               label="Items per page"
               type="number"
               min="-1"
@@ -34,19 +34,18 @@
             </v-icon>
           </v-btn>
         </v-row>
-        <v-row class="mt-0" justify="center">
+        <v-row class="mt-0" align="center">
           <v-col class="mt-0 pt-0" cols="6">
             <v-data-table
-              :headers="headers"
-              :items="articles"
-              :page.sync="page"
-              :items-per-page="itemsPerPage"
+              :headers= "headers"
+              :items= "articles"
+              :page.sync= "page"
+              :items-per-page= "itemsPerPage"
               hide-default-footer
               class="elevation-10"
-              @page-count="pageCount = $event"
-              @click:row="getNum"
-              v-model="detailno"
-              :loading="loading"
+              @page-count= "pageCount = $event"
+              @click:row= "getNum"
+              :loading= "loading"
             >
               <template slot="progress">
                 <v-progress-linear
@@ -100,6 +99,7 @@ export default {
       ],
       articles: [],
       errored: false,
+      loading:true,
     };
   },
   watch: {

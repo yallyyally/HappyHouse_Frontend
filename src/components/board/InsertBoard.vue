@@ -1,12 +1,12 @@
 <template>
 <v-app>
   <div>
-    <div v-if="!submitted">
+    <div v-if= "!submitted">
       <v-card class="pa-6 mx-auto my-12" max-width="500">
         <v-card-title>게시물 등록</v-card-title>
         <v-form v-model="valid" lazy-validation style="text-align:center">
           <v-text-field
-            v-model="inputData.userid"
+            v-model= "inputData.userid"
             label="아이디"
             disabled
             required
@@ -94,6 +94,7 @@ export default {
       submitted: false,
       inputData: {},
       resultString: '',
+      valid:null
     };
   },
   methods: {
@@ -156,7 +157,14 @@ export default {
     ...mapGetters(['getAccessToken', 'getUserId', 'getUserId']),
   },
   created() {
-    this.inputData.userid = this.getUserId;
+    console.log('@@@@@@아이디는?'+this.getUserId);
+    // 어느 시점에 state.userId가 null 이 되버리는데 언제일까 ㅠ?
+    this.inputData = {
+      userid: localStorage.getItem('userId'),
+      btitle:null,
+      bcontent:null
+    }
+    // this.inputData.userid = this.getUserId;
   },
 };
 </script>
