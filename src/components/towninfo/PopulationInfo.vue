@@ -4,8 +4,8 @@
      <b-icon icon="people" scale="1" aria-hidden="true"></b-icon>
      인구정보</strong></h4>
      <div class="content">
-         {{selectedGu}}의 인구는 {{totalPopulation}} 입니다.
-        <totalpopulation-chart :chartoptions = "{responsive: true, maintainAspectRatio: false}" :populations= "populations" :dongs= "dongs" >
+         <h4>{{selectedGu}}의 인구는 <strong>{{totalPopulation}}</strong>명 입니다.</h4>
+        <totalpopulation-chart :barColor= "barColor" :chartoptions = "{responsive: true, maintainAspectRatio: false}" :populations= "populations" :dongs= "dongs" >
 
     </totalpopulation-chart>
      </div>
@@ -27,7 +27,7 @@ export default{
         this.makeCompleteFalse();
     },
     computed:{
-        ...mapGetters(['selectedGu','populations','dongs','totalPopulation','selectComplete'])
+        ...mapGetters(['selectedGu','populations','dongs','totalPopulation','selectComplete','barColor'])
     },
 
 

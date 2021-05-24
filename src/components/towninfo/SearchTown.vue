@@ -20,9 +20,6 @@
               <!-- <b-spinner variant="light"></b-spinner> -->
          </b-button>
     </span>
-    <div class="content">
-    <span v-if= "selectedGu"> <h3>{{selectedGu}}의 인구 및 문화공간</h3></span>
-    </div>
     </div>
     </div>
 </template>
@@ -35,6 +32,7 @@
     .selectbox{
         width: 20%;
         margin-left:20px;
+    
     }
     .content{
         text-align: center;

@@ -1,9 +1,9 @@
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 
 export default {
-  extends: Line,
+  extends: Bar,
 
-  props: ["populations", "dongs", "chartoptions"],
+  props: ["populations", "dongs", "chartoptions", "barColor"],
   methods: {
     renderLineChart() {
       this.renderChart(
@@ -11,8 +11,8 @@ export default {
           labels: this.dongs,
           datasets: [
             {
-              label: "거래액",
-              backgroundColor: "#f87979",
+              label: "인구",
+              backgroundColor: this.barColor,
               data: this.populations,
             },
           ],

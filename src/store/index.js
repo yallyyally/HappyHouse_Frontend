@@ -27,6 +27,7 @@ export default new Vuex.Store({
     populations: [],
     totalPopulation: 0,
     selectComplete: false,
+    barColor: [],
   },
   getters: {
     houses(state) {
@@ -87,6 +88,9 @@ export default new Vuex.Store({
     },
     populations(state) {
       return state.populations;
+    },
+    barColor(state) {
+      return state.barColor;
     },
   },
   mutations: {
@@ -164,10 +168,17 @@ export default new Vuex.Store({
       state.dongs = [];
       state.populations = [];
       state.totalPopulation = 0;
+      state.barColor = [];
+      var letters = "0123456789ABCDEF".split("");
       payload.forEach((item) => {
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
         state.dongs.push(item["dong"]);
         state.populations.push(item["population"]);
         state.totalPopulation += item["population"];
+        state.barColor.push(color);
       });
       state.selectComplete = true;
     },
