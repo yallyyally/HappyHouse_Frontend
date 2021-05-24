@@ -15,7 +15,7 @@
             <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="커뮤니티" right>
           <b-dropdown-item href="/Board">자유게시판</b-dropdown-item>
-          <b-dropdown-item href="/QnABoard">Q&A</b-dropdown-item>
+          <b-dropdown-item to="/qna">Q&A</b-dropdown-item>
           <b-dropdown-item href="/notice">공지사항</b-dropdown-item>
          </b-nav-item-dropdown>
 

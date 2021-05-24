@@ -7,10 +7,10 @@
           <v-col cols="12" :justify="center">
             <v-img
               position="center"
-              lazy-src="@/assets/logo.png"
+              lazy-src="@/assets/Board-banner.jpg"
               max-height="300"
               max-width="1300"
-              src="@/assets/logo.png"
+              src="@/assets/Board-banner.jpg"
             ></v-img>
           </v-col>
         </v-row>

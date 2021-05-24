@@ -43,7 +43,7 @@
       </v-card>
     </div>
     <div v-else>
-      <h4>성공적으로 게시물을 수정하였습니다!</h4>
+      <h4>성공적으로 질문을 수정하였습니다!</h4>
       <button class="btn btn-success" v-on:click="showQnA">
         전체 목록으로 돌아가기
       </button>
