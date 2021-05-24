@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import http from '@/util/http-commons';
+import http from '../../util/http-commons';
 import { mapGetters } from 'vuex';
 import Vue from 'vue';
 import swal from 'vue-swal';

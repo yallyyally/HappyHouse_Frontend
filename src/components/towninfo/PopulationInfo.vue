@@ -6,18 +6,20 @@
      <div class="content">
          <!-- 전체 인구 -->
          <h4>{{selectedGu}}의 인구는 <strong>{{totalPopulation}}</strong>명 입니다.</h4>
+         <h5>서울시 평균은 웅앵</h5>
         <totalpopulation-chart :barColor= "barColor" :chartoptions = "{responsive: true, maintainAspectRatio: false}" :populations= "populations" :dongs= "dongs" >
     </totalpopulation-chart>
             <b-row style="margin-top:50px;">
             <!-- 전입, 전출 인구 -->
             <b-col><moveinout-table :moveData= "moveData"></moveinout-table></b-col>
             <!-- 가구별 인구수 -->
-            <b-col>동 선택
+            <b-col><strong>가구별 인원</strong>
+
                 <b-form-select @change= "changeDong()" v-model = "tmpSelectedDong" :options= "dongs" class="mb-3">
                 <b-form-select-option :value= "null" disabled >-- 동 선택 --</b-form-select-option>
-                                    </b-form-select>
+                </b-form-select>
 
-                <!-- <family-chart></family-chart> -->
+                <family-chart :familyData= "familyData" ></family-chart>
             </b-col>
         </b-row>
      </div>
@@ -26,7 +28,7 @@
 <script>
 import TotalpopulationChart from './TotalpopulationChart.js';
 import MoveinoutTable from './MoveinoutTable.vue'
-// import FamilyChart from './FamilyChart.js';
+import FamilyChart from './FamilyChart.js';
 
 import {mapGetters} from "vuex"
 import {mapActions} from "vuex"
@@ -36,7 +38,7 @@ export default{
     components:{
         TotalpopulationChart,
         MoveinoutTable,
-        // FamilyChart
+        FamilyChart
 },
 data(){
     return{
@@ -55,7 +57,7 @@ data(){
 
     },
     computed:{
-        ...mapGetters(['selectedDong','selectedGu','populations','dongs','totalPopulation','selectComplete','barColor','moveData'])
+        ...mapGetters(['selectedDong','selectedGu','populations','dongs','totalPopulation','selectComplete','barColor','moveData','familyData'])
     },
 
 

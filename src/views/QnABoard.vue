@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import http from '@/util/http-common';
+import http from '../util/http-commons';
 export default {
   data() {
     return {
