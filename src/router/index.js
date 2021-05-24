@@ -20,6 +20,8 @@ import QnA from '../views/QnABoard.vue';
 import UpdateQnA from '../components/qna/UpdateQnA.vue';
 import DetailQnA from '../components/qna/DetailQnA.vue';
 import InsertQnA from '../components/qna/InsertQnA.vue';
+import qnaUpdateSuccess from "../components/qna/UpdateSuccess.vue";
+import qnaDeleteSuccess from "../components/qna/DeleteSuccess.vue";
 // 동네정보 관련
 import towninfo from "../views/TownInfo.vue";
 
@@ -158,6 +160,16 @@ const routes = [
         props: true,
       },
     ],
+  },
+  {
+    path: "/update/success",
+    name: "qnaUpdateSuccess",
+    component: qnaUpdateSuccess,
+  },
+  {
+    path: "/delete/success",
+    name: "qnaDeleteSuccess",
+    component: qnaDeleteSuccess,
   },
   {
     path: "/towninfo",
