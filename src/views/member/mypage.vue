@@ -106,7 +106,7 @@ export default {
       .then((response) => {
         console.log('메시지 전체'+JSON.stringify(response.data))
         this.user = response.data.user;
-        console.log('@@@@@@@@@@@@@@@@@유저 정보'+JSON.stringify(this.user))
+        // console.log('@@@@@@@@@@@@@@@@@유저 정보'+JSON.stringify(this.user))
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/'));
