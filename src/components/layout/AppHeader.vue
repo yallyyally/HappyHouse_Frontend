@@ -36,7 +36,7 @@
       <!-- 오른쪽: 로그인/회원가입/로그아웃,마이페이지 -->
   
   <!-- 로그인 전 보이는 버전 -->
-   <div v-if="!getAccessToken">
+   <div v-if= "getAccessToken == null">
      <!-- <div v-if="!isLogin"> -->
       <b-navbar-nav id="beforeLogin">
       <!-- 로그인 -->

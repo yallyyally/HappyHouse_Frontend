@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    acceccToken: null,
+    accessToken: null,
     userId: "",
     userName: "",
     houses: [],
@@ -23,6 +23,10 @@ export default new Vuex.Store({
     selectedHouseDealDate: [],
     cnt: 0,
     selectedGu: null,
+    dongs: [],
+    populations: [],
+    totalPopulation: 0,
+    selectComplete: false,
   },
   getters: {
     houses(state) {
@@ -35,6 +39,7 @@ export default new Vuex.Store({
       return state.optionsDong;
     },
     getAccessToken(state) {
+      console.log("겟 엑세스 토컨" + state.accessToken);
       if (state.accessToken !== null) return state.accessToken;
       return localStorage.accessToken;
     },
@@ -71,6 +76,18 @@ export default new Vuex.Store({
     selectedGu(state) {
       return state.selectedGu;
     },
+    selectComplete(state) {
+      return state.selectComplete;
+    },
+    totalPopulation(state) {
+      return state.totalPopulation;
+    },
+    dongs(state) {
+      return state.dongs;
+    },
+    populations(state) {
+      return state.populations;
+    },
   },
   mutations: {
     setHouses(state, payload) {
@@ -94,6 +111,7 @@ export default new Vuex.Store({
     },
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
+      console.log("중간점검 " + state.accessToken);
       state.userId = payload["user-id"];
       state.userName = payload["user-name"];
       localStorage.accessToken = payload["auth-token"];
@@ -143,9 +161,18 @@ export default new Vuex.Store({
       console.log(state.selectedGu + "선택됨.");
     },
     SET_POPULATION_INFO(state, payload) {
-      console.log("신경ㄴㄴ");
-      console.log(state);
-      console.log(payload);
+      state.dongs = [];
+      state.populations = [];
+      state.totalPopulation = 0;
+      payload.forEach((item) => {
+        state.dongs.push(item["dong"]);
+        state.populations.push(item["population"]);
+        state.totalPopulation += item["population"];
+      });
+      state.selectComplete = true;
+    },
+    MAKE_COMPLETE_FALSE(state) {
+      state.selectComplete = false;
     },
   },
   actions: {
@@ -242,10 +269,15 @@ export default new Vuex.Store({
     setSelectedGu({ commit }, tempSelectedGu) {
       commit("SET_SELECTED_GU", tempSelectedGu);
     },
+    makeCompleteFalse({ commit }) {
+      commit("MAKE_COMPLETE_FALSE");
+    },
+    // 검색 버튼 누르면
     getPopulationInfo({ commit }, selectedGu) {
+      commit("MAKE_COMPLETE_FALSE");
       http.get("/api/town/population/" + selectedGu).then((resp) => {
         console.log("받은 인구 정보");
-        console.log(JSON.stringify(resp.data));
+        console.log(resp.data);
         commit("SET_POPULATION_INFO", resp.data);
       });
     },
