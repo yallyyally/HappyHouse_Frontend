@@ -24,7 +24,7 @@ Vue.use(VueRouter);
 const requireAuth = () => (to, from, next) => {
   const nextRoute = to.path;
 
-  if (store.getters.getAccessToken) {
+  if (store.getters.getUserId) {
     return next();
   } else {
     return next("/login" + nextRoute);
