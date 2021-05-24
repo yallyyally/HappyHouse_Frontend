@@ -36,7 +36,8 @@
       <!-- 오른쪽: 로그인/회원가입/로그아웃,마이페이지 -->
   
   <!-- 로그인 전 보이는 버전 -->
-   <!-- <div v-if="!getAccessToken"> -->
+   <div v-if="!getAccessToken">
+     <!-- <div v-if="!isLogin"> -->
       <b-navbar-nav id="beforeLogin">
       <!-- 로그인 -->
         <b-navbar-nav>
@@ -47,8 +48,8 @@
         <b-nav-item href="/join">회원가입</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
-  <!-- </div> -->
-  <!-- <div v-else>  -->
+  </div>
+  <div v-else> 
     <!-- 로그인 후 보이는 버전 -->
           <b-navbar-nav id="afterLogin">
           <!-- 로그아웃 -->
@@ -58,9 +59,10 @@
       </b-navbar-nav>
           <!-- 마이페이지 -->
       <b-navbar-nav>
-        <b-nav-item href="/mypage">마이페이지</b-nav-item>
+        <b-nav-item to="/mypage">마이페이지</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
+        </div>
     </b-collapse>
   </b-navbar>
   </div>

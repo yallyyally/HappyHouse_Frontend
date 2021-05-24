@@ -96,7 +96,7 @@ export default {
         },
         { text: '글쓴이', value: 'userid' },
         { text: '제목', value: 'btitle' },
-        { text: '작성 시간', value: 'bregtime' },
+        { date: '작성 시간', value: 'bregtime' },
       ],
       articles: [],
       errored: false,

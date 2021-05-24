@@ -120,7 +120,7 @@ export default {
       http
         .post('/api/board/write', {
           userid: this.inputData.userid,
-          btitle: this.inputData.btilte,
+          btitle: this.inputData.btitle,
           bcontent: this.inputData.bcontent,
         })
         .then((response) => {

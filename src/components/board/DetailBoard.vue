@@ -44,7 +44,7 @@
         </v-card-actions>
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
-       <v-card-text>
+       <!-- <v-card-text>
         <v-row align="center" class="mx-0 .col-md-3">
           <a class="indigo--text m-6 h6 font-weight-bold">
             게시글 평가
@@ -61,7 +61,7 @@
           #<b>{{ detail.bno }}</b
           >, 작성시간 {{ detail.bregtime }}
         </div>
-      </v-card-text>
+      </v-card-text> -->
     </v-card>
   </div>
 </v-app>
@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     updateBoard: function() {
-      this.$router.push('/Board/' + this.bno + '/update');
+      this.$router.push('/Board/' + this.bno + '/Update');
     },
     fetchData() {
       http
