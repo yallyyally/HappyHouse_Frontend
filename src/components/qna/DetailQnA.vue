@@ -45,7 +45,7 @@
 
       <v-divider class="mx-4"></v-divider>
 
-      <v-card-text>
+      <!-- <v-card-text>
         <v-row align="center" class="mx-0 .col-md-3">
           <a class="indigo--text m-6 h6 font-weight-bold">
             답변
@@ -62,7 +62,7 @@
           #<b>{{ detail.qnaNum }}</b
           >, 작성시간 {{ detail.queTime }}
         </div>
-      </v-card-text>
+      </v-card-text> -->
     </v-card>
   </div>
 </template>
