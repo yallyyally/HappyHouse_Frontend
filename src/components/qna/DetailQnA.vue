@@ -45,24 +45,40 @@
 
       <v-divider class="mx-4"></v-divider>
 
-      <!-- <v-card-text>
+      <v-card-text>
         <v-row align="center" class="mx-0 .col-md-3">
-          <a class="indigo--text m-6 h6 font-weight-bold">
+          <a class="indigo--text m-6 h6 font-weight-bold" @click="answerQnA">
             답변
           </a>
-          <v-rating
-            :value="4.5"
-            color="amber"
-            dense
-            half-increments
-            size="14"
-          ></v-rating>
+          <div class="black--text m-6 my-3 ">
+            {{ ansdetail.ansContent }}
+          </div>
+          <v-slider
+      v-model="length"
+      color="red darken-4"
+      min="1"
+      max="15"
+      label="답변 만족도"
+    ></v-slider>
+    <!-- <v-rating // 별모양 뜨는건데 안떠요ㅜㅜㅜ
+      v-model="rating"
+      :length="length"
+      color="red lighten-3"
+      background-color="grey lighten-1"
+      large
+    ></v-rating> -->
+    <div>
+      <span class="caption text-uppercase">model:</span>
+      <span class="font-weight-bold">
+        {{ rating }}
+      </span>
+    </div>
         </v-row>
         <div class="subtitle-4">
-          #<b>{{ detail.qnaNum }}</b
-          >, 작성시간 {{ detail.queTime }}
+          #<b>{{ ansdetail.ansNum }}</b
+          >, 작성시간 {{ ansdetail.ansTime }}
         </div>
-      </v-card-text> -->
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -82,11 +98,22 @@ export default {
     return {
       upHere: false,
       detail: {},
+      ansdetail: {},
       loading: true,
       errored: false,
     };
   },
   methods: {
+    answerQnA: function() {
+      http
+        .get('api/qna/answer/'+ this.qnaNum)
+        .then((response) => (this.ansdetail = response.data))
+        .catch(() => {
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
+        console.dir(this.ansdetail);
+    },
     updateQnA: function() {
       this.$router.push('/qna/' + this.qnaNum + '/update');
     },
