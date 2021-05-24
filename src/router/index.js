@@ -16,6 +16,12 @@ import UpdateBoard from "../components/board/UpdateBoard.vue";
 import UpdateSuccess from "../components/board/UpdateSuccess.vue";
 import DeleteSuccess from "../components/board/DeleteSuccess.vue";
 import notice from "../views/NoticeBoard.vue";
+import QnA from '../views/QnABoard.vue';
+import UpdateQnA from '../components/qna/UpdateQnA.vue';
+import DetailQnA from '../components/qna/DetailQnA.vue';
+import InsertQnA from '../components/qna/InsertQnA.vue';
+import qnaUpdateSuccess from "../components/qna/UpdateSuccess.vue";
+import qnaDeleteSuccess from "../components/qna/DeleteSuccess.vue";
 // 동네정보 관련
 import towninfo from "../views/TownInfo.vue";
 
@@ -122,6 +128,48 @@ const routes = [
     name: "notice",
     // beforeEnter: requireAuth(),
     component: notice,
+  },
+  {
+    path: '/qna',
+    name: 'QnA',
+    component: QnA,
+  },
+  {
+    path: '/qna/insert',
+    name: 'InsertQnA',
+    component: InsertQnA,
+    // beforeEnter: requireAuth(),
+  },
+
+  {
+    path: '/qna/:qnaNum',
+    name: 'QnANo',
+    component: QnA,
+    props: true,
+    children: [
+      {
+        path: 'detail',
+        name: 'DetailQnA',
+        component: DetailQnA,
+        props: true,
+      },
+      {
+        path: 'update',
+        name: 'UpdateQnA',
+        component: UpdateQnA,
+        props: true,
+      },
+    ],
+  },
+  {
+    path: "/update/success",
+    name: "qnaUpdateSuccess",
+    component: qnaUpdateSuccess,
+  },
+  {
+    path: "/delete/success",
+    name: "qnaDeleteSuccess",
+    component: qnaDeleteSuccess,
   },
   {
     path: "/towninfo",
