@@ -29,7 +29,7 @@
 
       <!-- 동네정보 -->
       <b-navbar-nav>
-        <b-nav-item href="#">동네정보</b-nav-item>
+        <b-nav-item href="/towninfo">동네정보</b-nav-item>
       </b-navbar-nav>
     </b-navbar-nav>
     
