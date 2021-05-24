@@ -1,6 +1,8 @@
 <template>
 <!-- 검색칸 -->
  <search-town></search-town>
+ <!-- 인구 정보 -->
+ <!-- <population-info></population-info> -->
 </template>
 
 <script>

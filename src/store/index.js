@@ -22,6 +22,7 @@ export default new Vuex.Store({
     selectedHouseDealAmount: [],
     selectedHouseDealDate: [],
     cnt: 0,
+    selectedGu: null,
   },
   getters: {
     houses(state) {
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     },
     cnt(state) {
       return state.cnt;
+    },
+    selectedGu(state) {
+      return state.selectedGu;
     },
   },
   mutations: {
@@ -131,6 +135,18 @@ export default new Vuex.Store({
       });
       state.avgDealAmount = Math.floor(sum / cnt);
     },
+    INIT_SELECTED_GU(state) {
+      state.selectedGu = null;
+    },
+    SET_SELECTED_GU(state, payload) {
+      state.selectedGu = payload;
+      console.log(state.selectedGu + "선택됨.");
+    },
+    SET_POPULATION_INFO(state, payload) {
+      console.log("신경ㄴㄴ");
+      console.log(state);
+      console.log(payload);
+    },
   },
   actions: {
     // getMap() {
@@ -188,20 +204,22 @@ export default new Vuex.Store({
     },
 
     LOGIN(context, user) {
-      return axios
-      // http
-        // .post(`${SERVER_URL}/api/member/confirm/login`, user)
-        .post("http://localhost:9999/vue/api/member/confirm/login", user)
-        .then((response) => {
-          if (response.data.message == "로그인 실패") {
-            return "fail";
-          } else {
-            context.commit("LOGIN", response.data);
-            axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
-            return "success";
-          }
-        })
-        .catch(({ message }) => alert(message));
+      return (
+        axios
+          // http
+          // .post(`${SERVER_URL}/api/member/confirm/login`, user)
+          .post("http://localhost:9999/vue/api/member/confirm/login", user)
+          .then((response) => {
+            if (response.data.message == "로그인 실패") {
+              return "fail";
+            } else {
+              context.commit("LOGIN", response.data);
+              axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+              return "success";
+            }
+          })
+          .catch(({ message }) => alert(message))
+      );
     },
     LOGOUT(context) {
       axios.defaults.headers.common["auth-token"] = undefined;
@@ -216,6 +234,19 @@ export default new Vuex.Store({
     getHousesByGu({ commit }, guName) {
       http.get("/api/house/houseinfo/gu/" + guName).then((resp) => {
         commit("setHouses", resp.data);
+      });
+    },
+    initSelectedGu({ commit }) {
+      commit("INIT_SELECTED_GU");
+    },
+    setSelectedGu({ commit }, tempSelectedGu) {
+      commit("SET_SELECTED_GU", tempSelectedGu);
+    },
+    getPopulationInfo({ commit }, selectedGu) {
+      http.get("/api/town/population/" + selectedGu).then((resp) => {
+        console.log("받은 인구 정보");
+        console.log(JSON.stringify(resp.data));
+        commit("SET_POPULATION_INFO", resp.data);
       });
     },
   },
