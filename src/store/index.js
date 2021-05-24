@@ -32,6 +32,8 @@ export default new Vuex.Store({
     selectedDong: null,
     familyData: [], //동 하나당 데이터.
     overallFamilyData: [], //객체 배열
+    totalMoveInOut: "",
+    increase: true,
   },
   getters: {
     houses(state) {
@@ -104,6 +106,14 @@ export default new Vuex.Store({
     },
     familyData(state) {
       return state.familyData;
+    },
+    totalMoveInOut(state) {
+      if (state.totalMoveInOut >= 0) {
+        state.increase = true;
+      } else {
+        state.increase = false;
+      }
+      return Math.abs(state.totalMoveInOut);
     },
   },
   mutations: {
@@ -187,6 +197,7 @@ export default new Vuex.Store({
       state.moveData = [];
       state.selectedDong = null;
       state.overallFamilyData = [];
+      state.totalMoveInOut = 0;
       var letters = "0123456789ABCDEF".split("");
       payload.forEach((item) => {
         var color = "#";
@@ -204,6 +215,7 @@ export default new Vuex.Store({
           전출: item["moveout"],
           증감: parseInt(item["movein"], 10) - parseInt(item["moveout"], 10),
         });
+        state.totalMoveInOut += parseInt(item["movein"], 10) - parseInt(item["moveout"], 10);
         // 해싱 -> 동 이름으로 매핑
         state.overallFamilyData[dongName] = [];
         state.overallFamilyData[dongName].push(

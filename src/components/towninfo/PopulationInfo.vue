@@ -5,13 +5,16 @@
      인구정보</strong></h4>
      <div class="content">
          <!-- 전체 인구 -->
-         <h4>{{selectedGu}}의 인구는 <strong>{{totalPopulation}}</strong>명 입니다.</h4>
+         <h4><strong>{{selectedGu}}</strong>의 인구는 <strong>{{totalPopulation}}</strong>명 입니다.</h4>
          <h5>서울시 평균은 웅앵</h5>
         <totalpopulation-chart :barColor= "barColor" :chartoptions = "{responsive: true, maintainAspectRatio: false}" :populations= "populations" :dongs= "dongs" >
     </totalpopulation-chart>
             <b-row style="margin-top:50px;">
             <!-- 전입, 전출 인구 -->
-            <b-col><moveinout-table :moveData= "moveData"></moveinout-table></b-col>
+            <b-col>
+             <h5><strong>{{selectedGu}}</strong>의 인구는 <strong>{{totalMoveInOut}}명</strong> <strong><span v-if= "increase"> 증가</span> <span v-else>감소</span></strong>하였습니다.</h5>
+                <moveinout-table :moveData= "moveData"></moveinout-table>
+                </b-col>
             <!-- 가구별 인구수 -->
             <b-col><strong>가구별 인원</strong>
 
@@ -57,7 +60,7 @@ data(){
 
     },
     computed:{
-        ...mapGetters(['selectedDong','selectedGu','populations','dongs','totalPopulation','selectComplete','barColor','moveData','familyData'])
+        ...mapGetters(['increase','totalMoveInOut','selectedDong','selectedGu','populations','dongs','totalPopulation','selectComplete','barColor','moveData','familyData'])
     },
 
 
