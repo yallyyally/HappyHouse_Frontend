@@ -29,6 +29,8 @@ export default new Vuex.Store({
     selectComplete: false,
     barColor: [],
     moveData: [],
+    selectedDong: null,
+    familyData: [],
   },
   getters: {
     houses(state) {
@@ -42,7 +44,7 @@ export default new Vuex.Store({
     },
     getAccessToken(state) {
       console.log("겟 엑세스 토컨" + state.accessToken);
-      if (state.accessToken !== null) return state.accessToken;
+      if (state.accessToken != null) return state.accessToken;
       return localStorage.accessToken;
     },
     getUserId(state) {
@@ -96,6 +98,9 @@ export default new Vuex.Store({
     moveData(state) {
       return state.moveData;
     },
+    selectedDong(state) {
+      return state.selectedDong;
+    },
   },
   mutations: {
     setHouses(state, payload) {
@@ -117,6 +122,7 @@ export default new Vuex.Store({
       state.optionsDong = payload;
       console.log("==========비동기 완료/동목록=========");
     },
+
     LOGIN(state, payload) {
       state.accessToken = payload["auth-token"];
       console.log("중간점검 " + state.accessToken);
@@ -163,6 +169,7 @@ export default new Vuex.Store({
     },
     INIT_SELECTED_GU(state) {
       state.selectedGu = null;
+      state.selectedDong = null;
     },
     SET_SELECTED_GU(state, payload) {
       state.selectedGu = payload;
@@ -174,6 +181,7 @@ export default new Vuex.Store({
       state.totalPopulation = 0;
       state.barColor = [];
       state.moveData = [];
+      state.selectedDong = null;
 
       var letters = "0123456789ABCDEF".split("");
       payload.forEach((item) => {
@@ -196,6 +204,11 @@ export default new Vuex.Store({
     },
     MAKE_COMPLETE_FALSE(state) {
       state.selectComplete = false;
+      // 선택된 동 null
+      state.selectedDong = null;
+    },
+    SET_SELECTED_DONG(state, payload) {
+      state.selectedDong = payload;
     },
   },
   actions: {
@@ -263,8 +276,11 @@ export default new Vuex.Store({
             if (response.data.message == "로그인 실패") {
               return "fail";
             } else {
+              console.log("로그인 성공~~~~");
               context.commit("LOGIN", response.data);
+
               axios.defaults.headers.common["auth-token"] = `${response.data["auth-token"]}`;
+              // axios.defaults.headers.common["auth-token"] = response.data["auth-token"];
               return "success";
             }
           })

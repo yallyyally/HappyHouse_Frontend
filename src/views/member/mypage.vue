@@ -71,12 +71,16 @@
 import axios from 'axios';
 import Vue from 'vue';
 import swal from 'vue-swal';
+import { mapGetters } from 'vuex';
 
 Vue.use(swal);
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
+  computed:{
+    ...mapGetters['getAccessToken']
+  },
   data: () => ({
     user: null,
     valid: false,
@@ -94,12 +98,15 @@ export default {
   }),
 
   created() {
+    console.log('마이페이지 생성시작!');
     axios
     // http
       // .get(`${SERVER_URL}/api/member/info`)
-      .get("http://localhost:9999/vue/api/member/info")
+      .get("http://localhost:9999/vue/api/member/info/"+localStorage['accessToken'])
       .then((response) => {
+        console.log('메시지 전체'+JSON.stringify(response.data))
         this.user = response.data.user;
+        console.log('@@@@@@@@@@@@@@@@@유저 정보'+JSON.stringify(this.user))
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/'));
