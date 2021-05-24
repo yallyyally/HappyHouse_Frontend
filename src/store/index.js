@@ -126,6 +126,9 @@ export default new Vuex.Store({
       console.log("구 위치 얻기" + JSON.stringify(state.guPosition));
       return state.guPosition;
     },
+    culturalSpaces(state) {
+      return state.culturalSpaces;
+    },
   },
   mutations: {
     setHouses(state, payload) {
@@ -261,6 +264,8 @@ export default new Vuex.Store({
     // 문화공간 정보 받아오기
     SET_CULTURAL_SPACES(state, payload) {
       state.culturalSpaces = [];
+      state.culturalSpaces = payload;
+      console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
   },
   actions: {
@@ -375,7 +380,9 @@ export default new Vuex.Store({
       http.get("/api/town/gupos/" + selectedGu).then((resp) => {
         commit("SET_GU_POSITION", resp.data);
       });
-      http.get("/api/town/cultural/" + selectedGu).then((resp) => {});
+      http.get("/api/town/cultural/" + selectedGu).then((resp) => {
+        commit("SET_CULTURAL_SPACES", resp.data);
+      });
     },
   },
   modules: {},

@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       icon: 'mdi-pencil',
-      detailno: 0,
+      detailno: [],
       page: 1,
       pageCount: 0,
       itemsPerPage: 7,

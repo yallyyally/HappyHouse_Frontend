@@ -60,13 +60,13 @@
       max="15"
       label="답변 만족도"
     ></v-slider>
-    <!-- <v-rating // 별모양 뜨는건데 안떠요ㅜㅜㅜ
-      v-model="rating"
-      :length="length"
-      color="red lighten-3"
-      background-color="grey lighten-1"
-      large
-    ></v-rating> -->
+    <!-- // 별모양 뜨는건데 안떠요ㅜㅜㅜ -->
+    <v-rating
+      v-model= "rating"
+      background-color="indigo lighten-3"
+      color="indigo"
+      size="64"
+    ></v-rating>
     <div>
       <span class="caption text-uppercase">model:</span>
       <span class="font-weight-bold">
@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       rating: 0,
-      length:'',
+      length:5,
       upHere: false,
       detail: {},
       ansdetail: {},
