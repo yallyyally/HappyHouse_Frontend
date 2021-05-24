@@ -126,10 +126,10 @@ export default {
         })
         .then((response) => {
           if (response.data == 'success') {
-            this.$swal('우왕!!', '게시글이 등록 성공!!', 'success');
+            this.$swal('우왕!!', '게시글 등록 성공!!', 'success');
             this.resultString = '게시글이 등록 되었습니다.';
           } else {
-            this.$swal('흑흑..', '게시글이 등록 실패..', 'return');
+            this.$swal('흑흑..', '게시글 등록 실패..', 'return');
             this.resultString = '게시글이 등록되지 않았습니다.';
           }
         });

@@ -3,7 +3,7 @@
   <div>
     <div v-if="!submitted">
       <v-card class="pa-6 mx-auto my-0" max-width="500">
-        <v-card-title>{{ detail.no }}번 게시물을 수정합니다!</v-card-title>
+        <v-card-title>{{ detail.bno }}번 게시물을 수정합니다!</v-card-title>
         <v-form v-model="valid" lazy-validation style="text-align:center">
           <v-text-field
             v-model="detail.userid"

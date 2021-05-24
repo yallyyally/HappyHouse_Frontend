@@ -23,7 +23,7 @@
           </div>
         </v-row>
         <v-card-actions>
-          <v-row v-if="detail.userid == getUserId">
+          <!-- <v-row v-if="detail.userid == getUserId"> -->
             <v-col cols="4"></v-col>
             <v-col cols="8">
               <v-btn
@@ -39,7 +39,7 @@
                 삭제
               </v-btn>
             </v-col>
-          </v-row>
+          <!-- </v-row> -->
         </v-card-actions>
       </v-card-text>
 

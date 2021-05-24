@@ -2,7 +2,7 @@
   <div>
     <div v-if="!submitted">
       <v-card class="pa-6 mx-auto my-0" max-width="500">
-        <v-card-title>{{ detail.qnaNum }}번 게시물을 수정합니다!</v-card-title>
+        <v-card-title>{{ detail.qnaNum }}번 질문을 수정합니다!</v-card-title>
         <v-form v-model="valid" lazy-validation style="text-align:center">
           <v-text-field
             v-model="detail.userid"
@@ -74,7 +74,7 @@ export default {
   },
   mounted() {
     http
-      .get('/api/qna/question/' + this.qnaNum + '/edit')
+      .get('/api/qna/question/' + this.qnaNum)
       .then((response) => {
         this.detail = response.data;
       })
@@ -126,7 +126,7 @@ export default {
     },
     showQnA() {
       http
-        .get('/question')
+        .get('/api/qna/question')
         .then((response) => (this.qnaNum = response.data))
         .catch(() => {
           this.errored = true;

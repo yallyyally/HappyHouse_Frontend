@@ -91,7 +91,7 @@ export default {
         {
           text: '글번호',
           align: 'start',
-          value: 'no',
+          value: 'qnaNum',
         },
         { text: '글쓴이', value: 'userid' },
         { text: '제목', value: 'queTitle' },
