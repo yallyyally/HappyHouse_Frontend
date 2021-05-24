@@ -10,13 +10,13 @@
     <div class="content">
         <span class="selectbox">
             <b-form-select  @change="changeGu()" v-model = "selectedGu" :options= "optionsGu" class="mb-3">
-            <b-form-select-option :value= "null" >-- 구 전체 --</b-form-select-option>
+            <b-form-select-option :value= "null" disabled>-- 구 선택 --</b-form-select-option>
             
             </b-form-select>
         </span>
         <span class="selectbox">
             <b-form-select  v-model = "selectedDong" :options= "optionsDong" class="mb-3">
-            <b-form-select-option :value= "null" >-- 동 전체 --</b-form-select-option>
+            <b-form-select-option :value= "null" disabled>-- 동 선택 --</b-form-select-option>
             </b-form-select>
         </span>
         <span class="selectbox">
@@ -79,16 +79,17 @@ export default{
             // 2. 구만 설정 -> 종로구 null
             // 3. 구, 동 둘다 설정->구로구 항동.
             // 4. 동만 설정 -> null 금촌동
-            if(this.selectedGu == null && this.selectedDong == null){
+            if(this.selectedGu == null  || this.selectedDong == null){
                 // alert('전체 매물 가져오기!')
-                this.$store.dispatch("getHouses");
+                // this.$store.dispatch("getHouses");
+                alert('주소를 모두 입력해주세요.')
 
             }
-            else if(this.selectedGu != null && this.selectedDong == null){
-                // alert(this.selectedGu+"에 속한 전체 동네 매물");
-                this.getHousesByGu(this.selectedGu);
+            // else if(this.selectedGu != null && this.selectedDong == null){
+            //     // alert(this.selectedGu+"에 속한 전체 동네 매물");
+            //     this.getHousesByGu(this.selectedGu);
                 
-            }
+            // }
             else{
                 // alert(this.selectedDong+"의 매물 바로불러오자");
                 this.getHousesByDong(this.selectedDong);
