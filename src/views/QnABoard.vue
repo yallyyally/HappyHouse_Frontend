@@ -4,13 +4,13 @@
       <v-container class="py-8 px-6">
         <v-row text-align: center>
           <v-col cols="12" :justify="center">
-            <!-- <v-img
+            <v-img
               position="center"
               lazy-src="@/assets/QnABoard-banner.jpg"
               max-height="300"
               max-width="1300"
               src="@/assets/QnABoard-banner.jpg"
-            ></v-img> -->
+            ></v-img>
           </v-col>
         </v-row>
         <v-row class="mb-0 pb-0">
@@ -76,7 +76,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+import http from '@/util/http-commons';
+=======
 import http from '../util/http-commons';
+>>>>>>> 135ded01d3eda310d633d6a5efc764b46dbf50ce
 export default {
   data() {
     return {

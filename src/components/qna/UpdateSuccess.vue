@@ -23,7 +23,7 @@
             style="color:white; margin-left:25%"
             @click="showQnA"
           >
-            전체 모록으로 돌아가기
+            전체 목록으로 돌아가기
           </v-btn>
         </v-card-actions>
       </v-card-text>
