@@ -30,7 +30,8 @@ export default new Vuex.Store({
     barColor: [],
     moveData: [],
     selectedDong: null,
-    familyData: [],
+    familyData: [], //동 하나당 데이터.
+    overallFamilyData: [], //객체 배열
   },
   getters: {
     houses(state) {
@@ -100,6 +101,9 @@ export default new Vuex.Store({
     },
     selectedDong(state) {
       return state.selectedDong;
+    },
+    familyData(state) {
+      return state.familyData;
     },
   },
   mutations: {
@@ -182,23 +186,34 @@ export default new Vuex.Store({
       state.barColor = [];
       state.moveData = [];
       state.selectedDong = null;
-
+      state.overallFamilyData = [];
       var letters = "0123456789ABCDEF".split("");
       payload.forEach((item) => {
         var color = "#";
         for (var i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)];
         }
-        state.dongs.push(item["dong"]);
+        var dongName = item["dong"];
+        state.dongs.push(dongName);
         state.populations.push(item["population"]);
         state.totalPopulation += item["population"];
         state.barColor.push(color);
         state.moveData.push({
-          동: item["dong"],
+          동: dongName,
           전입: item["movein"],
           전출: item["moveout"],
           증감: parseInt(item["movein"], 10) - parseInt(item["moveout"], 10),
         });
+        // 해싱 -> 동 이름으로 매핑
+        state.overallFamilyData[dongName] = [];
+        state.overallFamilyData[dongName].push(
+          item["oneperson"],
+          item["twoperson"],
+          item["threeperson"],
+          item["fourperson"],
+          item["morethanfiveperson"]
+        );
+        console.log(dongName + "가구정보 " + state.overallFamilyData[dongName]);
       });
       state.selectComplete = true;
     },
@@ -208,7 +223,10 @@ export default new Vuex.Store({
       state.selectedDong = null;
     },
     SET_SELECTED_DONG(state, payload) {
+      // 동 바뀔때마다 familyData  바뀜
       state.selectedDong = payload;
+      state.familyData = state.overallFamilyData[state.selectedDong];
+      console.log("동 세팅 후 값도 ㅅ팅.->" + state.familyData);
     },
   },
   actions: {

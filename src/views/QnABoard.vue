@@ -76,7 +76,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import http from '@/util/http-commons';
+=======
+import http from '../util/http-commons';
+>>>>>>> 135ded01d3eda310d633d6a5efc764b46dbf50ce
 export default {
   data() {
     return {
