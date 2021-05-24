@@ -16,7 +16,7 @@
         <b-nav-item-dropdown text="커뮤니티" right>
           <b-dropdown-item href="/Board">자유게시판</b-dropdown-item>
           <b-dropdown-item href="/QnABoard">Q&A</b-dropdown-item>
-          <b-dropdown-item href="/NoticeBoard">공지사항</b-dropdown-item>
+          <b-dropdown-item href="/notice">공지사항</b-dropdown-item>
          </b-nav-item-dropdown>
 
 <!-- 있어보이는 단어로 바꿀 것.. -->
@@ -37,6 +37,7 @@
   
   <!-- 로그인 전 보이는 버전 -->
    <div v-if= "getAccessToken == null">
+   <!-- <div v-if="!getAccessToken"> -->
      <!-- <div v-if="!isLogin"> -->
       <b-navbar-nav id="beforeLogin">
       <!-- 로그인 -->
@@ -59,7 +60,7 @@
       </b-navbar-nav>
           <!-- 마이페이지 -->
       <b-navbar-nav>
-        <b-nav-item to="/mypage">마이페이지</b-nav-item>
+        <b-nav-item href="/mypage">마이페이지</b-nav-item>
       </b-navbar-nav>
         </b-navbar-nav>
         </div>
