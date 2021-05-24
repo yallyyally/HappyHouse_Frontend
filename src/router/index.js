@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "../store";
+// import store from "../store";
 // 매물 관련
 import HouseInfo from "../views/HouseInfo.vue";
 // 회원 관련
@@ -21,15 +21,15 @@ import towninfo from "../views/TownInfo.vue";
 
 Vue.use(VueRouter);
 
-const requireAuth = () => (to, from, next) => {
-  const nextRoute = to.path;
+// const requireAuth = () => (to, from, next) => {
+//   const nextRoute = to.path;
 
-  if (store.getters.getUserId) {
-    return next();
-  } else {
-    return next("/login" + nextRoute);
-  }
-};
+//   if (store.getters.getUserId) {
+//     return next();
+//   } else {
+//     return next("/login" + nextRoute);
+//   }
+// };
 
 const routes = [
   {
@@ -74,7 +74,7 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: mypage,
-    beforeEnter: requireAuth(),
+    // beforeEnter: requireAuth(),
   },
   {
     path: "/Board",
