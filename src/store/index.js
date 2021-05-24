@@ -34,8 +34,13 @@ export default new Vuex.Store({
     overallFamilyData: [], //객체 배열
     totalMoveInOut: "",
     increase: true,
+    guPosition: {},
+    culturalSpaces: [],
   },
   getters: {
+    increase(state) {
+      return state.increase;
+    },
     houses(state) {
       return state.houses;
     },
@@ -114,6 +119,10 @@ export default new Vuex.Store({
         state.increase = false;
       }
       return Math.abs(state.totalMoveInOut);
+    },
+    guPosition(state) {
+      console.log("구 위치 얻기" + JSON.stringify(state.guPosition));
+      return state.guPosition;
     },
   },
   mutations: {
@@ -240,6 +249,16 @@ export default new Vuex.Store({
       state.familyData = state.overallFamilyData[state.selectedDong];
       console.log("동 세팅 후 값도 ㅅ팅.->" + state.familyData);
     },
+    // 구 중심위치 세팅
+    SET_GU_POSITION(state, payload) {
+      state.guPosition["lat"] = parseFloat(payload["lat"]);
+      state.guPosition["lng"] = parseFloat(payload.lng);
+      console.log("구 위치 세팅 " + JSON.stringify(state.guPosition));
+    },
+    // 문화공간 정보 받아오기
+    // SET_CULTURAL_SPACES(state, payload) {
+    //   state.culturalSpaces = [];
+    // },
   },
   actions: {
     // getMap() {
@@ -344,11 +363,18 @@ export default new Vuex.Store({
     // 검색 버튼 누르면
     getPopulationInfo({ commit }, selectedGu) {
       commit("MAKE_COMPLETE_FALSE");
+      // 인구정보 받기
       http.get("/api/town/population/" + selectedGu).then((resp) => {
-        console.log("받은 인구 정보");
         console.log(resp.data);
         commit("SET_POPULATION_INFO", resp.data);
       });
+      // 문화정보 받기 -> 구 위치 & 문화공간 정보 받아오기.
+      http.get("/api/town/gupos/" + selectedGu).then((resp) => {
+        commit("SET_GU_POSITION", resp.data);
+      });
+      // http.get('/api/town/cultural/' + selectedGu).then((resp) => {
+
+      // });
     },
   },
   modules: {},
