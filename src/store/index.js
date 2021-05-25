@@ -36,12 +36,8 @@ export default new Vuex.Store({
     increase: true,
     guPosition: {},
     culturalSpaces: [],
-    selectedCultureNo: null,
   },
   getters: {
-    selectedCultureNo(state) {
-      return state.selectedCultureNo;
-    },
     increase(state) {
       return state.increase;
     },
@@ -271,9 +267,6 @@ export default new Vuex.Store({
       state.culturalSpaces = payload;
       // console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
-    SET_SELECTED_CULTURENO(state, payload) {
-      state.selectedCultureNo = payload;
-    },
   },
   actions: {
     // getMap() {
@@ -390,10 +383,6 @@ export default new Vuex.Store({
       http.get("/api/town/cultural/" + selectedGu).then((resp) => {
         commit("SET_CULTURAL_SPACES", resp.data);
       });
-    },
-    setSelectedCultureNo({ commit }, selectedCultureNo) {
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      commit("SET_SELECTED_CULTURENO", selectedCultureNo);
     },
   },
   modules: {},

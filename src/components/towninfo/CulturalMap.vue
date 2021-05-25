@@ -1,21 +1,29 @@
 <template>
 <div>
   <div class="content">
+  <b-container>
+    <strong><span><img class="image" src='@/assets/book.png'/> 도서관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/canvas.png'/> 미술관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/museum.png'/> 박물관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
+    <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
+  </b-container>
     <div id="map" style="width:100%;height:400px;"></div>
-    <span v-if= "selectedCultureNo">{{selectedCultureNo}}</span>
+    <span v-if= "showinfo">{{showinfo}}</span>
     <span v-else>업승ㅁ</span>
   </div>
-  <b-container>
-    <!-- 마커 이미지 설명 -->
-    문화공간마커이미지설명
-    <!-- <img src='' -->
-  </b-container>
   </div>
 </template>
+<style scoped>
+  .image{
+    width:35px;
+  }
+</style>
+
 
 <script>
-import {mapGetters} from 'vuex';
-import {mapActions} from 'vuex';
+// import {mapGetters} from 'vuex';
+// import {mapActions} from 'vuex';
 
 export default {
     props:['guLat','guLng','culturalSpaces'],
@@ -24,36 +32,26 @@ export default {
         markers:[],
         mapOptions:{},
         markersinfo:[],
-        infowindow:[]
+        infowindow:[],
+        showinfo:null
       }
     },
-    computed:{
-      ...mapGetters(['selectedCultureNo'])
-    },
-    methods:{
-      ...mapActions({
-        setSelectedMarkerNo: 'setSelectedCultureNo',
-      }),
-      getClickHandler(seq){
-     return function(e) {
-        var markerTmp = markers[seq],
-            infoWindow = this.infowindows[seq];
 
-        if (infoWindow.getMap()) {
-            infoWindow.close();
-        } else {
-            infoWindow.open(map, markerTmp);
+    methods:{
+      getClickHandler(seq){
+        let outer = this;
+        return function(e) {
+          outer.showinfo = outer.markersinfo[seq];
         }
-    }
       },
       drawMarker(){
+        this.showinfo = null;
         // this.selectedCultureNo초기화필요
-        this.setSelectedMarkerNo(null);
-        this.information = null;
+        // this.information = null;
         var idx = 0;
         this.markersinfo=[];
         this.markers = [];
-        this.infowindows = []
+        // this.infowindows = []
       var map = new naver.maps.Map('map', this.mapOptions);
         var picture = './img/';
         var icon='';
@@ -95,12 +93,8 @@ export default {
           info:item.imformation,
           close:item.close
         })
-        
-    var tmp = new naver.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:10px;">The Letter is <b>"'+ item.imformation +'"</b>.</div>'
-    });
 
-    this.infowindows.push(tmp);
+    // this.infowindows.push(tmp);
         naver.maps.Event.addListener(this.markers[idx],'click',this.getClickHandler(idx++));
       })
       console.log('@@@@@@@@@@@마커@@@@@@@@@@@@@')
@@ -124,8 +118,8 @@ export default {
       },
       created(){
           // selectedMarkerNoNull피료
-          this.information=null;
-          this.setSelectedMarkerNo(null)
+          // this.information=null;
+          // this.setSelectedMarkerNo(null)
           this.mapOptions = {
         center: new naver.maps.LatLng(this.guLat, this.guLng),
           zoom: 14
