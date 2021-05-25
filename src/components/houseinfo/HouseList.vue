@@ -14,6 +14,7 @@
             <b>지번</b> {{selectedHouse.jibun}}<br/>
             <b>거래 평균 금액 </b>{{avgDealAmount}}원
           </p>
+          <specific-house-map :selectedHouseDealLatLng = "selectedHouseDealLatLng"></specific-house-map>
           <div style="margin-top:15px;">
           <h5> <b-icon icon="graph-up" aria-hidden="true"></b-icon>
           <b> 거래 내역</b></h5>
@@ -31,10 +32,12 @@
 import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
 import HousedealChart from './HousedealChart.js';
+import SpecificHouseMap from './SpecificHouseMap.vue';
 
 export default{
     components:{
-      HousedealChart
+      HousedealChart,
+      SpecificHouseMap
    },
     name:"HouseList",
     data(){
@@ -52,7 +55,7 @@ export default{
 
     },
     computed:{
-        ...mapGetters(["houses",'selectedHouse','selectedHouseDeal','avgDealAmount','selectedHouseDealAmount','selectedHouseDealDate'])
+        ...mapGetters(['selectedHouseDealLatLng','cameraPos',"houses",'selectedHouse','selectedHouseDeal','avgDealAmount','selectedHouseDealAmount','selectedHouseDealDate'])
     },
     created(){
         // 페이지 로딩시 전체 매물 목록 불러오기

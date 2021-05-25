@@ -39,8 +39,14 @@ export default new Vuex.Store({
     publicbicycle: [],
     school: [],
     cameraPos: { lat: 0, lng: 0 },
+    selectedHouseDealLatLng: {},
   },
   getters: {
+    selectedHouseDealLatLng(state) {
+      console.log("@@@@@@@@@@@@@래트랭 get@@@@@@@@@@@@@@@@@@@");
+      console.log(state.selectedHouseDealLatLng);
+      return state.selectedHouseDealLatLng;
+    },
     cameraPos(state) {
       return state.cameraPos;
     },
@@ -192,6 +198,7 @@ export default new Vuex.Store({
       state.selectedHouseDeal = [];
       state.selectedHouseDealAmount = [];
       state.selectedHouseDealDate = [];
+      state.selectedHouseDealLatLng = { lat: payload[0].lat, lng: payload[0].lng };
       var sum = 0;
       var cnt = 0;
       payload.forEach((item) => {
