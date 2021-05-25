@@ -9,7 +9,7 @@
 
 export default {
     name:'SpecificHouseMap',
-    props:['selectedHouseDealLatLng','school','subway'],
+    props:['selectedHouseDealLatLng','school','subway','publicbicycle'],
     data(){
         return{
             mapOption:{}
@@ -17,7 +17,7 @@ export default {
     },
       computed:{
         combined(){
-            return this.school && this.selectedHouseDealLatLng &&this.subway
+            return this.school && this.selectedHouseDealLatLng && this.subway && this.publicbicycleInfo
         }
 
     },
@@ -61,12 +61,24 @@ export default {
                   this.subway.forEach((item)=>{
         // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
         new naver.maps.Marker({
-          // 위경도 반대 주의!
           position: new naver.maps.LatLng(item.lat,item.lng),
           map:map,
           icon:{
             scaledSize: new naver.maps.Size(40, 40),
             url:'./img/train.png'
+          }
+        });
+      }) 
+
+      // 따릉이 마커
+        this.publicbicycle.forEach((item)=>{
+        // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map,
+          icon:{
+            scaledSize: new naver.maps.Size(40, 40),
+            url:'./img/mandala.png'
           }
         });
       })

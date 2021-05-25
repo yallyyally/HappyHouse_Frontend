@@ -47,6 +47,10 @@ export default new Vuex.Store({
       console.log("@@@@@@@@@@@@@지하철 get@@@@@@@@@@@");
       return state.subway;
     },
+    publicbicycle(state) {
+      console.log("나는 따릉이~~~!");
+      return state.publicbicycle;
+    },
     selectedHouseDealLatLng(state) {
       console.log("@@@@@@@@@@@@@래트랭 get@@@@@@@@@@@@@@@@@@@");
       console.log(state.selectedHouseDealLatLng);
@@ -149,9 +153,6 @@ export default new Vuex.Store({
     },
     culturalSpaces(state) {
       return state.culturalSpaces;
-    },
-    publicbicycle(state) {
-      return state.publicbicycle;
     },
   },
   mutations: {
@@ -293,10 +294,9 @@ export default new Vuex.Store({
       // console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
     // 따릉이 정보 받아오기
-    SET_PUBLIC_BICYCLE(state, payload) {
-      state.publicbicycle = [];
+    SET_PUBLICBICYCLE_INFO(state, payload) {
       state.publicbicycle = payload;
-      console("따릉 저장" + JSON.stringify(state.publicbicycle));
+      console("따릉 저장" + JSON.stringify(payload));
     },
     // 학교 정보 받아오기
     SET_SCHOOL_INFO(state, payload) {
@@ -433,6 +433,13 @@ export default new Vuex.Store({
       console.log("지하철정보받아오기 요청");
       http.get("api/house/subway/" + selectedGu).then((resp) => {
         commit("SET_SUBWAY_INFO", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 따릉이 목록 불러오기
+    getPublicBicycleInfo({ commit }, selectedGu) {
+      console.log("따릉이 정보 받아오기 요청");
+      http.get("api/house/publicbicycle/" + selectedGu).then((resp) => {
+        commit("SET_PUBLICBICYCLE_INFO", resp.data);
       });
     },
     // 동이 선택되면 그 위도 값을 받아온다.

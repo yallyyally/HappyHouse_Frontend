@@ -5,6 +5,7 @@
     <strong><span><img class="image" src='@/assets/house2.png'/> 매물 /</span>&nbsp;
     <span><img class="image" src='@/assets/school.png'/> 학교 /</span>&nbsp;
     <span><img class="image" src='@/assets/train.png'/> 지하철 /</span>&nbsp;
+    <span><img class="image" src='@/assets/mandala.png'/> 따릉이 /</span>&nbsp; <!--이미지가 없어서 임시 이미지 넣었슴당!-->
     <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
     <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
   </b-container>
@@ -22,7 +23,8 @@ export default {
     //  schoolMarkers:[],
     //  schoolMarkerInfos:[],
     houseinfo:[],
-    subwayInfo:[]
+    subwayInfo:[],
+    publicbicycleInfo:[]
     }
 
   },
@@ -110,7 +112,23 @@ export default {
         idx++;
       })
 
-
+      // 따릉이 정보 받아와서 마커 찍기
+      this.publicbicycleInfo = []
+       idx = 0;
+       console.log('따릉따릉')
+      this.publicbicycle.forEach((item)=>{
+        console.log('따릉이찍기 '+JSON.stringify(item))
+        this.publicbicycleInfo.push({'idx':idx, 'publicbicycleno':item.no})
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map2,
+          icon:{
+            scaledSize: new naver.maps.Size(45,54),
+            url:'./img/mandala.png'
+          }
+        })
+        idx++;
+      })
       
       //   this.markers.push(new naver.maps.Marker(markOpt));
         // 그냥 마커정보 - 순번 메핑해서 디비에서 받아와도 될듯...
@@ -138,11 +156,11 @@ export default {
   created(){
     // 기본위치 세팅
   },
-  props:['school','cameraPos','houses','subway'],
+  props:['school','cameraPos','houses','subway','publicbicycle'],
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
-            return this.school && this.cameraPos && this.houses
+            return this.school && this.cameraPos && this.houses && this.publicbicycle
         }
 
     },
@@ -175,47 +193,3 @@ export default {
   .image{
     width:35px;
   }</style>
-<!-- 따릉이 대실패 코드....흑흑흑 -->
-<!-- <template>
-
-  <div class="content">
-    <div id="map" style="width:100%;height:400px;"></div>
-  </div>
-</template>
-
-<script>
-export default {
-  props:['guLat','guLng','publicbicycle'],
-  methods: {
-    drawMarker(){
-      var mapOptions = {
-        center : new naver.maps.LatLng(this.guLat, this.guLng),
-        zoom: 14
-      };
-
-    var map = new naver.maps.Map('map', mapOptions);
-    var markers = [];
-    var picture = './img/'; // 임시 마커 아이콘
-    var icon = picture+'mandala.png';
-    var newMarkerOptions = {
-      position: new naver.maps.LatLng(publicbicycle.lat,publicbicycle.lng),
-      map: map,
-      icon: {
-        scaledSize: new naver.maps.Size(45,54),
-        url: icon,
-      }
-    }
-    markers.push(new naver.maps.markers(newMarkerOptions));
-  console.log("따릉이 마커 잘들어가나????")
- }
-  },
-  mounted (){
-    this.drawMarker();
-  },
-  watch:{
-    publicbicycle: function () {
-      this.drawMarker();
-    }
-  }
-}
-</script> -->

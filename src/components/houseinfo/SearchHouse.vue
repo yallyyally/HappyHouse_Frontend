@@ -74,7 +74,8 @@ export default{
             getHousesByGu:'getHousesByGu',
             getSchoolInfo:'getSchoolInfo',
             setCameraPos:'setCameraPos',
-            getSubwayInfo:'getSubwayInfo'
+            getSubwayInfo:'getSubwayInfo',
+            getPublicBicycleInfo:'getPublicBicycleInfo'
             
         }),
         getMap(){
@@ -95,6 +96,8 @@ export default{
                 this.setCameraPos(this.selectedDong);
                 // 지하철 정보 받아오기
                 this.getSubwayInfo(this.selectedGu);
+                // 따릉이 정보 받아오기
+                this.getPublicBicycleInfo(this.selectedGu);
 
             }
         },
