@@ -53,7 +53,7 @@
           </a>
           <v-row align="center" class="mx-0">
           <div class="black--text m-6 my-3 ">
-            {{ detail.ansContent }} ddd
+            {{ detail.ansContent }} 야매 답변 내용~~~
           </div>
         </v-row>
           <v-slider
