@@ -79,8 +79,8 @@ export default {
       userid: '',
       username: '',
       userpwd: '',
+      phoen: '',
       email: '',
-      phone: '',
     },
     valid: false,
     confirmPassword: '',
@@ -104,8 +104,8 @@ export default {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
           username: this.user.username,
-          email: this.user.phone,
-          phone: this.user.email,
+          phone: this.user.phone,
+          email: this.user.email,
         })
         .then((response) => {
           if (response.data == 'success') {
