@@ -36,6 +36,7 @@ export default new Vuex.Store({
     increase: true,
     guPosition: {},
     culturalSpaces: [],
+    publicbicycle:[],
   },
   getters: {
     increase(state) {
@@ -129,6 +130,9 @@ export default new Vuex.Store({
     culturalSpaces(state) {
       return state.culturalSpaces;
     },
+    publicbicycle(state) {
+      return state.publicbicycle;
+    }
   },
   mutations: {
     setHouses(state, payload) {
@@ -267,6 +271,12 @@ export default new Vuex.Store({
       state.culturalSpaces = payload;
       console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
+    // 따릉이 정보 받아오기
+    SET_PUBLIC_BICYCLE(state, payload) {
+      state.publicbicycle = [];
+      state.publicbicycle = payload;
+      console("따릉 저장" +JSON.stringify(state.publicbicycle));
+    }
   },
   actions: {
     // getMap() {
