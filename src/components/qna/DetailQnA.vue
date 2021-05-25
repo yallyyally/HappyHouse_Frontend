@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div>
     <v-card :loading="loading" class="mx-auto my-12" max-width="374">
       <template slot="progress">
@@ -81,6 +82,7 @@
       </v-card-text>
     </v-card>
   </div>
+</v-app>
 </template>
 
 <script>
