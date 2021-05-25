@@ -269,7 +269,7 @@ export default new Vuex.Store({
     SET_CULTURAL_SPACES(state, payload) {
       state.culturalSpaces = [];
       state.culturalSpaces = payload;
-      console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
+      // console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
     // 따릉이 정보 받아오기
     SET_PUBLIC_BICYCLE(state, payload) {

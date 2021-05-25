@@ -1,22 +1,63 @@
 <template>
-
+<div>
   <div class="content">
+  <b-container>
+    <strong><span><img class="image" src='@/assets/book.png'/> 도서관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/canvas.png'/> 미술관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/museum.png'/> 박물관 /</span>&nbsp;
+    <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
+    <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
+  </b-container>
     <div id="map" style="width:100%;height:400px;"></div>
+    <span v-if= "showinfo"><specific-info :showinfo= "showinfo"></specific-info></span>
+    <!-- <span v-else>업승ㅁ</span> -->
+  </div>
   </div>
 </template>
+<style scoped>
+  .image{
+    width:35px;
+  }
+</style>
+
 
 <script>
+// import {mapGetters} from 'vuex';
+// import {mapActions} from 'vuex';
+// .vue 안붙여도 되는거 첨알았네..
+import SpecificInfo from '../houseinfo/SpecificInfo';
 export default {
+    components:{
+      SpecificInfo
+    },
     props:['guLat','guLng','culturalSpaces'],
+    data(){
+      return{
+        markers:[],
+        mapOptions:{},
+        markersinfo:[],
+        infowindow:[],
+        showinfo:null
+      }
+    },
+
     methods:{
+      getClickHandler(seq){
+        let outer = this;
+        return function(e) {
+          outer.showinfo = outer.markersinfo[seq];
+          console.log(outer.showinfo);
+        }
+      },
       drawMarker(){
-            //   지도 설정
-      var mapOptions = {
-        center: new naver.maps.LatLng(this.guLat, this.guLng),
-          zoom: 14
-      };
-      var map = new naver.maps.Map('map', mapOptions);
-      var markers = [];
+        this.showinfo = null;
+        // this.selectedCultureNo초기화필요
+        // this.information = null;
+        var idx = 0;
+        this.markersinfo=[];
+        this.markers = [];
+        // this.infowindows = []
+      var map = new naver.maps.Map('map', this.mapOptions);
         var picture = './img/';
         var icon='';
       this.culturalSpaces.forEach((item)=>{
@@ -43,21 +84,53 @@ export default {
                       scaledSize: new naver.maps.Size(45, 54),
 
               url:icon,
+
+
           }
         }
-        markers.push(new naver.maps.Marker(newMarkerOptions));
+        this.markers.push(new naver.maps.Marker(newMarkerOptions));
+
+        this.markersinfo.push({
+          name:item.name,
+          no:item.no,
+          markerno:idx,
+          addr:item.address,
+          info:item.imformation,
+          close:item.close,
+          telno:item.telno
+        })
+
+    // this.infowindows.push(tmp);
+        naver.maps.Event.addListener(this.markers[idx],'click',this.getClickHandler(idx++));
       })
       console.log('@@@@@@@@@@@마커@@@@@@@@@@@@@')
-      console.log(markers)
+      console.log(this.markers)
       }
     },
   mounted () {
     this.drawMarker();
+    // this.selectedMarkerNo=null; 필요
+    // this.se
   },
     watch:{
         culturalSpaces: function () {
+      this.mapOptions = {
+        center: new naver.maps.LatLng(this.guLat, this.guLng),
+          zoom: 14
+      };
+      
         this.drawMarker();
       }
+      },
+      created(){
+          // selectedMarkerNoNull피료
+          // this.information=null;
+          // this.setSelectedMarkerNo(null)
+          this.mapOptions = {
+        center: new naver.maps.LatLng(this.guLat, this.guLng),
+          zoom: 14
+      };
       }
+
 }
 </script>
