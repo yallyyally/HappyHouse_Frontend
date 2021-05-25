@@ -78,7 +78,7 @@ export default {
           map:map,
           icon:{
             scaledSize: new naver.maps.Size(40, 40),
-            url:'./img/mandala.png'
+            url:'./img/bicycle.png'
           }
         });
       })

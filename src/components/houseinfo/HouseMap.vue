@@ -5,7 +5,7 @@
     <strong><span><img class="image" src='@/assets/house2.png'/> 매물 /</span>&nbsp;
     <span><img class="image" src='@/assets/school.png'/> 학교 /</span>&nbsp;
     <span><img class="image" src='@/assets/train.png'/> 지하철 /</span>&nbsp;
-    <span><img class="image" src='@/assets/mandala.png'/> 따릉이 /</span>&nbsp; <!--이미지가 없어서 임시 이미지 넣었슴당!-->
+    <span><img class="image" src='@/assets/bicycle.png'/> 따릉이 /</span>&nbsp; 
     <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
     <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
   </b-container>
@@ -124,7 +124,7 @@ export default {
           map:map2,
           icon:{
             scaledSize: new naver.maps.Size(45,54),
-            url:'./img/mandala.png'
+            url:'./img/bicycle.png'
           }
         })
         idx++;
