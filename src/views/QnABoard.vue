@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div class="grey lighten-2 ">
     <v-main>
       <v-container class="py-8 px-6">
@@ -73,6 +74,7 @@
       </v-container>
     </v-main>
   </div>
+</v-app>
 </template>
 
 <script>

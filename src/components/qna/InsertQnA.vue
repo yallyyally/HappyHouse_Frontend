@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div>
     <div v-if= "!submitted">
       <v-card class="pa-6 mx-auto my-12" max-width="500">
@@ -70,7 +71,9 @@
       </v-card>
     </div>
   </div>
+</v-app>
 </template>
+
 <script>
 import http from '@/util/http-commons';
 

@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div>
     <div v-if="!submitted">
       <v-card class="pa-6 mx-auto my-0" max-width="500">
@@ -49,7 +50,9 @@
       </button>
     </div>
   </div>
+</v-app>
 </template>
+
 <script>
 import http from '@/util/http-commons';
 import Vue from 'vue';
