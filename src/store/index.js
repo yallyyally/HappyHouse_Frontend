@@ -36,9 +36,17 @@ export default new Vuex.Store({
     increase: true,
     guPosition: {},
     culturalSpaces: [],
-    publicbicycle:[],
+    publicbicycle: [],
+    school: [],
+    cameraPos: { lat: 0, lng: 0 },
   },
   getters: {
+    cameraPos(state) {
+      return state.cameraPos;
+    },
+    schools(state) {
+      return state.school;
+    },
     increase(state) {
       return state.increase;
     },
@@ -132,7 +140,7 @@ export default new Vuex.Store({
     },
     publicbicycle(state) {
       return state.publicbicycle;
-    }
+    },
   },
   mutations: {
     setHouses(state, payload) {
@@ -275,19 +283,19 @@ export default new Vuex.Store({
     SET_PUBLIC_BICYCLE(state, payload) {
       state.publicbicycle = [];
       state.publicbicycle = payload;
-      console("따릉 저장" +JSON.stringify(state.publicbicycle));
-    }
+      console("따릉 저장" + JSON.stringify(state.publicbicycle));
+    },
+    SET_SCHOOL_INFO(state, payload) {
+      state.schools = payload;
+      // console.log("학교저장" + JSON.stringify(payload));
+    },
+    // 카메라 위치.
+    SET_CAMERA_POS(state, payload) {
+      state.cameraPos = payload;
+      console.log("카메라 정보 저장 완");
+    },
   },
   actions: {
-    // getMap() {
-    // console.log("지도 불러오는듕sss");
-
-    // const SERVICE_KEY = "fwt204pk0p";
-    // const SERVICE_URL =
-    //   "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=" + SERVICE_KEY;
-    // axios.get(SERVICE_URL);
-    // },
-
     // 전체 구 목록 불러오기
     getOptionsGu({ commit }) {
       console.log("========비동기통신 시작/구 목록=========");
@@ -392,6 +400,19 @@ export default new Vuex.Store({
       });
       http.get("/api/town/cultural/" + selectedGu).then((resp) => {
         commit("SET_CULTURAL_SPACES", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 학교 목록 불러오기
+    getSchoolInfo({ commit }, selectedGu) {
+      http.get("api/house/school/" + selectedGu).then((resp) => {
+        commit("SET_SCHOOL_INFO", resp.data);
+      });
+    },
+    // 동이 선택되면 그 위도 값을 받아온다.
+    setCameraPos({ commit }, selectedDong) {
+      http.get("api/house/houseinfo/camera/" + selectedDong).then((resp) => {
+        console.log("카메라 위치 받음 " + JSON.stringify(resp.data));
+        commit("SET_CAMERA_POS", resp.data);
       });
     },
   },

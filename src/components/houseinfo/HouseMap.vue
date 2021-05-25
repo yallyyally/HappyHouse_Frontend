@@ -7,13 +7,40 @@
 
 <script>
 export default {
+  data(){
+    return{
+     mapOptions:{}
+    }
+
+  },
+  methods:{
+    setMap(){
+      var map = new naver.maps.Map('map',this.mapOptions);
+    }
+  },
   mounted () {
-    var mapOptions = {
+    // 지도 세팅
+   this.setMap();
+  },
+  created(){
+    // 기본위치 세팅
+    this.mapOptions = {
       center: new naver.maps.LatLng(37.3595704, 127.105399),
       zoom: 10
     };
-
-    var map = new naver.maps.Map('map', mapOptions);
+  },
+  props:['cameraPos'],
+  // 카메라 위치 바뀔 때마다 계속 실행스
+  watch:{
+    cameraPos:function(){
+      // mapOptions변경 후
+      this.mapOptions = {
+        center: new naver.maps.LatLng(this.cameraPos.lat,this.cameraPos.lng),
+          zoom: 16
+      };
+      // 그 위치 기준으로 지도 다시 그리기
+      this.setMap();
+    }
   }
 }
 </script>

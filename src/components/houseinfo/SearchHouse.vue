@@ -71,28 +71,20 @@ export default{
             getOptionsGu:'getOptionsGu',
             getOptionsDong:'getOptionsDong',
             getHousesByDong:'getHousesByDong',
-            getHousesByGu:'getHousesByGu'
+            getHousesByGu:'getHousesByGu',
+            getSchoolInfo:'getSchoolInfo',
+            setCameraPos:'setCameraPos'
             
         }),
         getMap(){
-            // 1. 둘 다 전체 -> 0
-            // 2. 구만 설정 -> 종로구 null
-            // 3. 구, 동 둘다 설정->구로구 항동.
-            // 4. 동만 설정 -> null 금촌동
-            if(this.selectedGu == null  || this.selectedDong == null){
-                // alert('전체 매물 가져오기!')
-                // this.$store.dispatch("getHouses");
+            if(this.selectedGu == null  || this.selectedDong == null){;
                 alert('주소를 모두 입력해주세요.')
-
             }
-            // else if(this.selectedGu != null && this.selectedDong == null){
-            //     // alert(this.selectedGu+"에 속한 전체 동네 매물");
-            //     this.getHousesByGu(this.selectedGu);
-                
-            // }
             else{
-                // alert(this.selectedDong+"의 매물 바로불러오자");
+                this.setCameraPos(this.selectedDong);
                 this.getHousesByDong(this.selectedDong);
+                //)) -1. 중심 위치 불렁오기. 0.구 정보에 따라 학교 정보, 따릉이 정보, 매물 정보 불러오기 ))-> 1.state에 저장 -> 2.map에 props로 주기
+                this.getSchoolInfo(this.selectedGu);
             }
         },
         changeGu(){

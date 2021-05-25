@@ -3,7 +3,7 @@
     <!-- 검색칸 -->
     <search-house></search-house>
     <!-- 지도맵 -->
-    <house-map></house-map>
+    <house-map :cameraPos= "cameraPos"></house-map>
     <!-- 매물정보 -->
     <house-list></house-list>
     </b-container>
@@ -16,7 +16,12 @@ import HouseMap from '../components/houseinfo/HouseMap.vue';
 // import {HouseList} from '../componets/houseinfo/HouseList.vue';
 // 중괄호 절대 no,,,,
 import HouseList from '../components/houseinfo/HouseList';
+import {mapGetters} from 'vuex';
+
 export default {
+    computed:{
+        ...mapGetters(['cameraPos'])
+    },
     components:{
         SearchHouse,
         HouseMap,
