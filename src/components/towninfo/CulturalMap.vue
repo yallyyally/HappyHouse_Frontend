@@ -9,8 +9,8 @@
     <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
   </b-container>
     <div id="map" style="width:100%;height:400px;"></div>
-    <span v-if= "showinfo">{{showinfo}}</span>
-    <span v-else>업승ㅁ</span>
+    <span v-if= "showinfo"><specific-info :showinfo= "showinfo"></specific-info></span>
+    <!-- <span v-else>업승ㅁ</span> -->
   </div>
   </div>
 </template>
@@ -24,8 +24,12 @@
 <script>
 // import {mapGetters} from 'vuex';
 // import {mapActions} from 'vuex';
-
+// .vue 안붙여도 되는거 첨알았네..
+import SpecificInfo from '../houseinfo/SpecificInfo';
 export default {
+    components:{
+      SpecificInfo
+    },
     props:['guLat','guLng','culturalSpaces'],
     data(){
       return{
@@ -42,6 +46,7 @@ export default {
         let outer = this;
         return function(e) {
           outer.showinfo = outer.markersinfo[seq];
+          console.log(outer.showinfo);
         }
       },
       drawMarker(){
@@ -91,7 +96,8 @@ export default {
           markerno:idx,
           addr:item.address,
           info:item.imformation,
-          close:item.close
+          close:item.close,
+          telno:item.telno
         })
 
     // this.infowindows.push(tmp);
