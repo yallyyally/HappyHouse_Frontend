@@ -6,7 +6,7 @@
       <v-row class="mt-16 pt-7" justify="center">
         <v-img
           position="center"
-          lazy-src="@/assets/happyhouse_logo.png"
+          lazy-src="@/assets/happyhouse_main.png"
           max-height="500"
           max-width="500"
           src="@/assets/logo.png"
