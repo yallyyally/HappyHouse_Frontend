@@ -17,14 +17,12 @@
             ref="formSubject"
             required
           ></v-text-field>
-
           <v-textarea
             v-model="inputData.queContent"
             label="내용"
             ref="formContent"
             required
           ></v-textarea>
-
           <v-btn
             :disabled="!valid"
             color="success"
@@ -76,7 +74,6 @@
 
 <script>
 import http from '@/util/http-commons';
-
 import { mapGetters } from 'vuex';
 import Vue from 'vue';
 import swal from 'vue-swal';
@@ -127,13 +124,13 @@ export default {
           queTitle: this.inputData.queTitle,
           queContent: this.inputData.queContent,
         })
-        .then((response) => {
+        .then((response) => { // 등록 성공했는데 실패라고 뜨길래 두개 위치 바꿈 ㅡㅡ
           if (response.data == 'success') {
-            this.$swal('우왕!!', 'QnA 등록 성공!!', 'success');
-            this.resultString = '질문이 등록 되었습니다.';
-          } else {
             this.$swal('흑흑..', 'QnA 등록 실패..', 'return');
             this.resultString = '질문이 등록되지 않았습니다.';
+          } else {
+            this.$swal('우왕!!', 'QnA 등록 성공!!', 'success');
+            this.resultString = '질문이 등록 되었습니다.';
           }
         });
       this.submitted = true;
@@ -164,8 +161,8 @@ export default {
     // this.inputData.userid = this.getUserId;
     this.inputData = {
       userid: localStorage.getItem('userId'),
-      btitle:null,
-      bcontent:null
+      queTitle:null,
+      queContent:null
     }
   },
 };

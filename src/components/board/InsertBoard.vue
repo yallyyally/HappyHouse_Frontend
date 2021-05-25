@@ -79,7 +79,6 @@ import swal from 'vue-swal';
 
 Vue.use(swal);
 
-
 export default {
   name: 'InsertBoard',
   props: ['bno'],

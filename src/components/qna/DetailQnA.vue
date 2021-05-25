@@ -51,9 +51,11 @@
           <a class="indigo--text m-6 h6 font-weight-bold" @click="answerQnA">
             답변
           </a>
+          <v-row align="center" class="mx-0">
           <div class="black--text m-6 my-3 ">
-            {{ ansdetail.ansContent }}
+            {{ detail.ansContent }} ddd
           </div>
+        </v-row>
           <v-slider
       v-model= "length"
       color="red darken-4"
@@ -68,12 +70,12 @@
       color="indigo"
       size="64"
     ></v-rating>
-    <div>
+    <!-- <div>
       <span class="caption text-uppercase">model:</span>
       <span class="font-weight-bold">
         {{ rating }}
       </span>
-    </div>
+    </div> -->
         </v-row>
         <div class="subtitle-4">
           #<b>{{ ansdetail.ansNum }}</b
