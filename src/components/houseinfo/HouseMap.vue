@@ -12,8 +12,9 @@ export default {
     return{
      mapOptions:{},
     //  map:'',
-     schoolMarkers:[],
-     schoolMarkerInfos:[],
+    //  schoolMarkers:[],
+    //  schoolMarkerInfos:[],
+    houseinfo:[]
     }
 
   },
@@ -22,25 +23,28 @@ export default {
 
       var map2 = new naver.maps.Map('map', this.mapOptions);
         
-      this.schoolMarkers = [];
-      this.schoolMarkerInfos  = [];
-      new naver.maps.Marker({
-        position : new naver.maps.LatLng(this.cameraPos.lat,this.cameraPos.lng),
-        map:map2,
-        icon:{
-            scaledSize: new naver.maps.Size(45, 54),
-            url:'./img/school.png'
+      // this.schoolMarkers = [];
+      // this.schoolMarkerInfos  = [];
+      // new naver.maps.Marker({
+      //   position : new naver.maps.LatLng(this.cameraPos.lat,this.cameraPos.lng),
+      //   map:map2,
+      //   icon:{
+      //       scaledSize: new naver.maps.Size(45, 54),
+      //       url:'./img/school.png'
 
-        }
-      });
+      //   }
+      // });
 
       console.log('now location:'+this.cameraPos.lat+','+this.cameraPos.lng);
-
-      // 학교 정보 받아와서 마커에 저장 후
+      // console.log(JSON.stringify(this.mapOptions))
+      // 초반엔 학교, 집 정보가 null이므로 이를고려해줘야 한답.
+      if(this.cameraPos.lat != 0){
+      // 학교 정보 받아와서 마커 찍기
       this.school.forEach((item)=>{
         const mitem = JSON.parse(JSON.stringify(item));
-        console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
+        // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
         let tmpMarker =new naver.maps.Marker({
+          // 위경도 반대 주의!
           position: new naver.maps.LatLng(mitem.lng,mitem.lat),
           map:map2,
           icon:{
@@ -49,6 +53,24 @@ export default {
           }
         });
       })
+
+      // 집 정보 받아와서 매물 찍기
+      this.houseinfo = []
+      var idx = 0;
+      this.houses.forEach((item)=>{
+        this.houseinfo.push({'idx':idx, 'houseno':item.no})
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map2,
+          icon:{
+            scaledSize: new naver.maps.Size(45,54),
+            url:'./img/house2.png'
+          }
+        })
+        idx++;
+      })
+      }
+
       //   this.markers.push(new naver.maps.Marker(markOpt));
         // 그냥 마커정보 - 순번 메핑해서 디비에서 받아와도 될듯...
         // 이건 세부정보 저장용 (지도는 속성값이 정해져서 어쩔수x)
@@ -78,11 +100,11 @@ export default {
       zoom: 10
     };
   },
-  props:['school','cameraPos'],
+  props:['school','cameraPos','houses'],
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
-            return this.school && this.cameraPos
+            return this.school && this.cameraPos && this.houses
         }
 
     },

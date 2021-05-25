@@ -3,7 +3,7 @@
     <!-- 검색칸 -->
     <search-house></search-house>
     <!-- 지도맵 -->
-    <house-map :school="school" :cameraPos="cameraPos"></house-map>
+    <house-map :school="school" :cameraPos="cameraPos" :houses="houses"></house-map>
     <!-- 매물정보 -->
     <house-list></house-list>
     </b-container>
@@ -21,16 +21,16 @@ import { mapGetters } from 'vuex';
 
 export default {
     computed:{
-        ...mapGetters(['school','cameraPos']),
+        ...mapGetters(['school','cameraPos','houses']),
         combined(){
-            return this.school && this.cameraPos
+            return this.school && this.cameraPos && this.houses
         }
 
     },
     watch:{
         combined(value){
             if(value){
-                console.log('둘이 바ㅣ낌?')
+                console.log('세개 다 바낌.')
                 // console.log('카메라 '+JSON.stringify(this.cameraPos))
                 // console.log('학교제발 '+JSON.stringify(this.school))
             }
