@@ -8,7 +8,7 @@
       <v-form v-model="valid">
         <v-container>
           <v-text-field
-            v-model="user.userid"
+            v-model= "user.userid"
             :rules="idRules"
             :counter="20"
             label="아이디"
@@ -16,7 +16,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model="user.userpwd"
+            v-model= "user.userpwd"
             type="Password"
             :rules="passwordRules"
             label="패스워드 변경"
@@ -56,7 +56,7 @@
           <v-btn color="success" @click="updateUser">
             회원 정보 수정
           </v-btn>
-          <v-space></v-space>
+          <!-- <v-space></v-space> -->
           <v-btn color="error" class="ml-4" @click="deleteUser">
             회원 탈퇴
           </v-btn>
@@ -79,15 +79,15 @@ Vue.use(swal);
 
 export default {
   computed:{
-    ...mapGetters['getAccessToken']
+     ...mapGetters(['getAccessToken'])
   },
   data: () => ({
-    user: null,
+    user: {},
     valid: false,
     confirmPassword: '',
     idRules: [
       (v) => !!v || 'id is required',
-      (v) => v.length <= 20 || 'id must be less than 20 characters',
+      // (v) => v.length <= 20 || 'id must be less than 20 characters',
     ],
     passwordRules: [(v) => !!v || 'password is required'],
     nameRules: [(v) => !!v || 'name is required'],
@@ -104,9 +104,9 @@ export default {
       // .get(`${SERVER_URL}/api/member/info`)
       .get("http://localhost:9999/vue/api/member/info/"+localStorage['accessToken'])
       .then((response) => {
-        console.log('메시지 전체'+JSON.stringify(response.data))
         this.user = response.data.user;
-        // console.log('@@@@@@@@@@@@@@@@@유저 정보'+JSON.stringify(this.user))
+        console.log('메시지 전체'+JSON.stringify(response.data))
+        console.log('@@@@@@@@@@@@@@@@@유저 정보'+JSON.stringify(this.user))
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/'));
@@ -142,9 +142,10 @@ export default {
     },
 
     deleteUser: function() {
+      // if()
       axios
       // http
-      .delete("http://localhost:9999/vue/api/member/delete?userid=${this.user.userid}")
+      .delete("http://localhost:9999/vue/api/member/delete/"+this.user.userid)
         // .delete(`${SERVER_URL}/api/member/delete?userid=${this.user.userid}`)
         .then((response) => {
           if (response.data == 'success') {
