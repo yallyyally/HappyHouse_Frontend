@@ -5,6 +5,7 @@
     <strong><span><img class="image" src='@/assets/house2.png'/> 매물 /</span>&nbsp;
     <span><img class="image" src='@/assets/school.png'/> 학교 /</span>&nbsp;
     <span><img class="image" src='@/assets/train.png'/> 지하철 /</span>&nbsp;
+    <span><img class="image" src='@/assets/bus.png'/> 버스 /</span>&nbsp; 
     <span><img class="image" src='@/assets/bicycle.png'/> 따릉이 /</span>&nbsp; 
     <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
     <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
