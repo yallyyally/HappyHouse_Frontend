@@ -81,10 +81,18 @@ export default{
                 alert('주소를 모두 입력해주세요.')
             }
             else{
-                this.setCameraPos(this.selectedDong);
-                this.getHousesByDong(this.selectedDong);
-                //)) -1. 중심 위치 불렁오기. 0.구 정보에 따라 학교 정보, 따릉이 정보, 매물 정보 불러오기 ))-> 1.state에 저장 -> 2.map에 props로 주기
+                // 1. 중심 위치 불렁오기. 0.구 정보에 따라 학교 정보, 따릉이 정보, 매물 정보 불러오기 ))-> 
+                //2.state에 저장 
+                // 3.map에 props로 주기
+
+
+                // 학교 정보 받아오기
                 this.getSchoolInfo(this.selectedGu);
+                // 매물 정보 받아오기
+                this.getHousesByDong(this.selectedDong);
+                // 카메라 위치 설정
+                this.setCameraPos(this.selectedDong);
+
             }
         },
         changeGu(){

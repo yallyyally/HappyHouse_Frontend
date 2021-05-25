@@ -44,7 +44,8 @@ export default new Vuex.Store({
     cameraPos(state) {
       return state.cameraPos;
     },
-    schools(state) {
+    school(state) {
+      console.log("@@@학교정보낸하!!" + state.school);
       return state.school;
     },
     increase(state) {
@@ -286,8 +287,9 @@ export default new Vuex.Store({
       console("따릉 저장" + JSON.stringify(state.publicbicycle));
     },
     SET_SCHOOL_INFO(state, payload) {
-      state.schools = payload;
-      // console.log("학교저장" + JSON.stringify(payload));
+      state.school = payload;
+      console.log("학교 정보 저장 완 ");
+      console.log("학교저장" + JSON.stringify(state.school));
     },
     // 카메라 위치.
     SET_CAMERA_POS(state, payload) {
@@ -404,6 +406,7 @@ export default new Vuex.Store({
     },
     // 매물 검색 버튼 누르면 학교 목록 불러오기
     getSchoolInfo({ commit }, selectedGu) {
+      console.log("학교 정보 받아오기 요청");
       http.get("api/house/school/" + selectedGu).then((resp) => {
         commit("SET_SCHOOL_INFO", resp.data);
       });
