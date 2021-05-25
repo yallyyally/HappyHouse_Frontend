@@ -73,7 +73,8 @@ export default{
             getHousesByDong:'getHousesByDong',
             getHousesByGu:'getHousesByGu',
             getSchoolInfo:'getSchoolInfo',
-            setCameraPos:'setCameraPos'
+            setCameraPos:'setCameraPos',
+            getSubwayInfo:'getSubwayInfo'
             
         }),
         getMap(){
@@ -92,6 +93,8 @@ export default{
                 this.getHousesByDong(this.selectedDong);
                 // 카메라 위치 설정
                 this.setCameraPos(this.selectedDong);
+                // 지하철 정보 받아오기
+                this.getSubwayInfo(this.selectedGu);
 
             }
         },

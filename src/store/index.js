@@ -40,8 +40,13 @@ export default new Vuex.Store({
     school: [],
     cameraPos: { lat: 0, lng: 0 },
     selectedHouseDealLatLng: {},
+    subway: [],
   },
   getters: {
+    subway(state) {
+      console.log("@@@@@@@@@@@@@지하철 get@@@@@@@@@@@");
+      return state.subway;
+    },
     selectedHouseDealLatLng(state) {
       console.log("@@@@@@@@@@@@@래트랭 get@@@@@@@@@@@@@@@@@@@");
       console.log(state.selectedHouseDealLatLng);
@@ -293,10 +298,15 @@ export default new Vuex.Store({
       state.publicbicycle = payload;
       console("따릉 저장" + JSON.stringify(state.publicbicycle));
     },
+    // 학교 정보 받아오기
     SET_SCHOOL_INFO(state, payload) {
       state.school = payload;
       console.log("학교 정보 저장 완 ");
-      console.log("학교저장" + JSON.stringify(state.school));
+      // console.log("학교저장" + JSON.stringify(state.school));
+    },
+    SET_SUBWAY_INFO(state, payload) {
+      state.subway = payload;
+      console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
     },
     // 카메라 위치.
     SET_CAMERA_POS(state, payload) {
@@ -416,6 +426,13 @@ export default new Vuex.Store({
       console.log("학교 정보 받아오기 요청");
       http.get("api/house/school/" + selectedGu).then((resp) => {
         commit("SET_SCHOOL_INFO", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 지하철 목록 불러오기
+    getSubwayInfo({ commit }, selectedGu) {
+      console.log("지하철정보받아오기 요청");
+      http.get("api/house/subway/" + selectedGu).then((resp) => {
+        commit("SET_SUBWAY_INFO", resp.data);
       });
     },
     // 동이 선택되면 그 위도 값을 받아온다.

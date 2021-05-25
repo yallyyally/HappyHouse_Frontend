@@ -3,7 +3,7 @@
     <!-- 검색칸 -->
     <search-house></search-house>
     <!-- 지도맵 -->
-    <house-map :school="school" :cameraPos="cameraPos" :houses="houses"></house-map>
+    <house-map :school="school" :cameraPos="cameraPos" :houses="houses" :subway="subway"></house-map>
     <!-- 매물정보 -->
     <house-list></house-list>
     </b-container>
@@ -21,9 +21,9 @@ import { mapGetters } from 'vuex';
 
 export default {
     computed:{
-        ...mapGetters(['school','cameraPos','houses']),
+        ...mapGetters(['school','cameraPos','houses','subway']),
         combined(){
-            return this.school && this.cameraPos && this.houses
+            return this.school && this.cameraPos && this.houses &&this.subway;
         }
 
     },

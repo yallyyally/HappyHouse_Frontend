@@ -1,6 +1,13 @@
 <template>
 
   <div class="content">
+  <b-container>
+    <strong><span><img class="image" src='@/assets/house2.png'/> 매물 /</span>&nbsp;
+    <span><img class="image" src='@/assets/school.png'/> 학교 /</span>&nbsp;
+    <span><img class="image" src='@/assets/train.png'/> 지하철 /</span>&nbsp;
+    <span><img class="image" src='@/assets/theater.png'/> 공연장 /</span>&nbsp;
+    <span><img class="image" src='@/assets/mandala.png'/> 기타 </span></strong>
+  </b-container>
     <div id="map" style="width:100%;height:400px;"></div>
   </div>
 </template>
@@ -14,7 +21,8 @@ export default {
     //  map:'',
     //  schoolMarkers:[],
     //  schoolMarkerInfos:[],
-    houseinfo:[]
+    houseinfo:[],
+    subwayInfo:[]
     }
 
   },
@@ -81,8 +89,29 @@ export default {
         })
         idx++;
       })
-      }
 
+
+      }
+      // 지하철 정보 받아와서 마커 찍기
+      this.subwayInfo = []
+       idx = 0;
+       console.log('서브웨이')
+      this.subway.forEach((item)=>{
+        console.log('지하철찍기 '+JSON.stringify(item))
+        this.subwayInfo.push({'idx':idx, 'subwayno':item.no})
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map2,
+          icon:{
+            scaledSize: new naver.maps.Size(45,54),
+            url:'./img/train.png'
+          }
+        })
+        idx++;
+      })
+
+
+      
       //   this.markers.push(new naver.maps.Marker(markOpt));
         // 그냥 마커정보 - 순번 메핑해서 디비에서 받아와도 될듯...
         // 이건 세부정보 저장용 (지도는 속성값이 정해져서 어쩔수x)
@@ -109,7 +138,7 @@ export default {
   created(){
     // 기본위치 세팅
   },
-  props:['school','cameraPos','houses'],
+  props:['school','cameraPos','houses','subway'],
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
@@ -142,7 +171,10 @@ export default {
   // }
 }
 </script>
-
+<style scoped>
+  .image{
+    width:35px;
+  }</style>
 <!-- 따릉이 대실패 코드....흑흑흑 -->
 <!-- <template>
 
