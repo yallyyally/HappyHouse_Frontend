@@ -21,8 +21,6 @@ export default {
   methods:{
     setMap(){
 
-      var map2 = new naver.maps.Map('map', this.mapOptions);
-        
       // this.schoolMarkers = [];
       // this.schoolMarkerInfos  = [];
       // new naver.maps.Marker({
@@ -38,6 +36,20 @@ export default {
       console.log('now location:'+this.cameraPos.lat+','+this.cameraPos.lng);
       // console.log(JSON.stringify(this.mapOptions))
       // 초반엔 학교, 집 정보가 null이므로 이를고려해줘야 한답.
+      var map2;
+      if(this.cameraPos.lat != 0){
+            this.mapOptions = {
+      center: new naver.maps.LatLng(this.cameraPos.lat,this.cameraPos.lng),
+      zoom: 16
+    };
+      }else{
+            this.mapOptions = {
+      center: new naver.maps.LatLng(37.3595704, 127.105399),
+      zoom: 10
+    };
+      }
+        // 설정한대로 렌더링
+        map2 = new naver.maps.Map('map', this.mapOptions);
       if(this.cameraPos.lat != 0){
       // 학교 정보 받아와서 마커 찍기
       this.school.forEach((item)=>{
@@ -91,14 +103,11 @@ export default {
   },
   mounted () {
     // 지도 세팅
+
    this.setMap();
   },
   created(){
     // 기본위치 세팅
-    this.mapOptions = {
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 10
-    };
   },
   props:['school','cameraPos','houses'],
   // 카메라 위치 바뀔 때마다 계속 실행스
