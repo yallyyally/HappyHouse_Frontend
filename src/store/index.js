@@ -41,8 +41,12 @@ export default new Vuex.Store({
     cameraPos: { lat: 0, lng: 0 },
     selectedHouseDealLatLng: {},
     subway: [],
+    selectDongComplete: false,
   },
   getters: {
+    selectDongComplete(state) {
+      return state.selectDongComplete;
+    },
     subway(state) {
       console.log("@@@@@@@@@@@@@지하철 get@@@@@@@@@@@");
       return state.subway;
@@ -313,10 +317,14 @@ export default new Vuex.Store({
       state.cameraPos = payload;
       console.log("카메라 정보 저장 완");
     },
+    SET_SELECTDONG_COMPLETE(state, payload) {
+      state.selectDongComplete = payload;
+    },
   },
   actions: {
     // 전체 구 목록 불러오기
     getOptionsGu({ commit }) {
+      // SET_SELECT;
       console.log("========비동기통신 시작/구 목록=========");
       http.get("/api/house/optionsGu").then((resp) => {
         // console.log("받은거 1" + JSON.stringify(resp));
@@ -444,10 +452,14 @@ export default new Vuex.Store({
     },
     // 동이 선택되면 그 위도 값을 받아온다.
     setCameraPos({ commit }, selectedDong) {
+      // commit('SET_SELECTDONG_COPMLETE', false);
       http.get("api/house/houseinfo/camera/" + selectedDong).then((resp) => {
         console.log("카메라 위치 받음 " + JSON.stringify(resp.data));
         commit("SET_CAMERA_POS", resp.data);
       });
+    },
+    setSelectDongComplete({ commit }, bool) {
+      commit("SET_SELECTDONG_COMPLETE", bool);
     },
   },
   modules: {},

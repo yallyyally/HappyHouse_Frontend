@@ -1,5 +1,10 @@
 <template>
     <b-container>
+        <!-- 제목 -->
+    <div class="title">
+        <strong><h2>선택 지역 매물 조회</h2></strong>
+        <h5> <b-icon icon="geo-alt-fill" scale="1" ></b-icon> 서울특별시의 매물정보 조회</h5>
+    </div>
     <!-- 검색칸 -->
     <search-house></search-house>
     <!-- 지도맵 -->
@@ -49,5 +54,9 @@ export default {
 }
 </script>
 <style scoped>
-
+    .title{
+        margin-top:50px;
+        margin-bottom:20px;
+        text-align: center;
+    }
 </style>

@@ -21,11 +21,13 @@
 
 <!-- 있어보이는 단어로 바꿀 것.. -->
       <!-- 매물 -->
-      <b-navbar-nav>
               <!-- <router-link to="/about">About</router-link> -->
         <!-- 이게 라우터라는걸몰라도 가능스 -->
-        <b-nav-item href="/houseinfo">매물정보</b-nav-item>
-      </b-navbar-nav>
+                <b-nav-item-dropdown text="매물정보" right>
+          <b-dropdown-item href="/houseinfo">지역별 매물</b-dropdown-item>
+          <b-dropdown-item to="/houseroad">매물별 길안내</b-dropdown-item>
+         </b-nav-item-dropdown>
+
 
       <!-- 동네정보 -->
       <b-navbar-nav>

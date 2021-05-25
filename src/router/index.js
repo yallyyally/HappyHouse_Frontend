@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 // import store from "../store";
 // 매물 관련
 import HouseInfo from "../views/HouseInfo.vue";
+import HouseRoad from "../views/HouseRoad.vue";
 // 회원 관련
 import Home from "../views/Home.vue";
 import join from "../views/member/join.vue";
@@ -175,6 +176,11 @@ const routes = [
     path: "/towninfo",
     name: "towninfo",
     component: towninfo,
+  },
+  {
+    path: "/houseroad",
+    name: "HouseRoad",
+    component: HouseRoad,
   },
 ];
 

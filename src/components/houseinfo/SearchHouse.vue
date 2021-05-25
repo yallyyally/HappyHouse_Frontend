@@ -1,12 +1,5 @@
 <template>
 <b-container>
-
-    <!-- 시군구 선택박스 -->
-    <div class="title">
-        <h2>선택 지역 매물 조회</h2>
-        <h5> <b-icon icon="geo-alt-fill" scale="1" ></b-icon> 서울특별시의 매물정보 조회</h5>
-    </div>
-  
     <div class="content">
         <span class="selectbox">
             <b-form-select  @change="changeGu()" v-model = "selectedGu" :options= "optionsGu" class="mb-3">
@@ -75,7 +68,8 @@ export default{
             getSchoolInfo:'getSchoolInfo',
             setCameraPos:'setCameraPos',
             getSubwayInfo:'getSubwayInfo',
-            getPublicBicycleInfo:'getPublicBicycleInfo'
+            getPublicBicycleInfo:'getPublicBicycleInfo',
+            setSelectDongComplete:'setSelectDongComplete'
             
         }),
         getMap(){
@@ -98,7 +92,8 @@ export default{
                 this.getSubwayInfo(this.selectedGu);
                 // 따릉이 정보 받아오기
                 this.getPublicBicycleInfo(this.selectedGu);
-
+                // 동 선택 완료 상태로..
+                // this.setSelctDongComplete(true);
             }
         },
         changeGu(){
