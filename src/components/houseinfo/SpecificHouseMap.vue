@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-      <b>반경 200m 원으로 표시</b>
+      <b>반경 200m가 원으로 표시됩니다.</b>
     <div id="mapSpecific" style="width:100%;height:200px;"></div>
   </div>
 </template>
@@ -9,7 +9,7 @@
 
 export default {
     name:'SpecificHouseMap',
-    props:['selectedHouseDealLatLng','school'],
+    props:['selectedHouseDealLatLng','school','subway'],
     data(){
         return{
             mapOption:{}
@@ -17,7 +17,7 @@ export default {
     },
       computed:{
         combined(){
-            return this.school && this.selectedHouseDealLatLng
+            return this.school && this.selectedHouseDealLatLng &&this.subway
         }
 
     },
@@ -54,6 +54,19 @@ export default {
           icon:{
             scaledSize: new naver.maps.Size(40, 40),
             url:'./img/school.png'
+          }
+        });
+      })
+    //   지하철 마커
+                  this.subway.forEach((item)=>{
+        // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
+        new naver.maps.Marker({
+          // 위경도 반대 주의!
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map,
+          icon:{
+            scaledSize: new naver.maps.Size(40, 40),
+            url:'./img/train.png'
           }
         });
       })
