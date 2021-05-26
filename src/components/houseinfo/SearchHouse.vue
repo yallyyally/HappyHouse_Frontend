@@ -8,7 +8,7 @@
             </b-form-select>
         </span>
         <span class="selectbox">
-            <b-form-select  v-model = "selectedDong" :options= "optionsDong" class="mb-3">
+            <b-form-select  v-model = "tempSelectedDong" :options= "optionsDong" class="mb-3">
             <b-form-select-option :value= "null" disabled>-- 동 선택 --</b-form-select-option>
             </b-form-select>
         </span>
@@ -45,7 +45,7 @@ export default{
     name:"SearchHouse",
     computed:{
         // 소괄호 안써서 한시간 넘게 날림 ,,^^
-        ...mapGetters(['optionsGu','optionsDong'])
+        ...mapGetters(['optionsGu','optionsDong','selectedDong'])
     },
     created(){
         console.log("구 이름 불러오기 시작");
@@ -55,7 +55,7 @@ export default{
         //이거 mapState로 바꿀것.
         return{
         selectedGu:null,
-        selectedDong:null,
+        tempSelectedDong:null,
         }
     },
 
@@ -69,19 +69,20 @@ export default{
             setCameraPos:'setCameraPos',
             getSubwayInfo:'getSubwayInfo',
             getPublicBicycleInfo:'getPublicBicycleInfo',
-            setSelectDongComplete:'setSelectDongComplete'
+            setSelectDongComplete:'setSelectDongComplete',
+            setSelectedDong:'setSelectedDong'
             
         }),
         getMap(){
-            if(this.selectedGu == null  || this.selectedDong == null){;
+            if(this.selectedGu == null  || this.tempSelectedDong == null){;
                 alert('주소를 모두 입력해주세요.')
             }
             else{
                 // 1. 중심 위치 불렁오기. 0.구 정보에 따라 학교 정보, 따릉이 정보, 매물 정보 불러오기 ))-> 
                 //2.state에 저장 
                 // 3.map에 props로 주기
-
-
+                // 현재 선택된 동 등록
+                this.setSelectedDong(this.tempSelectedDong);
                 // 학교 정보 받아오기
                 this.getSchoolInfo(this.selectedGu);
                 // 매물 정보 받아오기
@@ -98,8 +99,9 @@ export default{
         },
         changeGu(){
             // 구목록에 따라서 동 목록 로딩하기!
-            this.selectedDong = null;
+            this.tempSelectedDong = null;
             this.getOptionsDong(this.selectedGu);
+            this.setSelectedDong(null);
         }
     }
 

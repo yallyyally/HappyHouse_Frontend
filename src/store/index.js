@@ -37,24 +37,37 @@ export default new Vuex.Store({
     guPosition: {},
     culturalSpaces: [],
     school: [],
-    kindergarten:[],
+    kindergarten: [],
     cameraPos: { lat: 0, lng: 0 },
     selectedHouseDealLatLng: {},
     subway: [],
     bus: [],
     publicbicycle: [],
-    selectDongComplete: false,
+    companySelect: false,
+    companyCameraPos: { lat: 0, lng: 0 },
   },
   getters: {
+    companyCameraPos(state) {
+      console.log(
+        "@@@@@@@@@@@@ companyCameraPos getter@@@@@@@@@@@@" +
+          state.companyCameraPos.lat +
+          ":" +
+          state.companyCameraPos.lng
+      );
+      return state.companyCameraPos;
+    },
+    companySelect(state) {
+      return state.companySelect;
+    },
     selectDongComplete(state) {
       return state.selectDongComplete;
     },
     subway(state) {
-      console.log("@@@@@@@@@@@@@지하철 get@@@@@@@@@@@");
+      // console.log("@@@@@@@@@@@@@지하철 get@@@@@@@@@@@");
       return state.subway;
     },
     bus(state) {
-      console.log("@@@@@@@@@@@@@버스 get@@@@@@@@@@@");
+      // console.log("@@@@@@@@@@@@@버스 get@@@@@@@@@@@");
       return state.bus;
     },
     publicbicycle(state) {
@@ -74,7 +87,7 @@ export default new Vuex.Store({
       return state.school;
     },
     kindergarten(state) {
-      console.log("유치원 정보!!!!"  + state.kindergarten);
+      console.log("유치원 정보!!!!" + state.kindergarten);
       return state.kindergarten;
     },
     increase(state) {
@@ -148,6 +161,7 @@ export default new Vuex.Store({
       return state.moveData;
     },
     selectedDong(state) {
+      console.log("셀렉티드 동 " + state.selectedDong);
       return state.selectedDong;
     },
     familyData(state) {
@@ -172,6 +186,7 @@ export default new Vuex.Store({
   mutations: {
     setHouses(state, payload) {
       state.houses = payload;
+      console.log("다 받은 지금 의 동 " + state.selectedDong);
       console.log("=======비동기 통신 완료/매물목록========");
     },
     setOptionsGu(state, payload) {
@@ -188,6 +203,7 @@ export default new Vuex.Store({
     setOptionsDong(state, payload) {
       state.optionsDong = payload;
       console.log("==========비동기 완료/동목록=========");
+      console.log(state.selectedDong);
     },
 
     LOGIN(state, payload) {
@@ -287,9 +303,10 @@ export default new Vuex.Store({
     MAKE_COMPLETE_FALSE(state) {
       state.selectComplete = false;
       // 선택된 동 null
-      state.selectedDong = null;
+      // state.selectedDong = null;
     },
     SET_SELECTED_DONG(state, payload) {
+      console.log("제발나타나줘2");
       // 동 바뀔때마다 familyData  바뀜
       state.selectedDong = payload;
       state.familyData = state.overallFamilyData[state.selectedDong];
@@ -336,8 +353,18 @@ export default new Vuex.Store({
       state.cameraPos = payload;
       console.log("카메라 정보 저장 완");
     },
-    SET_SELECTDONG_COMPLETE(state, payload) {
-      state.selectDongComplete = payload;
+    SET_COMPANY_SELECT(state, payload) {
+      state.companySelect = payload;
+    },
+    SET_COMPANY_CAMERAPOS(state, comPos) {
+      state.companyCameraPos["lat"] = comPos.lat;
+      state.companyCameraPos["lng"] = comPos.lng;
+      console.log(
+        "mutation에서 회사 정보 들ㅇ록하는 중 " +
+          state.companyCameraPos["lat"] +
+          ": " +
+          state.companyCameraPos["lng"]
+      );
     },
   },
   actions: {
@@ -491,8 +518,17 @@ export default new Vuex.Store({
         commit("SET_CAMERA_POS", resp.data);
       });
     },
-    setSelectDongComplete({ commit }, bool) {
-      commit("SET_SELECTDONG_COMPLETE", bool);
+    setCompanySelect({ commit }, bool) {
+      commit("SET_COMPANY_SELECT", bool);
+    },
+    // 선택한 회사의 위경도 설정
+    setCompanyCameraPos({ commit }, comPos) {
+      console.log("회사 정보 등록할거야 action" + comPos.lat + ":" + comPos.lng);
+      commit("SET_COMPANY_CAMERAPOS", comPos);
+    },
+    setSelectedDong({ commit }, dong) {
+      console.log("동 선택햇으니 등록!!!!!!!!!제발 나타나줘" + dong);
+      commit("SET_SELECTED_DONG", dong);
     },
   },
   modules: {},
