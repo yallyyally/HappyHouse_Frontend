@@ -25,6 +25,7 @@ export default {
     //  schoolMarkerInfos:[],
     houseinfo:[],
     subwayInfo:[],
+    busInfo:[],
     publicbicycleInfo:[]
     }
 
@@ -113,6 +114,24 @@ export default {
         idx++;
       })
 
+      // 버스 정보 받아와서 마커 찍기
+      this.busInfo = []
+       idx = 0;
+       console.log('버스')
+      this.bus.forEach((item)=>{
+        console.log('버스찍기 '+JSON.stringify(item))
+        this.busInfo.push({'idx':idx, 'busno':item.no})
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map2,
+          icon:{
+            scaledSize: new naver.maps.Size(45,54),
+            url:'./img/bus.png'
+          }
+        })
+        idx++;
+      })
+
       // 따릉이 정보 받아와서 마커 찍기
       this.publicbicycleInfo = []
        idx = 0;
@@ -157,11 +176,11 @@ export default {
   created(){
     // 기본위치 세팅
   },
-  props:['school','cameraPos','houses','subway','publicbicycle'],
+  props:['school','cameraPos','houses','subway','bus','publicbicycle'],
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
-            return this.school && this.cameraPos && this.houses && this.publicbicycle
+            return this.school && this.cameraPos && this.houses && this.subway && this.bus && this.publicbicycle
         }
 
     },

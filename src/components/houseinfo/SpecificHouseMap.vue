@@ -9,7 +9,7 @@
 
 export default {
     name:'SpecificHouseMap',
-    props:['selectedHouseDealLatLng','school','subway','publicbicycle'],
+    props:['selectedHouseDealLatLng','school','subway','bus','publicbicycle'],
     data(){
         return{
             mapOption:{}
@@ -17,7 +17,7 @@ export default {
     },
       computed:{
         combined(){
-            return this.school && this.selectedHouseDealLatLng && this.subway && this.publicbicycleInfo
+            return this.school && this.selectedHouseDealLatLng && this.subway && this.bus && this.publicbicycleInfo
         }
 
     },
@@ -66,6 +66,17 @@ export default {
           icon:{
             scaledSize: new naver.maps.Size(40, 40),
             url:'./img/train.png'
+          }
+        });
+      }) 
+      //   버스 마커
+        this.bus.forEach((item)=>{
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map,
+          icon:{
+            scaledSize: new naver.maps.Size(40, 40),
+            url:'./img/bus.png'
           }
         });
       }) 
