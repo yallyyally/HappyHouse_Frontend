@@ -9,7 +9,7 @@
 
 export default {
     name:'SpecificHouseMap',
-    props:['selectedHouseDealLatLng','school','subway','bus','publicbicycle'],
+    props:['selectedHouseDealLatLng','school','kindergarten','subway','bus','publicbicycle'],
     data(){
         return{
             mapOption:{}
@@ -17,7 +17,7 @@ export default {
     },
       computed:{
         combined(){
-            return this.school && this.selectedHouseDealLatLng && this.subway && this.bus && this.publicbicycleInfo
+            return this.school && this.kindergarten && this.selectedHouseDealLatLng && this.subway && this.bus && this.publicbicycleInfo
         }
 
     },
@@ -44,7 +44,7 @@ export default {
 
             }
         })
-        //학교마커
+        //학교 마커
               this.school.forEach((item)=>{
         // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
         new naver.maps.Marker({
@@ -57,7 +57,20 @@ export default {
           }
         });
       })
-    //   지하철 마커
+
+      // 유치원 마커
+        this.kindergarten.forEach((item)=>{
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
+          map:map,
+          icon:{
+            scaledSize: new naver.maps.Size(40, 40),
+            url:'./img/kindergarten.png'
+          }
+        });
+      })
+
+     // 지하철 마커
                   this.subway.forEach((item)=>{
         // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
         new naver.maps.Marker({

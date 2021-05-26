@@ -38,6 +38,7 @@ export default new Vuex.Store({
     culturalSpaces: [],
     publicbicycle: [],
     school: [],
+    kindergarten:[],
     cameraPos: { lat: 0, lng: 0 },
     selectedHouseDealLatLng: {},
     subway: [],
@@ -71,6 +72,10 @@ export default new Vuex.Store({
     school(state) {
       console.log("@@@학교정보낸하!!" + state.school);
       return state.school;
+    },
+    kindergarten(state) {
+      console.log("유치원 정보!!!!"  + state.kindergarten);
+      return state.kindergarten;
     },
     increase(state) {
       return state.increase;
@@ -313,6 +318,11 @@ export default new Vuex.Store({
       console.log("학교 정보 저장 완 ");
       // console.log("학교저장" + JSON.stringify(state.school));
     },
+    // 유치원 정보 받아오기
+    SET_KINDERGARTEN_INFO(state, payload) {
+      state.kindergarten = payload;
+      console.log("유치원 정보 저장 완");
+    },
     SET_SUBWAY_INFO(state, payload) {
       state.subway = payload;
       console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
@@ -443,6 +453,13 @@ export default new Vuex.Store({
       console.log("학교 정보 받아오기 요청");
       http.get("api/house/school/" + selectedGu).then((resp) => {
         commit("SET_SCHOOL_INFO", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 유치원 목록 불러오기
+    getKindergartenInfo({ commit }, selectedGu) {
+      console.log("유치원 정보 받아오기 요청");
+      http.get("api/house/kindergarten/" + selectedGu).then((resp) => {
+        commit("SET_KINDERGARTEN_INFO", resp.data);
       });
     },
     // 매물 검색 버튼 누르면 지하철 목록 불러오기

@@ -4,6 +4,7 @@
   <b-container>
     <strong><span><img class="image" src='@/assets/house2.png'/> 매물 /</span>&nbsp;
     <span><img class="image" src='@/assets/school.png'/> 학교 /</span>&nbsp;
+    <span><img class="image" src='@/assets/kindergarten.png'/> 유치원 /</span>&nbsp;
     <span><img class="image" src='@/assets/train.png'/> 지하철 /</span>&nbsp;
     <span><img class="image" src='@/assets/bus.png'/> 버스 /</span>&nbsp; 
     <span><img class="image" src='@/assets/bicycle.png'/> 따릉이 /</span>&nbsp; 
@@ -23,6 +24,8 @@ export default {
     //  map:'',
     //  schoolMarkers:[],
     //  schoolMarkerInfos:[],
+    schoolinfo:[],
+    kindergarteninfo:[],
     houseinfo:[],
     subwayInfo:[],
     busInfo:[],
@@ -78,6 +81,18 @@ export default {
         });
       })
 
+       // 유치원 정보 받아와서 마커 찍기
+      this.kindergarten.forEach((item)=>{
+        let tmpMarker =new naver.maps.Marker({
+          position: new naver.maps.LatLng(mitem.lat,mitem.lnt),
+          map:map2,
+          icon:{
+            scaledSize: new naver.maps.Size(45, 54),
+            url:'./img/kindergarten.png'
+          }
+        });
+      })
+
       // 집 정보 받아와서 매물 찍기
       this.houseinfo = []
       var idx = 0;
@@ -93,7 +108,6 @@ export default {
         })
         idx++;
       })
-
 
       }
       // 지하철 정보 받아와서 마커 찍기
@@ -180,7 +194,7 @@ export default {
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
-            return this.school && this.cameraPos && this.houses && this.subway && this.bus && this.publicbicycle
+            return this.school && this.kindergarten && this.cameraPos && this.houses && this.subway && this.bus && this.publicbicycle
         }
 
     },
