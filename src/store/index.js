@@ -325,7 +325,7 @@ export default new Vuex.Store({
     },
     SET_SUBWAY_INFO(state, payload) {
       state.subway = payload;
-      console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
+      // console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
     },
     SET_BUS_INFO(state, payload) {
       state.bus = payload;
