@@ -43,7 +43,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Intro",
+    name:"Intro",
     component: Intro,
   },
   {
