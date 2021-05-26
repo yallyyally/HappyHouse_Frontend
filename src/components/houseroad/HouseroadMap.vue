@@ -16,7 +16,8 @@ export default{
     data(){
         return{
           mapOptions:{},
-
+        map:'',
+        marker:''
         }
     },
     methods:{
@@ -24,19 +25,39 @@ export default{
         setCompany(){
             alert('마커 선택 완료')
         },
+        // 마커 찍기
+        setMarker(lat,lng){
+            // 처음에 안보이다가
+            console.log('@@@@@@@@@2'+JSON.stringify(this.cameraPos));
+            if(lat == 0){
+                
+            }
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(lat, lng),
+    map: this.map
+});
+
+naver.maps.Event.addListener(this.map, 'click', function(e) {
+    marker.setPosition(e.coord);
+    console.log('현재위치 '+e.coord);
+    
+});
+
+        },
         // 맵 초기화
         initMap(){
-                    this.mapOptions = {
+        this.mapOptions = {
         center: new naver.maps.LatLng(37.510740808403334, 127.04597817740535),
           zoom: 15
-      };
-     new naver.maps.Map('map', this.mapOptions);
-
+        };
+          this.map =   new naver.maps.Map('map', this.mapOptions);
+          this.setMarker(0,0);
         },
         // 카메라에 따라 맵 변경
         setMapCamera(){
             this.mapOptions.center = new naver.maps.LatLng(this.cameraPos.lat, this.cameraPos.lng);
-            new naver.maps.Map('map',this.mapOptions);
+            this.map = new naver.maps.Map('map',this.mapOptions);
+            this.setMarker(this.cameraPos.lat,this.cameraPos.lng);
         }
     },
     mounted(){
