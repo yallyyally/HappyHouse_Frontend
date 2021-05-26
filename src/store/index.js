@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import http from "@/util/http-commons";
+// import httpDirect from "@/util/http-direct";
 
 Vue.use(Vuex);
 
@@ -45,8 +46,12 @@ export default new Vuex.Store({
     publicbicycle: [],
     companySelect: false,
     companyCameraPos: { lat: 0, lng: 0 },
+    routeInfo: {},
   },
   getters: {
+    routeInfo(state) {
+      return state.routeInfo;
+    },
     companyCameraPos(state) {
       console.log(
         "@@@@@@@@@@@@ companyCameraPos getter@@@@@@@@@@@@" +
@@ -332,7 +337,7 @@ export default new Vuex.Store({
       state.bus = payload;
       console.log("버스 정보 저장");
     },
-     // 따릉이 정보 받아오기
+    // 따릉이 정보 받아오기
     SET_PUBLICBICYCLE_INFO(state, payload) {
       state.publicbicycle = payload;
       console("따릉 정보 저장");
@@ -365,6 +370,12 @@ export default new Vuex.Store({
           ": " +
           state.companyCameraPos["lng"]
       );
+    },
+    GET_ROUTE_INFO(state, payload) {
+      console.log("경로정보 세팅");
+      state.routeInfo = payload;
+      // console.log("신경ㄴ" + state);
+      // console.log("정보받아올까나");
     },
   },
   actions: {
@@ -529,6 +540,37 @@ export default new Vuex.Store({
     setSelectedDong({ commit }, dong) {
       console.log("동 선택햇으니 등록!!!!!!!!!제발 나타나줘" + dong);
       commit("SET_SELECTED_DONG", dong);
+    },
+    getRouteInfo({ commit }, startAndGoal) {
+      // 출발지와 도착지의 위경도 정보를 배열에 담아 저장스
+      console.log(
+        "api호출할까나 " + JSON.stringify(startAndGoal[0]) + "//" + JSON.stringify(startAndGoal[1])
+      );
+
+      // 엄청난 이슈: js에서 접근하지 말고 백엔드에서 접근하라고함....
+      // Access to XMLHttpRequest at '' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+      // 위와 같은 에러는,
+      //   MAPS API는 javascript 환경에서 보안상의 이슈로 CORS(Cross - Origin Resource Sharing)를 허용하지 않습니다.
+      //   javascript 환경에서 사용하시려면, 동일 도메인을 갖는 backend 서버를 두고, 이 서버에서 API를 호출하는 방식으로 사용 부탁드립니다
+
+      // 고민 ->객체 두개를 인자로 보내는 방법이 없을까? 정확히는 네개의 값임.
+      // 해결법1: map으로 보내보자
+
+      const paramSentence =
+        "?start=" +
+        startAndGoal[0].lng +
+        "," +
+        startAndGoal[0].lat +
+        "&goal=" +
+        startAndGoal[1].lng +
+        "," +
+        startAndGoal[1].lat;
+      console.log("보낼인자 " + paramSentence);
+      http.get("api/house/route/" + paramSentence).then((resp) => {
+        console.log("과연결과는 두근두근");
+        console.log(JSON.stringify(resp));
+        commit("GET_ROUTE_INFO", resp.data);
+      });
     },
   },
   modules: {},

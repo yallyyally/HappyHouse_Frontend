@@ -1,8 +1,8 @@
 <template>
   <div style="text-align: center">
-    <span><strong>관심 있는 지점을 클릭해봐유</strong></span>
+    <span><h5>관심있는 지점을 클릭해보세요!</h5></span>
     <div id="map0" style="width: 100%; height: 400px; margin-bottom: 20px"></div>
-    <v-btn rounded color="primary" dark @click="setCompany()"> 선택 완료</v-btn>
+    <v-btn rounded color="primary" dark @click="setCompany()">매물 정보 보기</v-btn>
   </div>
 </template>
 <script>
@@ -32,12 +32,12 @@ export default {
       } else if (this.companyPos == 0 || this.companyPos._lat == undefined) {
         alert("위치를 선택해주세요");
       } else {
-        alert(
-          "선택 위치 근처의 매물을 불러옵니다." +
-            this.companyPos._lat +
-            " : " +
-            this.companyPos._lng
-        );
+        // alert(
+        //   "선택 위치 근처의 매물을 불러옵니다." +
+        //     this.companyPos._lat +
+        //     " : " +
+        //     this.companyPos._lng
+        // );
         // 1. 선택되었음을 아래에 알린다.
         this.setCompanySelect(true);
         //  2. 선택된 회사 위치도 알린다.
