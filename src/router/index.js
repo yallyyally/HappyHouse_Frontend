@@ -25,6 +25,8 @@ import qnaUpdateSuccess from "../components/qna/UpdateSuccess.vue";
 import qnaDeleteSuccess from "../components/qna/DeleteSuccess.vue";
 // 동네정보 관련
 import towninfo from "../views/TownInfo.vue";
+// 인트로
+import Intro from "../views/Intro.vue";
 
 Vue.use(VueRouter);
 
@@ -51,6 +53,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/intro",
+    name: "Intro",
+    component: Intro,
   },
   {
     path: "/houseinfo",
