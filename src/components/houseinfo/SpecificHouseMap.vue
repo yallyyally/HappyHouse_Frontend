@@ -17,7 +17,7 @@ export default {
     },
       computed:{
         combined(){
-            return this.school && this.kindergarten && this.selectedHouseDealLatLng && this.subway && this.bus && this.publicbicycleInfo
+            return this.school && this.kindergarten && this.selectedHouseDealLatLng && this.subway && this.bus && this.publicbicycle
         }
 
     },
@@ -96,7 +96,6 @@ export default {
 
       // 따릉이 마커
         this.publicbicycle.forEach((item)=>{
-        // console.log('@@@@@@@@ 학교 정보 있자나...lat'+mitem.lat+' lng'+mitem.lng);
         new naver.maps.Marker({
           position: new naver.maps.LatLng(item.lat,item.lng),
           map:map,

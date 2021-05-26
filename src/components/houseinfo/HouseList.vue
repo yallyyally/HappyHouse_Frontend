@@ -55,7 +55,7 @@ export default{
 
     },
     computed:{
-        ...mapGetters(['subway','kindergarten','bus','publicbicycle','school','selectedHouseDealLatLng','cameraPos',"houses",'selectedHouse','selectedHouseDeal','avgDealAmount','selectedHouseDealAmount','selectedHouseDealDate'])
+        ...mapGetters(['subway','bus','publicbicycle','school','kindergarten','selectedHouseDealLatLng','cameraPos',"houses",'selectedHouse','selectedHouseDeal','avgDealAmount','selectedHouseDealAmount','selectedHouseDealDate'])
     },
     created(){
         // 페이지 로딩시 전체 매물 목록 불러오기

@@ -81,7 +81,7 @@ export default {
         });
       })
 
-       // 유치원 정보 받아와서 마커 찍기
+      // 유치원 정보 받아와서 마커 찍기
       this.kindergarten.forEach((item)=>{
         let tmpMarker =new naver.maps.Marker({
           position: new naver.maps.LatLng(mitem.lat,mitem.lnt),
@@ -109,7 +109,6 @@ export default {
         idx++;
       })
 
-      }
       // 지하철 정보 받아와서 마커 찍기
       this.subwayInfo = []
        idx = 0;
@@ -163,7 +162,8 @@ export default {
         })
         idx++;
       })
-      
+
+      }
       //   this.markers.push(new naver.maps.Marker(markOpt));
         // 그냥 마커정보 - 순번 메핑해서 디비에서 받아와도 될듯...
         // 이건 세부정보 저장용 (지도는 속성값이 정해져서 어쩔수x)
@@ -190,7 +190,7 @@ export default {
   created(){
     // 기본위치 세팅
   },
-  props:['school','cameraPos','houses','subway','bus','publicbicycle'],
+  props:['school','kindergarten','cameraPos','houses','subway','bus','publicbicycle'],
   // 카메라 위치 바뀔 때마다 계속 실행스
   computed:{
         combined(){
