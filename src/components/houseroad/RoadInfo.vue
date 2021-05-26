@@ -20,6 +20,12 @@ export default {
   // 부모가 companyCameraPos, companyselect,houses 감시하다가 넘겨줄거임
   props: ["companySelect", "houses", "companyCameraPos"],
   methods: {
+    getClickHandler(idx) {
+      let outer = this;
+      return function (e) {
+        console.log("선택된 매물" + outer.markersinfo[idx].lat + ";" + outer.markersinfo[idx].lng);
+      };
+    },
     setMap1() {
       console.log(
         "회사 중심 선택된거 받았니 ?" + this.companyCameraPos.lat + ":" + this.companyCameraPos.lng
@@ -65,10 +71,10 @@ export default {
         };
         this.markers.push(new naver.maps.Marker(newMarkerOptions));
         this.markersinfo.push({
-          no: cnt++,
           lat: item.lat,
           lng: item.lng,
         });
+        naver.maps.Event.addListener(this.markers[cnt], "click", this.getClickHandler(cnt++));
       });
       console.log("집찍기");
     },
