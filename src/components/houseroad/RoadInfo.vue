@@ -29,7 +29,7 @@ export default {
         // center: new naver.maps.LatLng(this.companyCameraPos.lat, this.companyCameraPos.lng),
         center: new naver.maps.LatLng(this.companyCameraPos.lat, this.companyCameraPos.lng),
 
-        zoom: 18,
+        zoom: 15,
         draggable: false,
         pinchZoom: false,
         scrollWheel: false,
