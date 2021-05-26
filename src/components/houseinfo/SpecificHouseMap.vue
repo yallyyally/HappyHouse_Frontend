@@ -61,7 +61,7 @@ export default {
       // 유치원 마커
         this.kindergarten.forEach((item)=>{
         new naver.maps.Marker({
-          position: new naver.maps.LatLng(item.lat,item.lng),
+          position: new naver.maps.LatLng(item.lng,item.lat),
           map:map,
           icon:{
             scaledSize: new naver.maps.Size(40, 40),
@@ -85,7 +85,8 @@ export default {
       //   버스 마커
         this.bus.forEach((item)=>{
         new naver.maps.Marker({
-          position: new naver.maps.LatLng(item.lat,item.lng),
+          // 위경도 반대 주의!
+          position: new naver.maps.LatLng(item.lng,item.lat),
           map:map,
           icon:{
             scaledSize: new naver.maps.Size(40, 40),

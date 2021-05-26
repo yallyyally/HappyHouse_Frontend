@@ -1,4 +1,4 @@
-<template>
+<!--<template>
 <div>
     <div id="vertical_space"></div>
     <b-container fluid id="background">
@@ -32,4 +32,45 @@
         padding-top:50px;
         position:relative;
     }
-</style>
+</style>-->
+
+<template>
+  <v-footer class="footer" color="black" dark padless>
+    <v-card
+      width="100%"
+      color="black"
+      flat
+      tile
+      class="lighten-1 white--text text-center"
+    >
+      <v-card-text>
+        <v-btn v-for="icon in icons" :key="icon" class="mx-2 white--text" icon>
+          <v-icon size="24px">
+            {{ icon }}
+          </v-icon>
+        </v-btn>
+      </v-card-text>
+
+      <v-card-text class="white--text pt-0">
+        <h3>HappyHouse</h3>
+        <br />
+        Tel.042-820-7400
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-text class="white--text">
+        {{ new Date().getFullYear() }} —
+        <strong>노효진 신준희 "All rights reserved"</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
+  }),
+};
+</script>
