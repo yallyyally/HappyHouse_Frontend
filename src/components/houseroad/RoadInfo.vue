@@ -40,6 +40,16 @@ export default {
       };
       this.map1 = new naver.maps.Map("map1", this.mapOptions);
 
+      // 중심지 찍기
+      var center = new naver.maps.Marker({
+        position: new naver.maps.LatLng(this.companyCameraPos.lat, this.companyCameraPos.lng),
+        map: this.map1,
+        icon: {
+          scaledSize: new naver.maps.Size(80, 95),
+          url: "./img/pin-map.svg",
+        },
+      });
+      // center.setContent("선택위치");
       //   집 마커 그리깅.companyCameraPos
       this.markers = [];
       this.markersinfo = [];
