@@ -37,7 +37,7 @@ export default new Vuex.Store({
     guPosition: {},
     culturalSpaces: [],
     school: [],
-    kindergarten:[],
+    kindergarten: [],
     cameraPos: { lat: 0, lng: 0 },
     selectedHouseDealLatLng: {},
     subway: [],
@@ -307,6 +307,19 @@ export default new Vuex.Store({
       state.culturalSpaces = payload;
       // console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
+    SET_SUBWAY_INFO(state, payload) {
+      state.subway = payload;
+      // console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
+    },
+    SET_BUS_INFO(state, payload) {
+      state.bus = payload;
+      console.log("버스 정보 저장");
+    },
+     // 따릉이 정보 받아오기
+    SET_PUBLICBICYCLE_INFO(state, payload) {
+      state.publicbicycle = payload;
+      console("따릉 정보 저장");
+    },
     // 학교 정보 받아오기
     SET_SCHOOL_INFO(state, payload) {
       state.school = payload;
@@ -317,19 +330,6 @@ export default new Vuex.Store({
     SET_KINDERGARTEN_INFO(state, payload) {
       state.kindergarten = payload;
       console.log("유치원 정보 저장 완");
-    },
-    SET_SUBWAY_INFO(state, payload) {
-      state.subway = payload;
-      // console.log("지하철정보세팅햇ㅅㅁ " + JSON.stringify(payload));
-    },
-    SET_BUS_INFO(state, payload) {
-      state.bus = payload;
-      console.log("버스 정보 저장" + JSON.stringify(payload));
-    },
-     // 따릉이 정보 받아오기
-    SET_PUBLICBICYCLE_INFO(state, payload) {
-      state.publicbicycle = payload;
-      console("따릉 정보 저장");
     },
     // 카메라 위치.
     SET_CAMERA_POS(state, payload) {
@@ -448,20 +448,6 @@ export default new Vuex.Store({
         commit("SET_CULTURAL_SPACES", resp.data);
       });
     },
-    // 매물 검색 버튼 누르면 학교 목록 불러오기
-    getSchoolInfo({ commit }, selectedGu) {
-      console.log("학교 정보 받아오기 요청");
-      http.get("api/house/school/" + selectedGu).then((resp) => {
-        commit("SET_SCHOOL_INFO", resp.data);
-      });
-    },
-    // 매물 검색 버튼 누르면 유치원 목록 불러오기
-    getKindergartenInfo({ commit }, selectedGu) {
-      console.log("유치원 정보 받아오기 요청");
-      http.get("api/house/kindergarten/" + selectedGu).then((resp) => {
-        commit("SET_KINDERGARTEN_INFO", resp.data);
-      });
-    },
     // 매물 검색 버튼 누르면 지하철 목록 불러오기
     getSubwayInfo({ commit }, selectedGu) {
       console.log("지하철 정보 받아오기 요청");
@@ -481,6 +467,20 @@ export default new Vuex.Store({
       console.log("따릉이 정보 받아오기 요청");
       http.get("api/house/publicbicycle/" + selectedGu).then((resp) => {
         commit("SET_PUBLICBICYCLE_INFO", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 학교 목록 불러오기
+    getSchoolInfo({ commit }, selectedGu) {
+      console.log("학교 정보 받아오기 요청");
+      http.get("api/house/school/" + selectedGu).then((resp) => {
+        commit("SET_SCHOOL_INFO", resp.data);
+      });
+    },
+    // 매물 검색 버튼 누르면 유치원 목록 불러오기
+    getKindergartenInfo({ commit }, selectedGu) {
+      console.log("유치원 정보 받아오기 요청");
+      http.get("api/house/kindergarten/" + selectedGu).then((resp) => {
+        commit("SET_KINDERGARTEN_INFO", resp.data);
       });
     },
     // 동이 선택되면 그 위도 값을 받아온다.

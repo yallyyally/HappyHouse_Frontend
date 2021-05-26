@@ -66,8 +66,10 @@ export default{
             getHousesByDong:'getHousesByDong',
             getHousesByGu:'getHousesByGu',
             getSchoolInfo:'getSchoolInfo',
+            getKindergartenInfo:'getKindergartenInfo',
             setCameraPos:'setCameraPos',
             getSubwayInfo:'getSubwayInfo',
+            getBusInfo:'getBusInfo',
             getPublicBicycleInfo:'getPublicBicycleInfo',
             setSelectDongComplete:'setSelectDongComplete'
             
@@ -84,12 +86,16 @@ export default{
 
                 // 학교 정보 받아오기
                 this.getSchoolInfo(this.selectedGu);
+                // 유치원 정보 받아오기
+                this.getKindergartenInfo(this.selectedGu);
                 // 매물 정보 받아오기
                 this.getHousesByDong(this.selectedDong);
                 // 카메라 위치 설정
                 this.setCameraPos(this.selectedDong);
                 // 지하철 정보 받아오기
                 this.getSubwayInfo(this.selectedGu);
+                // 버스 정보 받아오기
+                this.getBusInfo(this.selectedGu);
                 // 따릉이 정보 받아오기
                 this.getPublicBicycleInfo(this.selectedGu);
                 // 동 선택 완료 상태로..

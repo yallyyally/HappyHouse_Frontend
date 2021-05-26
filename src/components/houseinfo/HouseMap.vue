@@ -81,20 +81,18 @@ export default {
         });
       })
       
-      // 유치원 정보 받아와서 매물 찍기
-      this.kindergarteninfo = []
-      var idx = 0;
+      // 유치원 정보 받아와서 마커 찍기
       this.kindergarten.forEach((item)=>{
-        this.kindergarteninfo.push({'idx':idx, 'kindergartenno':item.no})
-        new naver.maps.Marker({
-          position: new naver.maps.LatLng(item.lat,item.lng),
+        const mitem = JSON.parse(JSON.stringify(item));
+        let tmpMarker =new naver.maps.Marker({
+          // 위경도 반대 주의!
+          position: new naver.maps.LatLng(mitem.lng,mitem.lat),
           map:map2,
           icon:{
-            scaledSize: new naver.maps.Size(45,54),
+            scaledSize: new naver.maps.Size(45, 54),
             url:'./img/kindergarten.png'
           }
-        })
-        idx++;
+        });
       })
 
       // 집 정보 받아와서 매물 찍기
@@ -118,7 +116,7 @@ export default {
        idx = 0;
        console.log('서브웨이')
       this.subway.forEach((item)=>{
-        console.log('지하철찍기 '+JSON.stringify(item))
+        // console.log('지하철찍기 '+JSON.stringify(item))
         this.subwayInfo.push({'idx':idx, 'subwayno':item.no})
         new naver.maps.Marker({
           position: new naver.maps.LatLng(item.lat,item.lng),
@@ -136,10 +134,10 @@ export default {
        idx = 0;
        console.log('버스')
       this.bus.forEach((item)=>{
-        console.log('버스찍기 '+JSON.stringify(item))
+        // console.log('버스찍기 '+JSON.stringify(item))
         this.busInfo.push({'idx':idx, 'busno':item.no})
-        new naver.maps.Marker({
-          position: new naver.maps.LatLng(item.lat,item.lng),
+        new naver.maps.Marker({ // lng과 lat 바뀜 왜바귄지모르겠음 ㅜ
+          position: new naver.maps.LatLng(item.lng,item.lat),
           map:map2,
           icon:{
             scaledSize: new naver.maps.Size(45,54),
@@ -154,7 +152,7 @@ export default {
        idx = 0;
        console.log('따릉따릉')
       this.publicbicycle.forEach((item)=>{
-        console.log('따릉이찍기 '+JSON.stringify(item))
+        // console.log('따릉이찍기 '+JSON.stringify(item))
         this.publicbicycleinfo.push({'idx':idx, 'publicbicycleno':item.no})
         new naver.maps.Marker({
           position: new naver.maps.LatLng(item.lat,item.lng),
