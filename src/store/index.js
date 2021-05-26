@@ -307,11 +307,6 @@ export default new Vuex.Store({
       state.culturalSpaces = payload;
       // console.log("저장ㅅ" + JSON.stringify(state.culturalSpaces));
     },
-    // 따릉이 정보 받아오기
-    SET_PUBLICBICYCLE_INFO(state, payload) {
-      state.publicbicycle = payload;
-      console("따릉 정보 저장" + JSON.stringify(payload));
-    },
     // 학교 정보 받아오기
     SET_SCHOOL_INFO(state, payload) {
       state.school = payload;
@@ -330,6 +325,11 @@ export default new Vuex.Store({
     SET_BUS_INFO(state, payload) {
       state.bus = payload;
       console.log("버스 정보 저장" + JSON.stringify(payload));
+    },
+     // 따릉이 정보 받아오기
+    SET_PUBLICBICYCLE_INFO(state, payload) {
+      state.publicbicycle = payload;
+      console("따릉 정보 저장");
     },
     // 카메라 위치.
     SET_CAMERA_POS(state, payload) {

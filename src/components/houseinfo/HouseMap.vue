@@ -29,7 +29,7 @@ export default {
     houseinfo:[],
     subwayInfo:[],
     busInfo:[],
-    publicbicycleInfo:[]
+    publicbicycleinfo:[]
     }
 
   },
@@ -80,17 +80,21 @@ export default {
           }
         });
       })
-
-      // 유치원 정보 받아와서 마커 찍기
+      
+      // 유치원 정보 받아와서 매물 찍기
+      this.kindergarteninfo = []
+      var idx = 0;
       this.kindergarten.forEach((item)=>{
-        let tmpMarker =new naver.maps.Marker({
-          position: new naver.maps.LatLng(mitem.lat,mitem.lnt),
+        this.kindergarteninfo.push({'idx':idx, 'kindergartenno':item.no})
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(item.lat,item.lng),
           map:map2,
           icon:{
-            scaledSize: new naver.maps.Size(45, 54),
+            scaledSize: new naver.maps.Size(45,54),
             url:'./img/kindergarten.png'
           }
-        });
+        })
+        idx++;
       })
 
       // 집 정보 받아와서 매물 찍기
@@ -146,12 +150,12 @@ export default {
       })
 
       // 따릉이 정보 받아와서 마커 찍기
-      this.publicbicycleInfo = []
+      this.publicbicycleinfo = []
        idx = 0;
        console.log('따릉따릉')
       this.publicbicycle.forEach((item)=>{
         console.log('따릉이찍기 '+JSON.stringify(item))
-        this.publicbicycleInfo.push({'idx':idx, 'publicbicycleno':item.no})
+        this.publicbicycleinfo.push({'idx':idx, 'publicbicycleno':item.no})
         new naver.maps.Marker({
           position: new naver.maps.LatLng(item.lat,item.lng),
           map:map2,
@@ -163,7 +167,6 @@ export default {
         idx++;
       })
 
-      }
       //   this.markers.push(new naver.maps.Marker(markOpt));
         // 그냥 마커정보 - 순번 메핑해서 디비에서 받아와도 될듯...
         // 이건 세부정보 저장용 (지도는 속성값이 정해져서 어쩔수x)
@@ -179,7 +182,7 @@ export default {
 
             console.log('@@@@@@@@@@   끗   @@@@@@@@@@@@@')
       // console.log(this.markers)
-
+      }
     },
   },
   mounted () {
