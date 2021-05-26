@@ -38,7 +38,7 @@ export default{
             // 회사가 선택된 상태에만 두가지 조건 적용.
             // 아니면 걍 디폴트 상태로 있음.(안보임)
             if(this.companySelect)  {
-                console.log('houseroad@@@@@@@@@@@combined@@@@@@@@@@@@')
+                console.log('houseroad@@@@@@@@@@@combined@@@@@@@@@@@@'+this.companyCameraPos)
                 // house가 null이다 ? 디폴트 위치인겨
                 // if(this.houses.length == 0){
                 //     this.getHousesByDong('역삼동');
